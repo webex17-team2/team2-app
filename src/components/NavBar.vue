@@ -6,6 +6,9 @@
       <router-link to="/my-page" class="nav__item nav__link">
         MyPage
       </router-link>
+      <router-link to="/listOfPosts" class="nav__item nav__link">
+        一覧画面</router-link
+      >
     </div>
   </div>
 </template>
