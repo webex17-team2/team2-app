@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import HomeView from "../views/HomeView.vue"
 import AboutView from "../views/AboutView.vue"
 import MyPageView from "../views/MyPageView.vue"
+import ListOfPostsView from "../views/ListOfPostsView.vue"
 
 const routes = [
   {
@@ -19,6 +20,7 @@ const routes = [
     name: "MyPage",
     component: MyPageView,
   },
+  { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
 ]
 
 const router = createRouter({
