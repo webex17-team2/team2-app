@@ -12,6 +12,11 @@
 </template>
 
 <script>
+//import { addDoc } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
+// firebase.js で db として export したものを import
+import { db } from "./firebase"
+
 export default {
   data() {
     return {
@@ -20,7 +25,9 @@ export default {
   },
   methods: {
     postTweet() {
-      alert("投稿機能の完成をお楽しみに！")
+      addDoc(collection(db, "tweets"), {
+        text: "こんにちは、ツイートの本文です。",
+      })
     },
   },
 }
