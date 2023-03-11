@@ -2,10 +2,13 @@
   <div class="nav__bar">
     <router-link to="/" class="nav__logo nav__link">GeekTwitter</router-link>
     <div class="nav__items">
-      <router-link to="/about" class="nav__item nav__link">About</router-link>
+      <router-link to="/about" class="nav__item nav__link">Map</router-link>
       <router-link to="/my-page" class="nav__item nav__link">
         MyPage
       </router-link>
+      <router-link to="/japan-page" class="nav__item nav__link"
+        >Map Chose</router-link
+      >
     </div>
   </div>
 </template>
