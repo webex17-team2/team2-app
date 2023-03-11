@@ -22,7 +22,7 @@ const routes = [
     component: MyPageView,
   },
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
-  { path: "/addPosts", name: "AddPosts", component: AddPostsView },
+  { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
 ]
 
 const router = createRouter({

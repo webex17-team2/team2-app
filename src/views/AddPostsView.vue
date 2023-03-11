@@ -3,24 +3,45 @@
     <textarea
       class="form__textarea"
       v-model="text"
-      placeholder="いまどうしてる？"
+      placeholder="いまどうしてるの？"
     />
     <div class="form__buttons">
-      <button v-on:click="postTweet" class="form__submit-button">投稿</button>
+      <button v-on:click="Post" class="form__submit-button">投稿</button>
     </div>
   </div>
 </template>
 
 <script>
+//import { collection, addDoc, getDatabase, ref, set } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
+// firebase.js で db として export したものを import
+import { db } from "../firebase.js"
 export default {
   data() {
-    return {
-      text: "",
-    }
+    // return {
+    //   text: "",
+    // }
   },
   methods: {
-    postTweet() {
-      alert("投稿機能の完成をお楽しみに！")
+    //postTweet(userName, postTitle, postContent, imageUrl) {
+    Post() {
+      //const db = getDatabase()
+      const Post = {
+        userName: "userNameだよ",
+        postTitle: "postTitleだよ",
+        postContent: "postContentだよ",
+      }
+      addDoc(collection(db, "posts"), Post).then((ref) => {
+        this.posts.push({
+          id: ref.id,
+          ...Post,
+        })
+      })
+      // set(ref(db, "users/" + userId), {
+      //   username: name,
+      //   email: email,
+      //   profile_picture: imageUrl,
+      // })
     },
   },
 }
