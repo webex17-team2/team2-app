@@ -21,13 +21,14 @@
     <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
         {{ postObj.postTitle }},
-
-        <img
-          v-if="postObj.imgPath !== null"
-          v-bind:src="postObj.imgPath"
-          width="300"
-          height="300"
-        />
+        <div v-for="(path, index) in postObj.imgPaths" :key="index">
+          <img
+            v-if="postObj.imgPath !== null"
+            v-bind:src="path"
+            width="300"
+            height="300"
+          />
+        </div>
       </li>
     </ul>
   </div>
@@ -67,6 +68,7 @@ export default {
         imgPaths: this.imgPaths,
       }
       await addDoc(collection(db, "posts"), Post)
+      this.imgPaths = []
     },
 
     // 写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
@@ -90,22 +92,24 @@ export default {
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath}`)
-          ).then((url) => {
-            return url
-          })
-          const postdata = doc.data()
-          postdata.imgPath = imgUrl
+        if (doc.data().imgPaths !== "") {
+          let postdata = doc.data()
+          for (let i = 0; i < doc.data().imgPaths.length; i++) {
+            const imgUrl = await getDownloadURL(
+              ref(storage, `files/${doc.data().imgPaths[i]}`)
+            ).then((url) => {
+              return url
+            })
+            postdata.imgPaths[i] = imgUrl
+          }
           this.postObjs.push(postdata)
         } else {
           const postdata = doc.data()
-          postdata.imgPath = null
+          postdata.imgPaths = null
           this.postObjs.push(postdata)
-          console.log(this.postObjs)
         }
       })
+      console.log(this.postObjs)
     },
   },
 }
