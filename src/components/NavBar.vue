@@ -7,7 +7,7 @@
         MyPage
       </router-link>
       <router-link to="/japan-page" class="nav__item nav__link"
-        >Map Chose</router-link
+        >エリア</router-link
       >
     </div>
   </div>
