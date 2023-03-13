@@ -11,7 +11,7 @@
       placeholder="ここが素敵！"
     />
     <p>写真を追加</p>
-    <input type="file" @change="fileUpload" />
+    <input type="file" multiple @change="fileUpload" />
     <!-- アップロードされた画像が以下に表示される -->
     <img v-if="img_url" :src="img_url" />
     <div class="form__buttons">
