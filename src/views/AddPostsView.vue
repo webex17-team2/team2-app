@@ -75,7 +75,7 @@ export default {
       console.log(this)
       //もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜ける
       if (this.postTitle === "" && this.postContent === "") {
-        console.log("postTitleが空でした")
+        alert("タイトルと内容がありません！")
         return
       }
       //投稿内容全てをまとめたPostオブジェクト
