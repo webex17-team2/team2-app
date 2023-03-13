@@ -1,10 +1,12 @@
 <template>
   <div class="all">
-    <h1>エリアを選んでね！</h1>
+    <div class="title"><h1>エリアを選んでね！</h1></div>
 
     <div class="Japan">
       <img src="../assets/Japan.png" />
-      <div class="box-1"></div>
+      <div class="box-1">
+        <img class="pin-1" src="../assets/flag-1.png" />
+      </div>
       <div class="box-2"></div>
       <div class="box-3"></div>
       <div class="box-4"></div>
@@ -18,15 +20,23 @@
 </template>
 <style>
 .all {
-  margin-top: 40px;
-  width: 100vw;
+  margin-top: 6px;
+  width: 100%;
   position: relative;
+  background-color: beige;
+}
+.title {
+  display: inline-block;
+  margin-left: 45%;
+  border: 1px solid black;
+  border-radius: 10%;
 }
 img {
   width: 570px;
   height: 700px;
 }
 .Japan {
+  margin-top: 8%;
   position: absolute;
   left: 33%;
   top: 5%;
@@ -36,10 +46,18 @@ img {
   width: 190px;
   height: 180px;
   border-radius: 50%;
-  background-color: rgba(226, 16, 16, 0.417);
+  background-color: rgba(226, 16, 16, 0.519);
+  pointer-events: none;
   position: absolute;
   left: 23em;
   top: 0.5em;
+}
+.pin-1 {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 40px;
+  left: 40%;
 }
 
 .box-2 {
