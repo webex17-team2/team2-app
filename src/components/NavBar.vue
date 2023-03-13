@@ -9,6 +9,12 @@
       <router-link to="/japan-page" class="nav__item nav__link"
         >エリア</router-link
       >
+      <router-link to="/listOfPosts" class="nav__item nav__link">
+        一覧画面
+      </router-link>
+      <router-link to="/addPostsView" class="nav__item nav__link">
+        投稿追加</router-link
+      >
     </div>
   </div>
 </template>
