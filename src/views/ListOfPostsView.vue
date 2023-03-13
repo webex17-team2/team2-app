@@ -6,8 +6,8 @@
         {{ postObj.postTitle }},
 
         <img
-          v-if="postObj.imgPath !== null"
-          v-bind:src="postObj.imgPath"
+          v-if="postObj.imagePath !== null"
+          v-bind:src="path"
           width="300"
           height="300"
         />
@@ -16,18 +16,10 @@
   </div>
 </template>
 <script>
-import {
-  collection,
-  // addDoc,
-  query,
-  getDocs,
-} from "firebase/firestore"
-import {
-  ref,
-  // uploadBytes,
-  getDownloadURL,
-} from "firebase/storage"
-import { db, storage } from "../firebase.js"
+import { collection, query, getDocs } from "firebase/firestore"
+import { ref, getDownloadURL } from "firebase/storage"
+// firebase.js で db として export したものを import
+import { db, storage } from "../firebase.js" //const db = getDatabase()
 export default {
   data() {
     return {
@@ -35,11 +27,11 @@ export default {
       postTitle: "",
       postContent: "",
       postObjs: [],
-      imgPath: "",
+      imgPath: [],
     }
   },
-  //いる？
   created() {
+    //いる？
     //postObj
     this.Read()
   },
@@ -47,25 +39,23 @@ export default {
     //画像の表示
     //投稿を１回読み込む関数 posts.dbRef.id/ref.id
     async Read() {
-      console.log("l")
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
         if (doc.data().imgPath !== "") {
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath}`)
-          ).then((url) => {
-            return url
-          })
-
-          const postdata = doc.data()
-          postdata.imgPath = imgUrl
-          console.log(postdata)
+          let postdata = doc.data()
+          for (let i = 0; i < doc.data().imgPath.length; i++) {
+            const imgUrl = await getDownloadURL(
+              ref(storage, `files/${doc.data().imgPath[i]}`)
+            ).then((url) => {
+              return url
+            })
+            postdata.imgPath[i] = imgUrl
+          }
           this.postObjs.push(postdata)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
-          console.log(postdata)
           this.postObjs.push(postdata)
         }
       })
