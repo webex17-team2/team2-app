@@ -21,13 +21,14 @@
     <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
         {{ postObj.postTitle }},
-
-        <img
-          v-if="postObj.imagePath !== null"
-          v-bind:src="path"
-          width="300"
-          height="300"
-        />
+        <div v-for="(path, index) in postObj.imgPath" :key="index">
+          <img
+            v-if="postObj.imagePath !== null"
+            v-bind:src="path"
+            width="300"
+            height="300"
+          />
+        </div>
       </li>
     </ul>
   </div>
