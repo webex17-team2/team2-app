@@ -25,13 +25,14 @@
     <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
         {{ postObj.postTitle }},
-
-        <img
-          v-if="postObj.imgPath !== null"
-          v-bind:src="postObj.imgPath"
-          width="300"
-          height="300"
-        />
+        <div v-for="(path, index) in postObj.imgPath" :key="index">
+          <img
+            v-if="postObj.imgPath !== null"
+            v-bind:src="postObj.imgPath"
+            width="300"
+            height="300"
+          />
+        </div>
       </li>
     </ul>
   </div>
@@ -59,7 +60,7 @@ export default {
       postTitle: "",
       postContent: "",
       postObjs: [],
-      imgPath: "",
+      imgPath: [],
     }
   },
   //いる？
@@ -97,19 +98,20 @@ export default {
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      console.log("k")
-      //アップロードしたい画像の情報を取得。
-      const file = props.target.files[0]
-
-      this.imgPath = file.name
-      this.img_url = URL.createObjectURL(file)
-      //"files"はstorageに作成したフォルダ名
-      //Firebase storageに画像ファイルを送信。
-      const storageRef = ref(storage, "files/" + file.name)
-      //Firebaseにデータを適切に送るために必要なコード
-      await uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("エラー", snapshot)
-      })
+      let files = []
+      for (let i = 0; i < props.target.files.length; i++) {
+        files[i] = props.target.files[i]
+        this.imgPath.push(props.target.files[i].name)
+      }
+      for (let i = 0; i < props.target.files.length; i++) {
+        this.imgUrl = URL.createObjectURL(files[i])
+        const storageRef = ref(storage, "files/" + files[i].name)
+        // "files"はstorageに作成したフォルダ名
+        // Firebaseにデータを適切に送るために必要なコード
+        await uploadBytes(storageRef, files[i]).then((snapshot) => {
+          console.log("追加画像情報" + snapshot)
+        })
+      }
     },
     //画像の表示
     // async filedownload(imgPath) {
@@ -118,48 +120,28 @@ export default {
     // },
     //投稿を１回読み込む関数 posts.dbRef.id/ref.id
     async Read() {
-      console.log("l")
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
         if (doc.data().imgPath !== "") {
-          // doc.data() is never undefined for query doc snapshots
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath}`)
-          ).then((url) => {
-            //console.log(url)
-
-            return url
-          })
-          //console.log(imgUrl)
-          const postdata = doc.data()
-          postdata.imgPath = imgUrl
-          //doc.data().imgPath = imgUrl
-          console.log(postdata)
+          let postdata = doc.data()
+          for (let i = 0; i < doc.data().imgPath.length; i++) {
+            const imgUrl = await getDownloadURL(
+              ref(storage, `files/${doc.data().imgPath[i]}`)
+            ).then((url) => {
+              return url
+            })
+            postdata.imgPath[i] = imgUrl
+          }
           this.postObjs.push(postdata)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
-          //doc.data().imgPath = imgUrl
-          console.log(postdata)
           this.postObjs.push(postdata)
         }
       })
+      console.log("read後")
       console.log(this.postObjs)
-      // for (let i = 0; i < querySnapshot.length; i++) {
-      //   console.log("3.5")
-      //   //idがドキュメントの名前、dataがフィールド
-
-      //   console.log(querySnapshot[i].id, " => ", querySnapshot[i].data())
-      //   let obj = { ...querySnapshot[i] }
-      //   const imgPath = await this.filedownload(querySnapshot[i].data().imgPath)
-      //   obj.imgPath = imgPath
-      //   //配列の後ろにオブジェクトを追加する
-      //   this.postObjs.push(obj)
-
-      //   console.log(this.postObjs)
-      // }
-      //console.log(this.postObjs)
     },
   },
 }
