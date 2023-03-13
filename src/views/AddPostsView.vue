@@ -118,6 +118,7 @@ export default {
           this.postObjs.push(postdata)
         }
       })
+      console.log("read後")
       console.log(this.postObjs)
     },
   },
