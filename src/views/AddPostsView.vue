@@ -15,7 +15,11 @@
     <!-- アップロードされた画像が以下に表示される -->
     <img v-if="img_url" :src="img_url" />
     <div class="form__buttons">
-      <button v-on:click="Post" class="form__submit-button">投稿</button>
+      <button v-on:click="Post" class="form__submit-button">
+        <router-link to="/listOfPosts" class="nav__item nav__link"
+          >投稿</router-link
+        >
+      </button>
     </div>
     <h3>表示</h3>
     <ul>
@@ -25,7 +29,7 @@
           <img
             v-if="postObj.imagePath !== null"
             v-bind:src="path"
-            width="300"
+            width="500"
             height="300"
           />
         </div>

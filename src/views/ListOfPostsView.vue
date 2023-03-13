@@ -8,7 +8,7 @@
           <img
             v-if="postObj.imagePath !== null"
             v-bind:src="path"
-            width="300"
+            width="500"
             height="300"
           />
         </div>
