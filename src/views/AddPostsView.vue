@@ -85,14 +85,7 @@ export default {
         postContent: this.postContent,
         imgPath: this.imgPath,
       }
-      //追加
       await addDoc(collection(db, "posts"), Post)
-
-      // set(ref(db, "users/" + userId), {
-      //   username: name,
-      //   email: email,
-      //   profile_picture: imageUrl,
-      // })
     },
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)

@@ -43,11 +43,11 @@ export default {
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
+        let postdata = doc.data()
+        if (postdata.imgPath !== "") {
+          for (let i = 0; i < postdata.imgPath.length; i++) {
             const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
+              ref(storage, `files/${postdata.imgPath[i]}`)
             ).then((url) => {
               return url
             })
@@ -55,7 +55,6 @@ export default {
           }
           this.postObjs.push(postdata)
         } else {
-          const postdata = doc.data()
           postdata.imgPath = null
           this.postObjs.push(postdata)
         }
