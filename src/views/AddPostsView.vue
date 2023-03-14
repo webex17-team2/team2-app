@@ -24,8 +24,7 @@
     <h3>表示</h3>
     <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
-        {{ postObj.postTitle }},
-
+        {{ postObj.postTitle }}
         <img
           v-if="postObj.imgPath !== null"
           v-bind:src="postObj.imgPath"
@@ -46,12 +45,12 @@ import {
   // getDatabase,
   // child,
   // get,
-  query,
-  getDocs,
+  // query,
+  // getDocs,
 } from "firebase/firestore"
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+// import { ref, uploadBytes } from "firebase/storage"
 // firebase.js で db として export したものを import
-import { db, storage } from "../firebase.js" //const db = getDatabase()
+import { db } from "../firebase.js" //const db = getDatabase()
 export default {
   data() {
     return {
@@ -65,7 +64,8 @@ export default {
   //いる？
   created() {
     //postObj
-    this.Read()
+    // this.Read()
+    // console.log("リロードしたよ！")
   },
   methods: {
     //postTweet(userName, postTitle, postContent, imageUrl) {
@@ -90,70 +90,43 @@ export default {
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      console.log("k")
-      //アップロードしたい画像の情報を取得。
-      const file = props.target.files[0]
+      console.clear()
+      console.log(props)
 
-      this.imgPath = file.name
-      this.img_url = URL.createObjectURL(file)
+      const file = props.target.files[0] // 画像
+      //アップロードしたい画像の情報を取得。
+      const imgPath = file.name // 画像の名前
+      const img_url = URL.createObjectURL(file) // 画像のURL
       //"files"はstorageに作成したフォルダ名
       //Firebase storageに画像ファイルを送信。
-      const storageRef = ref(storage, "files/" + file.name)
+      const postObj = { postTitle: imgPath, imgPath: img_url }
+      this.postObjs.push(postObj)
+      // const storageRef = ref(storage, "files/" + file.name)
       //Firebaseにデータを適切に送るために必要なコード
-      await uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("エラー", snapshot)
-      })
+      // await uploadBytes(storageRef, file).then((snapshot) => {
+      //   console.log("エラー", snapshot)
+      // })
     },
-    //画像の表示
-    // async filedownload(imgPath) {
-    //   const url = await getDownloadURL(ref(storage, imgPath))
-    //   return url
+    // async Read() {
+    //   const q = query(collection(db, "posts"))
+    //   const querySnapshot = await getDocs(q)
+    //   querySnapshot.forEach(async (doc) => {
+    //     if (doc.data().imgPath !== "") {
+    //       const imgUrl = await getDownloadURL(
+    //         ref(storage, `files/${doc.data().imgPath}`)
+    //       ).then((url) => {
+    //         return url
+    //       })
+    //       const postdata = doc.data()
+    //       postdata.imgPath = imgUrl
+    //       this.postObjs.push(postdata)
+    //     } else {
+    //       const postdata = doc.data()
+    //       postdata.imgPath = null
+    //       this.postObjs.push(postdata)
+    //     }
+    //   })
     // },
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
-    async Read() {
-      console.log("l")
-      const q = query(collection(db, "posts"))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          // doc.data() is never undefined for query doc snapshots
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath}`)
-          ).then((url) => {
-            //console.log(url)
-
-            return url
-          })
-          //console.log(imgUrl)
-          const postdata = doc.data()
-          postdata.imgPath = imgUrl
-          //doc.data().imgPath = imgUrl
-          console.log(postdata)
-          this.postObjs.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          //doc.data().imgPath = imgUrl
-          console.log(postdata)
-          this.postObjs.push(postdata)
-        }
-      })
-      console.log(this.postObjs)
-      // for (let i = 0; i < querySnapshot.length; i++) {
-      //   console.log("3.5")
-      //   //idがドキュメントの名前、dataがフィールド
-
-      //   console.log(querySnapshot[i].id, " => ", querySnapshot[i].data())
-      //   let obj = { ...querySnapshot[i] }
-      //   const imgPath = await this.filedownload(querySnapshot[i].data().imgPath)
-      //   obj.imgPath = imgPath
-      //   //配列の後ろにオブジェクトを追加する
-      //   this.postObjs.push(obj)
-
-      //   console.log(this.postObjs)
-      // }
-      //console.log(this.postObjs)
-    },
   },
 }
 </script>
