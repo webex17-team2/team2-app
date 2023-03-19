@@ -1,7 +1,7 @@
 <template>
   <div class="my-page">
     <h1>投稿一覧</h1>
-    <ul>
+    <!-- <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
         {{ postObj.postTitle }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
@@ -13,11 +13,14 @@
           />
         </div>
       </li>
-    </ul>
+    </ul> -->
+    <li v-for="(postArray, index) in postArray" :key="index">
+      {{ postArray.postTitle }}
+    </li>
   </div>
 </template>
 <script>
-import { collection, query, getDocs } from "firebase/firestore"
+import { collection, query, getDocs, orderBy } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -29,12 +32,26 @@ export default {
       postContent: "",
       postObjs: [],
       imgPath: [],
+      postArray: [],
     }
   },
-  created() {
+  async created() {
     //いる？
     //postObj
     this.Read()
+    const a = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+    const querySnapshot = await getDocs(a)
+
+    querySnapshot.forEach((doc) => {
+      this.postArray.unshift({
+        imgPath: doc.data().imgPath,
+        postContent: doc.data().postContent,
+        postTitle: doc.data().postTitle,
+        timestamp: doc.data().timestamp,
+        userName: doc.data().userName,
+      })
+      console.log(doc)
+    })
   },
   methods: {
     //画像の表示

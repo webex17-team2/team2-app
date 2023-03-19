@@ -20,6 +20,7 @@
           投稿
         </router-link>
       </button>
+      <button>確認</button>
     </div>
     <h3>表示</h3>
     <ul>
@@ -45,12 +46,12 @@ import {
   // getDatabase,
   // child,
   // get,
-  // query,
-  // getDocs,
+  query,
+  getDocs,
 } from "firebase/firestore"
-// import { ref, uploadBytes } from "firebase/storage"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
-import { db } from "../firebase.js" //const db = getDatabase()
+import { db, storage } from "../firebase.js" //const db = getDatabase()
 export default {
   data() {
     return {
@@ -65,7 +66,7 @@ export default {
   created() {
     //postObj
     // this.Read()
-    // console.log("リロードしたよ！")
+    //console.log(firebase.firestore.Timestamp.fromDate(new Date()))
   },
   methods: {
     //postTweet(userName, postTitle, postContent, imageUrl) {
@@ -79,11 +80,13 @@ export default {
         return
       }
       //投稿内容全てをまとめたPostオブジェクト
+      const now = new Date()
       const Post = {
         userName: this.userName,
         postTitle: this.postTitle,
         postContent: this.postContent,
         imgPath: this.imgPath,
+        timestamp: now.getTime(),
       }
       await addDoc(collection(db, "posts"), Post)
     },
@@ -101,32 +104,32 @@ export default {
       //Firebase storageに画像ファイルを送信。
       const postObj = { postTitle: imgPath, imgPath: img_url }
       this.postObjs.push(postObj)
-      // const storageRef = ref(storage, "files/" + file.name)
+      const storageRef = ref(storage, "files/" + file.name)
       //Firebaseにデータを適切に送るために必要なコード
-      // await uploadBytes(storageRef, file).then((snapshot) => {
-      //   console.log("エラー", snapshot)
-      // })
+      await uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("エラー", snapshot)
+      })
     },
-    // async Read() {
-    //   const q = query(collection(db, "posts"))
-    //   const querySnapshot = await getDocs(q)
-    //   querySnapshot.forEach(async (doc) => {
-    //     if (doc.data().imgPath !== "") {
-    //       const imgUrl = await getDownloadURL(
-    //         ref(storage, `files/${doc.data().imgPath}`)
-    //       ).then((url) => {
-    //         return url
-    //       })
-    //       const postdata = doc.data()
-    //       postdata.imgPath = imgUrl
-    //       this.postObjs.push(postdata)
-    //     } else {
-    //       const postdata = doc.data()
-    //       postdata.imgPath = null
-    //       this.postObjs.push(postdata)
-    //     }
-    //   })
-    // },
+    async Read() {
+      const q = query(collection(db, "posts"))
+      const querySnapshot = await getDocs(q)
+      querySnapshot.forEach(async (doc) => {
+        if (doc.data().imgPath !== "") {
+          const imgUrl = await getDownloadURL(
+            ref(storage, `files/${doc.data().imgPath}`)
+          ).then((url) => {
+            return url
+          })
+          const postdata = doc.data()
+          postdata.imgPath = imgUrl
+          this.postObjs.push(postdata)
+        } else {
+          const postdata = doc.data()
+          postdata.imgPath = null
+          this.postObjs.push(postdata)
+        }
+      })
+    },
   },
 }
 </script>
