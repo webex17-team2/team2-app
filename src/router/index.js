@@ -24,7 +24,16 @@ const routes = [
   },
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
-  { path: "/detailView", name: "DetailView", component: DetailView },
+  {
+    path: "/detailView:index",
+    name: "DetailView",
+    component: DetailView,
+    props: (route) => ({
+      // postArray: route.params.postArray,
+      imgPath: route.params.imgPath,
+      index: route.params.index,
+    }),
+  },
 ]
 
 const router = createRouter({

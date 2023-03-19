@@ -7,7 +7,11 @@
   <P>感想や押しポイント</P>
   <p>〜〜〜〜〜〜＾</p>
   <p>画像</p>
-  <p>{{ ArrayIndex }}</p>
+  <img :src="imgPath" />
+  <!-- <p>{{ postArray }}</p> 
+    <div>{{ imgPath }}</div>-->
+  <p>{{ index }}</p>
+
   <img />
 
   <h2>コメント機能</h2>
@@ -21,9 +25,32 @@
 <script>
 export default {
   //ListOfView.vueから受け取り
-  props: ["ArrayIndex"],
+  props: {
+    postArray: {
+      type: String,
+      required: true,
+    },
+    imgPath: {
+      type: String,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      array: [],
+    }
+  },
   created() {
-    console.log(this.ArrayIndex)
+    // console.log(this.ArrayIndex)
+    this.array.push({
+      postArray: this.postArray,
+      imgPath: this.imgPath,
+      index: this.index,
+    })
   },
 }
 </script>

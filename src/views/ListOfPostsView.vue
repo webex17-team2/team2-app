@@ -13,9 +13,7 @@
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
-          <router-link to="/detailView" ArrayIndex="{{postObjs}}"
-            >詳細へ</router-link
-          >
+          <button @click="routerBtn(postObjs)">詳細へ</button>
         </div>
       </li>
     </ul>
@@ -61,6 +59,8 @@ export default {
             postdata.imgPath[i] = imgUrl
           }
           this.postArray.push(postdata)
+          console.log("ID")
+          console.log(doc.id)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
@@ -71,11 +71,18 @@ export default {
       console.log(this.postArray)
       console.log(this.postObjs)
     },
-    // ByValue() {
-    //   const index = this.postObjs
-    //   console.log("index番号")
-    //   console.log(index)
-    // },
+    routerBtn(postObjs) {
+      console.clear()
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          // postArray: this.postArray[index],
+          // imgPath: this.imgPath[index],
+          imgPath: this.postArray[postObjs].imgPath[0],
+          index: postObjs,
+        },
+      })
+    },
   },
 }
 </script>
