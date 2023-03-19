@@ -47,6 +47,8 @@ export default {
     console.log(this.postTitle)
     console.log(typeof this.imgPath)
     // const data = this.$router
+    // const nameQuery = query(citiesRef, where("タイムスタンプ", "==", "受け取った値"));
+    //
   },
 }
 </script>

@@ -13,8 +13,8 @@
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
-          <button @click="routerBtn(postObjs)">詳細へ</button>
         </div>
+        <button @click="routerBtn(postObjs)">詳細へ</button>
       </li>
     </ul>
   </div>
@@ -90,6 +90,7 @@ export default {
           // postTitle: this.postArray[postObjs].postTitle,
           imgPath: this.postArray[postObjs].imgPath[0],
           index: postObjs,
+          //タイムー>time: this.postArray[postObjs].
         },
       })
     },
