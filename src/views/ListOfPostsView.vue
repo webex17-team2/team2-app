@@ -81,7 +81,8 @@ export default {
         name: "DetailView",
         params: {
           // postArray: this.postArray[index],
-          // imgPath: this.imgPath[index],
+          postTitle: this.postArray[postObjs].postTitle,
+          imgPath: this.postArray[postObjs].imgPath[0],
           index: postObjs,
         },
       })

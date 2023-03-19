@@ -7,8 +7,8 @@
   <P>感想や押しポイント</P>
   <p>〜〜〜〜〜〜＾</p>
   <p>画像</p>
-  <p>{{ postArray }}</p>
-  <div>{{ imgPath }}</div>
+  <p>{{ this.$router.params.postTitle }}</p>
+  <img :src="imgPath" />
   <div>{{ index }}</div>
   <img />
 
@@ -24,12 +24,12 @@
 export default {
   //ListOfView.vueから受け取り
   props: {
-    postArray: {
+    postTitle: {
       type: String,
       required: true,
     },
     imgPath: {
-      type: String,
+      // type: String,
       required: true,
     },
     index: {
@@ -38,17 +38,11 @@ export default {
     },
   },
   data() {
-    return {
-      array: [],
-    }
+    return {}
   },
   created() {
-    // console.log(this.ArrayIndex)
-    this.array.push({
-      postArray: this.postArray,
-      imgPath: this.imgPath,
-      index: this.index,
-    })
+    console.log(this.postTitle)
+    // const data = this.$router
   },
 }
 </script>
