@@ -61,7 +61,7 @@
       </div>
       <!-- 中国 -->
       <div @mouseover="sixOver" @mouseleave="sixLeave" class="box-6">
-        <div class="big-pin">
+        <div class="big-pin big-pin6">
           <img
             @click="tyugoku"
             v-if="hoverFlag_6"
@@ -241,21 +241,15 @@ img {
   top: 0.5em;
 }
 .pin-1 {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
   opacity: 0;
   position: absolute;
-  top: 40px;
-  left: 40%;
-}
-.big-pin {
-  transition: 1.3s;
-}
-.big-pin:hover {
-  transform: rotateY(360deg);
+  top: 50px;
+  left: 38%;
 }
 
 .box-2 {
@@ -275,8 +269,8 @@ img {
   animation-fill-mode: forwards;
   opacity: 0;
   position: absolute;
-  top: 40px;
-  left: 40%;
+  top: 45px;
+  left: 25%;
 }
 
 .box-3 {
@@ -299,7 +293,7 @@ img {
   opacity: 0;
   position: absolute;
   top: 10px;
-  left: 40%;
+  left: 25%;
 }
 
 .box-4 {
@@ -312,11 +306,11 @@ img {
   top: 25em;
 }
 .pin-4 {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   position: absolute;
-  top: 20px;
-  left: 44%;
+  top: 30px;
+  left: 25%;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
@@ -336,8 +330,8 @@ img {
   width: 45px;
   height: 45px;
   position: absolute;
-  top: 10px;
-  left: 45%;
+  top: 15px;
+  left: 40%;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
@@ -357,15 +351,18 @@ img {
 .pin-6 {
   width: 40px;
   height: 40px;
-  transform: rotate(20deg);
   position: absolute;
-  top: -10px;
-  left: 57%;
+  top: -5px;
+  left: 50%;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
   opacity: 0;
 }
+/* .big-pin6 {
+  transform: rotate(27deg);
+  transform-origin: center;
+} */
 
 .box-7 {
   width: 110px;
@@ -382,7 +379,7 @@ img {
   height: 35px;
   transform: rotate(10deg);
   position: absolute;
-  top: -15px;
+  top: -7px;
   left: 53%;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
@@ -400,11 +397,11 @@ img {
   top: 36em;
 }
 .pin-8 {
-  width: 46px;
-  height: 46px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: 15px;
-  left: 45px;
+  left: 40px;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
@@ -424,8 +421,8 @@ img {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 14px;
-  left: 49px;
+  top: 19px;
+  left: 40px;
   animation-name: rotateAnime;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
@@ -441,5 +438,58 @@ img {
     opacity: 1;
     transform: rotate(360deg);
   }
+}
+@keyframes bounce1 {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-30px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bounce2 {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-30px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+.big-pin {
+  transition: 1.3s;
+}
+.big-pin:hover {
+  animation: bounce1 1s;
+  animation-fill-mode: both;
+}
+.big-pin6:hover {
+  animation: bounce2 1s;
+  animation-fill-mode: both;
 }
 </style>
