@@ -23,7 +23,7 @@
     </div>
     <h3>表示</h3>
     <ul>
-      <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
+      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
           <img
@@ -49,7 +49,7 @@ export default {
       userName: "",
       postTitle: "",
       postContent: "",
-      postObjs: [],
+      postArray: [],
       imgPath: [],
     }
   },
@@ -115,15 +115,15 @@ export default {
             })
             postdata.imgPath[i] = imgUrl
           }
-          this.postObjs.push(postdata)
+          this.postArray.push(postdata)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
-          this.postObjs.push(postdata)
+          this.postArray.push(postdata)
         }
       })
       console.log("read後")
-      console.log(this.postObjs)
+      console.log(this.postArray)
     },
   },
 }
