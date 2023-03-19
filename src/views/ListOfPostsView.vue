@@ -13,14 +13,13 @@
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
-          <router-link to="/detailView" ArrayIndex="{{postObjs}}"
-            >詳細へ</router-link
-          >
+          <button @click="routerBtn(postObjs)">詳細へ</button>
         </div>
       </li>
     </ul>
   </div>
 </template>
+
 <script>
 import { collection, query, getDocs } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
@@ -76,6 +75,17 @@ export default {
     //   console.log("index番号")
     //   console.log(index)
     // },
+    routerBtn(postObjs) {
+      console.clear()
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          // postArray: this.postArray[index],
+          // imgPath: this.imgPath[index],
+          index: postObjs,
+        },
+      })
+    },
   },
 }
 </script>
