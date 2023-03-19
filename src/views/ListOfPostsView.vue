@@ -59,8 +59,6 @@ export default {
             postdata.imgPath[i] = imgUrl
           }
           this.postArray.push(postdata)
-          console.log("ID")
-          console.log(doc.id)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
@@ -71,13 +69,25 @@ export default {
       console.log(this.postArray)
       console.log(this.postObjs)
     },
+    // ByValue() {
+    //   const index = this.postObjs
+    //   console.log("index番号")
+    //   console.log(index)
+    // },
     routerBtn(postObjs) {
       console.clear()
+      // let box = []
+      // const imgBoxNumber = this.postArray[postObjs].imgPath.length
+      // for (let i = 0; i < imgBoxNumber; i++) {
+      //   box.push(this.postArray[postObjs].imgPath.path)
+      // }
+      // console.log(box)
       this.$router.push({
         name: "DetailView",
         params: {
           // postArray: this.postArray[index],
-          // imgPath: this.imgPath[index],
+          postTitle: this.postArray[postObjs].postTitle,
+          // postTitle: this.postArray[postObjs].postTitle,
           imgPath: this.postArray[postObjs].imgPath[0],
           index: postObjs,
         },
@@ -86,7 +96,6 @@ export default {
   },
 }
 </script>
-
 <style scoped>
 .form__wrapper {
   padding: 1rem;

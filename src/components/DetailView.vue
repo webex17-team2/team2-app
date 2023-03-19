@@ -7,11 +7,12 @@
   <P>感想や押しポイント</P>
   <p>〜〜〜〜〜〜＾</p>
   <p>画像</p>
+  <p>{{ this.$router.params.postTitle }}</p>
   <img :src="imgPath" />
-  <!-- <p>{{ postArray }}</p> 
-    <div>{{ imgPath }}</div>-->
-  <p>{{ index }}</p>
+  <!-- <p>{{ this.$router.params.postTitle }}</p> -->
+  <img :src="imgPathContent" />
 
+  <div>{{ index }}</div>
   <img />
 
   <h2>コメント機能</h2>
@@ -21,17 +22,17 @@
     placeholder="コメントする"
   ></textarea>
 </template>
-
 <script>
 export default {
   //ListOfView.vueから受け取り
   props: {
-    postArray: {
+    postTitle: {
       type: String,
       required: true,
     },
     imgPath: {
-      type: String,
+      // type: String,
+      type: Array,
       required: true,
     },
     index: {
@@ -40,17 +41,12 @@ export default {
     },
   },
   data() {
-    return {
-      array: [],
-    }
+    return {}
   },
   created() {
-    // console.log(this.ArrayIndex)
-    this.array.push({
-      postArray: this.postArray,
-      imgPath: this.imgPath,
-      index: this.index,
-    })
+    console.log(this.postTitle)
+    console.log(typeof this.imgPath)
+    // const data = this.$router
   },
 }
 </script>

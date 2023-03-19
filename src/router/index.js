@@ -5,7 +5,6 @@ import MyPageView from "../views/MyPageView.vue"
 import ListOfPostsView from "../views/ListOfPostsView.vue"
 import AddPostsView from "../views/AddPostsView.vue"
 import DetailView from "../components/DetailView.vue"
-
 const routes = [
   {
     path: "/",
@@ -25,20 +24,19 @@ const routes = [
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
   {
-    path: "/detailView:index",
+    path: "/detailView:index/:imgPath",
     name: "DetailView",
     component: DetailView,
     props: (route) => ({
-      // postArray: route.params.postArray,
+      postTitle: route.params.postTitle,
+      // postTitle: route.params.postTitle,
       imgPath: route.params.imgPath,
       index: route.params.index,
     }),
   },
 ]
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
-
 export default router
