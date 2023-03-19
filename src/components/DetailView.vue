@@ -7,8 +7,9 @@
   <P>感想や押しポイント</P>
   <p>〜〜〜〜〜〜＾</p>
   <p>画像</p>
-  <p>{{ this.$router.params.postTitle }}</p>
-  <img :src="imgPath" />
+  <!-- <p>{{ this.$router.params.postTitle }}</p> -->
+  <img :src="imgPathContent" />
+
   <div>{{ index }}</div>
   <img />
 
@@ -29,7 +30,7 @@ export default {
       required: true,
     },
     imgPath: {
-      // type: String,
+      type: Array,
       required: true,
     },
     index: {
@@ -41,7 +42,7 @@ export default {
     return {}
   },
   created() {
-    console.log(this.postTitle)
+    console.log(typeof this.imgPath)
     // const data = this.$router
   },
 }

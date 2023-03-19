@@ -29,7 +29,7 @@ const routes = [
     name: "DetailView",
     component: DetailView,
     props: (route) => ({
-      postTitle: route.params.postTitle,
+      // postTitle: route.params.postTitle,
       imgPath: route.params.imgPath,
       index: route.params.index,
     }),
