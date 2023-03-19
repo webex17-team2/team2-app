@@ -2,8 +2,8 @@
   <div class="my-page">
     <h1>投稿一覧</h1>
     <ul>
-      <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
-        {{ postObj.postTitle }},
+      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+        {{ postObj.postTitle }},{{ postObjs }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
           <img
             v-if="postObj.imagePath !== null"
@@ -11,6 +11,11 @@
             width="500"
             height="300"
           />
+          <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
+          <p>{{ postObjs }}</p>
+          <router-link to="/detailView" ArrayIndex="{{postObjs}}"
+            >詳細へ</router-link
+          >
         </div>
       </li>
     </ul>
@@ -21,13 +26,15 @@ import { collection, query, getDocs } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
+// import DetailView from "../components/DetailView.vue"
 export default {
+  // components: { DetailView },
   data() {
     return {
       userName: "",
       postTitle: "",
       postContent: "",
-      postObjs: [],
+      postArray: [],
       imgPath: [],
     }
   },
@@ -53,17 +60,22 @@ export default {
             })
             postdata.imgPath[i] = imgUrl
           }
-          this.postObjs.push(postdata)
+          this.postArray.push(postdata)
         } else {
           const postdata = doc.data()
           postdata.imgPath = null
-          this.postObjs.push(postdata)
+          this.postArray.push(postdata)
         }
       })
-      console.log("posrObjs")
+      console.log("postArrey")
+      console.log(this.postArray)
       console.log(this.postObjs)
-      console.log(this.postObj)
     },
+    // ByValue() {
+    //   const index = this.postObjs
+    //   console.log("index番号")
+    //   console.log(index)
+    // },
   },
 }
 </script>
