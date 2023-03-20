@@ -24,14 +24,15 @@ const routes = [
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
   {
-    path: "/detailView:index/:imgPath",
+    path: "/detailView:imgPath/:timestamp",
     name: "DetailView",
     component: DetailView,
     props: (route) => ({
       postTitle: route.params.postTitle,
       // postTitle: route.params.postTitle,
       imgPath: route.params.imgPath,
-      index: route.params.index,
+      // index: route.params.index,
+      timestamp: route.params.timestamp,
     }),
   },
 ]

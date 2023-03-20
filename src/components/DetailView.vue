@@ -7,12 +7,12 @@
   <P>感想や押しポイント</P>
   <p>〜〜〜〜〜〜＾</p>
   <p>画像</p>
-  <p>{{ this.$router.params.postTitle }}</p>
+  <div>{{ timestamp }}</div>
+  <!-- <p>{{ this.$router.params.postTitle }}</p> -->
   <img :src="imgPath" />
   <!-- <p>{{ this.$router.params.postTitle }}</p> -->
-  <img :src="imgPathContent" />
-
-  <div>{{ index }}</div>
+  <!-- <img :src="imgPathContent" /> -->
+  <!-- <div>{{ index }}</div> -->
   <img />
 
   <h2>コメント機能</h2>
@@ -35,17 +35,23 @@ export default {
       type: Array,
       required: true,
     },
-    index: {
+    timestamp: {
+      // type: String,
       type: Number,
       required: true,
     },
+    // index: {
+    //   type: Number,
+    //   required: true,
+    // },
   },
   data() {
     return {}
   },
   created() {
-    console.log(this.postTitle)
-    console.log(typeof this.imgPath)
+    console.log(this.timestamp)
+    // const timestamp = this.timestamp
+    // const list =
     // const data = this.$router
     // const nameQuery = query(citiesRef, where("タイムスタンプ", "==", "受け取った値"));
     //

@@ -21,9 +21,9 @@
 </template>
 <script>
 import { collection, query, getDocs, orderBy } from "firebase/firestore"
-import { ref, getDownloadURL } from "firebase/storage"
+// import { ref, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
-import { db, storage } from "../firebase.js" //const db = getDatabase()
+import { db } from "../firebase.js" //const db = getDatabase()
 // import DetailView from "../components/DetailView.vue"
 export default {
   // components: { DetailView },
@@ -75,47 +75,71 @@ export default {
     // },
     //画像の表示
     //投稿を１回読み込む関数 posts.dbRef.d/ref.id
+    // async Read() {
+    //   const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+    //   const querySnapshot = await getDocs(q)
+    //   querySnapshot.forEach(async (doc) => {
+    //     if (doc.data().imgPath !== "") {
+    //       let postdata = doc.data()
+    //       for (let i = 0; i < doc.data().imgPath.length; i++) {
+    //         const imgUrl = await getDownloadURL(
+    //           ref(storage, `files/${doc.data().imgPath[i]}`)
+    //         ).then((url) => {
+    //           return url
+    //         })
+    //         postdata.imgPath[i] = imgUrl
+    //       }
+    //       postdata.timestamp = doc.data().timestamp
+    //       this.postArray.unshift(postdata)
+    //     } else {
+    //       const postdata = doc.data()
+    //       postdata.imgPath = null
+    //       this.postArray.unshift(postdata)
+    //     }
+    //   })
+    //   console.log("postArrey")
+    //   console.log(this.postArray)
+    // },
     async Read() {
       const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        // this.postArray.unshift({
-        //   // imgPath: doc.data().imgPath,
-        //   // postContent: doc.data().postContent,
-        //   // postTitle: doc.data().postTitle,
-        //   timestamp: doc.data().timestamp,
-        //   // userName: doc.data().userName,
-        // })
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          postdata.timestamp = doc.data().timestamp
-          this.postArray.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postArray.push(postdata)
-        }
+        let postdata = doc.data()
+        this.postArray.push(postdata)
       })
-      console.log("postArrey")
-      console.log(this.postArray)
-      console.log(this.postObjs)
     },
+    // async Read() {
+    //   const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+    //   const querySnapshot = await getDocs(q)
+    //   querySnapshot.forEach((doc) => {
+    //     let data = doc.data()
+    //     const postData = {
+    //       postContent: data.postContent,
+    //       postTitle: data.postTitle,
+    //       timestamp: data.timestamp,
+    //       userName: data.userName,
+    //     }
+
+    //     if (data.imgPath !== "") {
+    //       for (let i = 0; i < data.imgPath.length; i++) {
+    //         const imgUrl = getDownloadURL(
+    //           ref(storage, `files/${doc.data().imgPath[i]}`)
+    //         ).then((url) => {
+    //           return url
+    //         })
+    //         postData.imgPath = imgUrl
+    //         this.postArray.unshift(postData)
+    //       }
+    //     } else {
+    //       postData.imgPath = null
+    //       this.postArray.unshift(postData)
+    //     }
+    //   })
+    //   console.log(this.postArray)
+    // },
     routerBtn(postObjs) {
       console.clear()
-      // let box = []
-      // const imgBoxNumber = this.postArray[postObjs].imgPath.length
-      // for (let i = 0; i < imgBoxNumber; i++) {
-      //   box.push(this.postArray[postObjs].imgPath.path)
-      // }
-      // console.log(box)
+      console.log(postObjs)
       this.$router.push({
         name: "DetailView",
         params: {
@@ -125,6 +149,7 @@ export default {
           imgPath: this.postArray[postObjs].imgPath[0],
           index: postObjs,
           //タイムー>time: this.postArray[postObjs].
+          timestamp: this.postArray[postObjs].timestamp,
         },
       })
     },
