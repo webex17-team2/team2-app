@@ -80,35 +80,30 @@ export default {
       const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        // this.postArray.unshift({
-        //   // imgPath: doc.data().imgPath,
-        //   // postContent: doc.data().postContent,
-        //   // postTitle: doc.data().postTitle,
-        //   timestamp: doc.data().timestamp,
-        //   // userName: doc.data().userName,
-        // })
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          postdata.timestamp = doc.data().timestamp
-          this.postArray.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postArray.push(postdata)
+        //if (doc.data().imgPath !== "") {
+        let postdata = doc.data()
+        for (let i = 0; i < doc.data().imgPath.length; i++) {
+          const imgUrl = await getDownloadURL(
+            ref(storage, `files/${doc.data().imgPath[i]}`)
+          ).then((url) => {
+            return url
+          })
+          postdata.imgPath[i] = imgUrl
         }
+        postdata.timestamp = doc.data().timestamp
+        this.postArray.unshift(postdata)
+        console.log("タイムスタンプ")
+        console.log(postdata.timestamp)
+        // } else {
+        //   const postdata = doc.data()
+        //   postdata.imgPath = null
+        //   postdata.timestamp = doc.data().timestamp
+        //   this.postArray.unshift(postdata)
+        // }
       })
 
       console.log("postArrey")
       console.log(this.postArray)
-      console.log(this.postObjs)
     },
     // ByValue() {
     //   const index = this.postObjs
@@ -127,10 +122,11 @@ export default {
         name: "DetailView",
         params: {
           // postArray: this.postArray[index],
-          postTitle: this.postArray[postObjs].postTitle,
           // postTitle: this.postArray[postObjs].postTitle,
-          imgPath: this.postArray[postObjs].imgPath[0],
-          index: postObjs,
+          // postTitle: this.postArray[postObjs].postTitle,
+          // imgPath: this.postArray[postObjs].imgPath[0],
+          // index: postObjs,
+          timestamp: this.postArray[postObjs].timestamp,
           //タイムー>time: this.postArray[postObjs].
         },
       })

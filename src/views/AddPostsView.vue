@@ -63,9 +63,13 @@ export default {
     // 投稿を追加する関数
     async Post() {
       // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
-      if (this.postTitle === "" && this.postContent === "") {
+      if (
+        this.postTitle === "" &&
+        this.postContent === "" &&
+        this.imgPath === ""
+      ) {
         console.log("postTitleが空でした")
-        alert("タイトルと内容がありません。必ず記載してください")
+        alert("タイトル/写真/感想/は必ず記載してください")
         return
       }
       //投稿内容全てをまとめたPostオブジェクト
