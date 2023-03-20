@@ -39,48 +39,69 @@ export default {
   async created() {
     //いる？
     //postObj
-    this.Read()
+
     const a = query(collection(db, "posts"), orderBy("timestamp", "asc"))
     const querySnapshot = await getDocs(a)
-    querySnapshot.forEach((doc) => {
-      this.postArray.unshift({
-        imgPath: doc.data().imgPath,
-        postContent: doc.data().postContent,
-        postTitle: doc.data().postTitle,
-        timestamp: doc.data().timestamp,
-        userName: doc.data().userName,
+    querySnapshot
+      .forEach((doc) => {
+        this.postArray.unshift({
+          imgPath: doc.data().imgPath,
+          postContent: doc.data().postContent,
+          postTitle: doc.data().postTitle,
+          timestamp: doc.data().timestamp,
+          userName: doc.data().userName,
+        })
+
+        console.log("DOC")
+        console.log(doc)
+        console.log("Array")
+        console.log(this.postArray)
       })
-      console.log(doc)
-    })
+      .then(() => {
+        this.read()
+      })
   },
   methods: {
-    //画像の表示
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
-    async Read() {
-      const q = query(collection(db, "posts"))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          this.postArray.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postArray.push(postdata)
+    async read() {
+      for (let i = 0; i < 2; i++) {
+        if (this.postArray[i].imgPath !== "") {
+          const imgUrl = await getDownloadURL(
+            ref(storage, `files/${this.postArray[i].imgPath}`)
+          ).then((url) => {
+            return url
+          })
+          this.postArray[i].imgPath = imgUrl
         }
-      })
-      console.log("postArrey")
-      console.log(this.postArray)
-      console.log(this.postObjs)
+      }
     },
+    //画像の表示
+    //投稿を１回読み込む関数 posts.dbRef.d/ref.id
+    // async Read() {
+    //   const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+    //   const querySnapshot = await getDocs(q)
+    //   querySnapshot.forEach(async (doc) => {
+    //     if (doc.data().imgPath !== "") {
+    //       let postdata = doc.data()
+    //       for (let i = 0; i < doc.data().imgPath.length; i++) {
+    //         const imgUrl = await getDownloadURL(
+    //           ref(storage, `files/${doc.data().imgPath[i]}`)
+    //         ).then((url) => {
+    //           return url
+    //         })
+    //         postdata.imgPath[i] = imgUrl
+    //       }
+    //       this.postArray.push(postdata)
+    //     } else {
+    //       const postdata = doc.data()
+    //       postdata.imgPath = null
+    //       this.postArray.push(postdata)
+    //     }
+    //   })
+
+    //   console.log("postArrey")
+    //   console.log(this.postArray)
+    //   console.log(this.postObjs)
+    // },
     // ByValue() {
     //   const index = this.postObjs
     //   console.log("index番号")

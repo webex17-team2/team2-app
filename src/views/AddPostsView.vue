@@ -39,6 +39,7 @@
 </template>
 
 <script>
+// s
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
@@ -64,14 +65,17 @@ export default {
       // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
       if (this.postTitle === "" && this.postContent === "") {
         console.log("postTitleが空でした")
+        alert("タイトルと内容がありません。必ず記載してください")
         return
       }
       //投稿内容全てをまとめたPostオブジェクト
+      const now = new Date()
       const Post = {
         userName: this.userName,
         postTitle: this.postTitle,
         postContent: this.postContent,
         imgPath: this.imgPath,
+        timestamp: now.getTime(),
       }
       //追加
       await addDoc(collection(db, "posts"), Post)
