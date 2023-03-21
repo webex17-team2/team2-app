@@ -23,7 +23,7 @@
     </div>
     <h3>表示</h3>
     <ul>
-      <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
+      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
           <img
@@ -39,7 +39,8 @@
 </template>
 
 <script>
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
+// s
+import { setDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -49,81 +50,70 @@ export default {
       userName: "",
       postTitle: "",
       postContent: "",
-      postObjs: [],
+      postArray: [],
       imgPath: [],
     }
   },
-  created() {
-    //いる？
-    //postObj
-    this.Read()
-  },
   methods: {
-    // 投稿を追加する関数
     async Post() {
-      // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
-      if (this.postTitle === "" && this.postContent === "") {
+      if (
+        this.postTitle === "" &&
+        this.postContent === "" &&
+        this.imgPath === ""
+      ) {
         console.log("postTitleが空でした")
+        alert("タイトル/写真/感想/は必ず記載してください")
         return
       }
-      //投稿内容全てをまとめたPostオブジェクト
+      //追加
+      function generateRandomString(length) {
+        var result = ""
+        var characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          )
+        }
+        return result
+      }
+
+      var randomString = String(generateRandomString(20))
+      const now = new Date()
       const Post = {
         userName: this.userName,
         postTitle: this.postTitle,
         postContent: this.postContent,
         imgPath: this.imgPath,
+        timestamp: now.getTime(),
+        ID: randomString,
       }
-      //追加
-      await addDoc(collection(db, "posts"), Post)
+      const overvieRef = doc(db, "posts-test", randomString)
+      await setDoc(overvieRef, Post)
+
+      // const overvieRef_res = doc(db, "posts-test", randomString)
+      const postCommentsRef = doc(
+        db,
+        "posts-test",
+        randomString,
+        "postContent",
+        randomString
+      )
+
+      await setDoc(postCommentsRef, { name: "kuji" })
+      console.log(overvieRef)
       this.imgPath = []
     },
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      let files = []
-      for (let i = 0; i < props.target.files.length; i++) {
-        files[i] = props.target.files[i]
-        this.imgPath.push(props.target.files[i].name)
-      }
-      for (let i = 0; i < props.target.files.length; i++) {
-        this.imgUrl = URL.createObjectURL(files[i])
-        const storageRef = ref(storage, "files/" + files[i].name)
-        // "files"はstorageに作成したフォルダ名
-        // Firebaseにデータを適切に送るために必要なコード
-        await uploadBytes(storageRef, files[i]).then((snapshot) => {
-          console.log("追加画像情報" + snapshot)
-        })
-      }
-    },
-    //画像の表示
-    // async filedownload(imgPath) {
-    //   const url = await getDownloadURL(ref(storage, imgPath))
-    //   return url
-    // },
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
-    async Read() {
-      const q = query(collection(db, "posts"))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          this.postObjs.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postObjs.push(postdata)
-        }
-      })
-      console.log("read後")
-      console.log(this.postObjs)
+      console.log(props)
+      let file = props.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+      const storageRef = ref(storage, "files/" + file.name)
+      await uploadBytes(storageRef, file)
+      const getUrl = await getDownloadURL(ref(storage, `files/${file.name}`))
+      this.imgPath.push(getUrl)
     },
   },
 }

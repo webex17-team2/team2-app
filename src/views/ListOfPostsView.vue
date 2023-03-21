@@ -2,8 +2,8 @@
   <div class="my-page">
     <h1>投稿一覧</h1>
     <ul>
-      <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
-        {{ postObj.postTitle }},
+      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+        {{ postObj.postTitle }},{{ postObjs }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
           <img
             v-if="postObj.imagePath !== null"
@@ -11,63 +11,50 @@
             width="500"
             height="300"
           />
+          <p>{{ postObjs }}</p>
         </div>
+        <button @click="routerBtn(postObjs)">詳細へ</button>
       </li>
     </ul>
   </div>
 </template>
 <script>
-import { collection, query, getDocs } from "firebase/firestore"
-import { ref, getDownloadURL } from "firebase/storage"
-// firebase.js で db として export したものを import
-import { db, storage } from "../firebase.js" //const db = getDatabase()
+import { collection, query, getDocs, orderBy } from "firebase/firestore"
+import { db } from "../firebase.js" //const db = getDatabase()
 export default {
   data() {
     return {
       userName: "",
       postTitle: "",
       postContent: "",
-      postObjs: [],
+      postArray: [],
       imgPath: [],
     }
   },
-  created() {
-    //いる？
-    //postObj
+  async created() {
     this.Read()
   },
   methods: {
-    //画像の表示
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
     async Read() {
-      const q = query(collection(db, "posts"))
+      const q = query(collection(db, "posts-test"), orderBy("timestamp", "asc"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          this.postObjs.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postObjs.push(postdata)
-        }
+        let postdata = doc.data()
+        postdata.timestamp = doc.data().timestamp
+        this.postArray.unshift(postdata)
       })
-      console.log("posrObjs")
-      console.log(this.postObjs)
-      console.log(this.postObj)
+    },
+    routerBtn(postObjs) {
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          timestamp: this.postArray[postObjs].timestamp,
+        },
+      })
     },
   },
 }
 </script>
-
 <style scoped>
 .form__wrapper {
   padding: 1rem;
