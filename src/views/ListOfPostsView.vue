@@ -11,7 +11,6 @@
             width="500"
             height="300"
           />
-          <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
         </div>
         <button @click="routerBtn(postObjs)">詳細へ</button>
@@ -21,12 +20,8 @@
 </template>
 <script>
 import { collection, query, getDocs, orderBy } from "firebase/firestore"
-import { ref, getDownloadURL } from "firebase/storage"
-// firebase.js で db として export したものを import
-import { db, storage } from "../firebase.js" //const db = getDatabase()
-// import DetailView from "../components/DetailView.vue"
+import { db } from "../firebase.js" //const db = getDatabase()
 export default {
-  // components: { DetailView },
   data() {
     return {
       userName: "",
@@ -37,97 +32,23 @@ export default {
     }
   },
   async created() {
-    //いる？
-    //postObj
     this.Read()
-    // const a = query(collection(db, "posts"), orderBy("timestamp", "asc"))
-    // const querySnapshot = await getDocs(a)
-    // querySnapshot
-    //   .forEach((doc) => {
-    //     this.postArray.unshift({
-    //       imgPath: doc.data().imgPath,
-    //       postContent: doc.data().postContent,
-    //       postTitle: doc.data().postTitle,
-    //       timestamp: doc.data().timestamp,
-    //       userName: doc.data().userName,
-    //     })
-
-    //     console.log("DOC")
-    //     console.log(doc)
-    //     console.log("Array")
-    //     console.log(this.postArray)
-    //   })
-    //   .then(() => {
-    //     this.read()
-    //   })
   },
   methods: {
-    // async read() {
-    //   for (let i = 0; i < 2; i++) {
-    //     if (this.postArray[i].imgPath !== "") {
-    //       const imgUrl = await getDownloadURL(
-    //         ref(storage, `files/${this.postArray[i].imgPath}`)
-    //       ).then((url) => {
-    //         return url
-    //       })
-    //       this.postArray[i].imgPath = imgUrl
-    //     }
-    //   }
-    // },
-    //画像の表示
-    //投稿を１回読み込む関数 posts.dbRef.d/ref.id
     async Read() {
-      const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+      const q = query(collection(db, "posts-test"), orderBy("timestamp", "asc"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        //if (doc.data().imgPath !== "") {
         let postdata = doc.data()
-        for (let i = 0; i < doc.data().imgPath.length; i++) {
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath[i]}`)
-          ).then((url) => {
-            return url
-          })
-          postdata.imgPath[i] = imgUrl
-        }
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
-        console.log("タイムスタンプ")
-        console.log(postdata.timestamp)
-        // } else {
-        //   const postdata = doc.data()
-        //   postdata.imgPath = null
-        //   postdata.timestamp = doc.data().timestamp
-        //   this.postArray.unshift(postdata)
-        // }
       })
-
-      console.log("postArrey")
-      console.log(this.postArray)
     },
-    // ByValue() {
-    //   const index = this.postObjs
-    //   console.log("index番号")
-    //   console.log(index)
-    // },
     routerBtn(postObjs) {
-      console.clear()
-      // let box = []
-      // const imgBoxNumber = this.postArray[postObjs].imgPath.length
-      // for (let i = 0; i < imgBoxNumber; i++) {
-      //   box.push(this.postArray[postObjs].imgPath.path)
-      // }
-      // console.log(box)
       this.$router.push({
         name: "DetailView",
         params: {
-          // postArray: this.postArray[index],
-          // postTitle: this.postArray[postObjs].postTitle,
-          // postTitle: this.postArray[postObjs].postTitle,
-          // imgPath: this.postArray[postObjs].imgPath[0],
-          // index: postObjs,
           timestamp: this.postArray[postObjs].timestamp,
-          //タイムー>time: this.postArray[postObjs].
         },
       })
     },

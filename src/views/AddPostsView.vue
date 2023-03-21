@@ -40,7 +40,7 @@
 
 <script>
 // s
-import { collection, addDoc, query, getDocs } from "firebase/firestore"
+import { collection, addDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -55,9 +55,7 @@ export default {
     }
   },
   created() {
-    //いる？
-    //postObj
-    this.Read()
+    // this.Read()
   },
   methods: {
     // 投稿を追加する関数
@@ -80,58 +78,46 @@ export default {
         postContent: this.postContent,
         imgPath: this.imgPath,
         timestamp: now.getTime(),
+        name: {
+          postContent: "kuji",
+        },
       }
       //追加
-      await addDoc(collection(db, "posts"), Post)
+      function generateRandomString(length) {
+        var result = ""
+        var characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          )
+        }
+        return result
+      }
+
+      var randomString = generateRandomString(20)
+      console.log(randomString)
+
+      const overvieRef = collection(db, "posts-test")
+      await addDoc(overvieRef, Post)
+
+      const overvieRef_res = doc(db, "posts-test", randomString)
+      const postCommentsRef = collection(overvieRef_res, "postComment")
+
+      await addDoc(postCommentsRef, { name: "kuji" })
       this.imgPath = []
     },
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      let files = []
-      for (let i = 0; i < props.target.files.length; i++) {
-        files[i] = props.target.files[i]
-        this.imgPath.push(props.target.files[i].name)
-      }
-      for (let i = 0; i < props.target.files.length; i++) {
-        this.imgUrl = URL.createObjectURL(files[i])
-        const storageRef = ref(storage, "files/" + files[i].name)
-        // "files"はstorageに作成したフォルダ名
-        // Firebaseにデータを適切に送るために必要なコード
-        await uploadBytes(storageRef, files[i]).then((snapshot) => {
-          console.log("追加画像情報" + snapshot)
-        })
-      }
-    },
-    //画像の表示
-    // async filedownload(imgPath) {
-    //   const url = await getDownloadURL(ref(storage, imgPath))
-    //   return url
-    // },
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
-    async Read() {
-      const q = query(collection(db, "posts"))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach(async (doc) => {
-        if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
-          for (let i = 0; i < doc.data().imgPath.length; i++) {
-            const imgUrl = await getDownloadURL(
-              ref(storage, `files/${doc.data().imgPath[i]}`)
-            ).then((url) => {
-              return url
-            })
-            postdata.imgPath[i] = imgUrl
-          }
-          this.postArray.push(postdata)
-        } else {
-          const postdata = doc.data()
-          postdata.imgPath = null
-          this.postArray.push(postdata)
-        }
-      })
-      console.log("read後")
-      console.log(this.postArray)
+      console.log(props)
+      let file = props.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+      const storageRef = ref(storage, "files/" + file.name)
+      const snapshot = await uploadBytes(storageRef, file)
+      console.log("追加画像情報" + snapshot)
+      const getUrl = await getDownloadURL(ref(storage, `files/${file.name}`))
+      this.imgPath.push(getUrl)
     },
   },
 }
