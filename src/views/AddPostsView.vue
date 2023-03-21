@@ -65,7 +65,7 @@ export default {
   //いる？
   created() {
     //postObj
-    // this.Read()
+    this.Read()
     //console.log(firebase.firestore.Timestamp.fromDate(new Date()))
   },
   methods: {
