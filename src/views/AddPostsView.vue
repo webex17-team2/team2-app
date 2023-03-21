@@ -40,7 +40,7 @@
 
 <script>
 // s
-import { collection, addDoc, doc } from "firebase/firestore"
+import { setDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -54,13 +54,8 @@ export default {
       imgPath: [],
     }
   },
-  created() {
-    // this.Read()
-  },
   methods: {
-    // 投稿を追加する関数
     async Post() {
-      // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
       if (
         this.postTitle === "" &&
         this.postContent === "" &&
@@ -69,18 +64,6 @@ export default {
         console.log("postTitleが空でした")
         alert("タイトル/写真/感想/は必ず記載してください")
         return
-      }
-      //投稿内容全てをまとめたPostオブジェクト
-      const now = new Date()
-      const Post = {
-        userName: this.userName,
-        postTitle: this.postTitle,
-        postContent: this.postContent,
-        imgPath: this.imgPath,
-        timestamp: now.getTime(),
-        name: {
-          postContent: "kuji",
-        },
       }
       //追加
       function generateRandomString(length) {
@@ -95,16 +78,30 @@ export default {
         return result
       }
 
-      var randomString = generateRandomString(20)
-      console.log(randomString)
+      var randomString = String(generateRandomString(20))
+      const now = new Date()
+      const Post = {
+        userName: this.userName,
+        postTitle: this.postTitle,
+        postContent: this.postContent,
+        imgPath: this.imgPath,
+        timestamp: now.getTime(),
+        ID: randomString,
+      }
+      const overvieRef = doc(db, "posts-test", randomString)
+      await setDoc(overvieRef, Post)
 
-      const overvieRef = collection(db, "posts-test")
-      await addDoc(overvieRef, Post)
+      // const overvieRef_res = doc(db, "posts-test", randomString)
+      const postCommentsRef = doc(
+        db,
+        "posts-test",
+        randomString,
+        "postContent",
+        randomString
+      )
 
-      const overvieRef_res = doc(db, "posts-test", randomString)
-      const postCommentsRef = collection(overvieRef_res, "postComment")
-
-      await addDoc(postCommentsRef, { name: "kuji" })
+      await setDoc(postCommentsRef, { name: "kuji" })
+      console.log(overvieRef)
       this.imgPath = []
     },
 
@@ -114,8 +111,7 @@ export default {
       let file = props.target.files[0]
       this.imgUrl = URL.createObjectURL(file)
       const storageRef = ref(storage, "files/" + file.name)
-      const snapshot = await uploadBytes(storageRef, file)
-      console.log("追加画像情報" + snapshot)
+      await uploadBytes(storageRef, file)
       const getUrl = await getDownloadURL(ref(storage, `files/${file.name}`))
       this.imgPath.push(getUrl)
     },
