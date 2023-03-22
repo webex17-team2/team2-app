@@ -1,6 +1,6 @@
 <template>
   <div class="my-page">
-    <h1>投稿一覧</h1>
+    <!-- <h1>投稿一覧</h1> -->
     <ul>
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},{{ postObjs }},
@@ -101,11 +101,14 @@ export default {
     //   console.log(this.postArray)
     // },
     async Read() {
-      const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+      //const q = query(collection(db, "posts"), orderBy("timestamp", "asc"))
+      const q = query(collection(db, "posts-test"), orderBy("timestamp", "asc"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
         let postdata = doc.data()
-        this.postArray.push(postdata)
+        postdata.timestamp = doc.data().timestamp
+        this.postArray.unshift(postdata)
+        //this.postArray.push(postdata)
       })
     },
     // async Read() {
@@ -138,20 +141,19 @@ export default {
     //   console.log(this.postArray)
     // },
     routerBtn(postObjs) {
-      console.clear()
-      console.log(postObjs)
       this.$router.push({
         name: "DetailView",
         params: {
-          // postArray: this.postArray[index],
-          postTitle: this.postArray[postObjs].postTitle,
+          // // postArray: this.postArray[index],
           // postTitle: this.postArray[postObjs].postTitle,
-          imgPath: this.postArray[postObjs].imgPath[0],
-          index: postObjs,
-          //タイムー>time: this.postArray[postObjs].
+          // // postTitle: this.postArray[postObjs].postTitle,
+          // imgPath: this.postArray[postObjs].imgPath[0],
+          // index: postObjs,
+          // //タイムー>time: this.postArray[postObjs].
           timestamp: this.postArray[postObjs].timestamp,
         },
       })
+      console.log("ボタンが押されました")
     },
   },
 }
