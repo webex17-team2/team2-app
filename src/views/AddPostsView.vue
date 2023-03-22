@@ -16,39 +16,30 @@
     <img v-if="img_url" :src="img_url" />
     <div class="form__buttons">
       <button v-on:click="Post" class="form__submit-button">
-        <router-link to="/listOfPosts" class="nav__item nav__link">
-          投稿
-        </router-link>
+        <router-link to="/listOfPosts" class="nav__item nav__link"
+          >投稿</router-link
+        >
       </button>
-      <button>確認</button>
     </div>
     <h3>表示</h3>
     <ul>
       <li v-for="(postObj, postObjs) in postObjs" :key="postObjs">
-        {{ postObj.postTitle }}
-        <img
-          v-if="postObj.imgPath !== null"
-          v-bind:src="postObj.imgPath"
-          width="300"
-          height="300"
-        />
+        {{ postObj.postTitle }},
+        <div v-for="(path, index) in postObj.imgPath" :key="index">
+          <img
+            v-if="postObj.imagePath !== null"
+            v-bind:src="path"
+            width="500"
+            height="300"
+          />
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import {
-  collection,
-  addDoc,
-  //getDoc,
-  //doc,
-  // getDatabase,
-  // child,
-  // get,
-  query,
-  getDocs,
-} from "firebase/firestore"
+import { collection, addDoc, query, getDocs } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -59,22 +50,19 @@ export default {
       postTitle: "",
       postContent: "",
       postObjs: [],
-      imgPath: "",
+      imgPath: [],
     }
   },
-  //いる？
   created() {
+    //いる？
     //postObj
     this.Read()
     //console.log(firebase.firestore.Timestamp.fromDate(new Date()))
   },
   methods: {
-    //postTweet(userName, postTitle, postContent, imageUrl) {
-    //投稿を追加する関数
+    // 投稿を追加する関数
     async Post() {
-      //
-      console.log(this)
-      //もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜ける
+      // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
       if (this.postTitle === "" && this.postContent === "") {
         alert("タイトルと内容がありません！")
         return
@@ -89,39 +77,40 @@ export default {
         timestamp: now.getTime(),
       }
       await addDoc(collection(db, "posts"), Post)
+      this.imgPath = []
     },
 
     //写真読み込み関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      console.clear()
-      console.log(props)
-
-      const file = props.target.files[0] // 画像
-      //アップロードしたい画像の情報を取得。
-      const imgPath = file.name // 画像の名前
-      const img_url = URL.createObjectURL(file) // 画像のURL
-      //"files"はstorageに作成したフォルダ名
-      //Firebase storageに画像ファイルを送信。
-      const postObj = { postTitle: imgPath, imgPath: img_url }
-      this.postObjs.push(postObj)
-      const storageRef = ref(storage, "files/" + file.name)
-      //Firebaseにデータを適切に送るために必要なコード
-      await uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("エラー", snapshot)
-      })
+      let files = []
+      for (let i = 0; i < props.target.files.length; i++) {
+        files[i] = props.target.files[i]
+        this.imgPath.push(props.target.files[i].name)
+      }
+      for (let i = 0; i < props.target.files.length; i++) {
+        this.imgUrl = URL.createObjectURL(files[i])
+        const storageRef = ref(storage, "files/" + files[i].name)
+        // "files"はstorageに作成したフォルダ名
+        // Firebaseにデータを適切に送るために必要なコード
+        await uploadBytes(storageRef, files[i]).then((snapshot) => {
+          console.log("追加画像情報" + snapshot)
+        })
+      }
     },
     async Read() {
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
         if (doc.data().imgPath !== "") {
-          const imgUrl = await getDownloadURL(
-            ref(storage, `files/${doc.data().imgPath}`)
-          ).then((url) => {
-            return url
-          })
-          const postdata = doc.data()
-          postdata.imgPath = imgUrl
+          let postdata = doc.data()
+          for (let i = 0; i < doc.data().imgPath.length; i++) {
+            const imgUrl = await getDownloadURL(
+              ref(storage, `files/${doc.data().imgPath[i]}`)
+            ).then((url) => {
+              return url
+            })
+            postdata.imgPath[i] = imgUrl
+          }
           this.postObjs.push(postdata)
         } else {
           const postdata = doc.data()
@@ -129,6 +118,8 @@ export default {
           this.postObjs.push(postdata)
         }
       })
+      console.log("read後")
+      console.log(this.postObjs)
     },
   },
 }
