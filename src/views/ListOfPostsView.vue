@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { collection, query, getDocs } from "firebase/firestore"
+import { collection, query, getDocs, orderBy } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
 import { db, storage } from "../firebase.js" //const db = getDatabase()
@@ -34,7 +34,7 @@ export default {
       imgPath: [],
     }
   },
-  created() {
+  async created() {
     //いる？
     //postObj
     this.Read()
@@ -59,8 +59,8 @@ export default {
       const q = query(collection(db, "posts"))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
+        let postdata = doc.data()
         if (doc.data().imgPath !== "") {
-          let postdata = doc.data()
           for (let i = 0; i < doc.data().imgPath.length; i++) {
             const imgUrl = await getDownloadURL(
               ref(storage, `files/${doc.data().imgPath[i]}`)
