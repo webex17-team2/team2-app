@@ -5,7 +5,7 @@ import MyPageView from "../views/MyPageView.vue"
 import JapanView from "../views/JapanView.vue"
 import ListOfPostsView from "../views/ListOfPostsView.vue"
 import AddPostsView from "../views/AddPostsView.vue"
-
+import DetailView from "../components/DetailView.vue"
 const routes = [
   {
     path: "/",
@@ -29,11 +29,21 @@ const routes = [
   },
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
+  {
+    path: "/detailView:imgPath/:timestamp",
+    name: "DetailView",
+    component: DetailView,
+    props: (route) => ({
+      postTitle: route.params.postTitle,
+      // postTitle: route.params.postTitle,
+      imgPath: route.params.imgPath,
+      // index: route.params.index,
+      timestamp: route.params.timestamp,
+    }),
+  },
 ]
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
-
 export default router
