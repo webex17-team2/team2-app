@@ -65,11 +65,11 @@
         />必須</span
       >カテゴリー
     </h2>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <input type="radio" id="tag1" v-model="radioValue" value="place" />
     <label for="good">場所</label>
-    <input type="radio" id="tag2" v-model="radio" value="food" />
+    <input type="radio" id="tag2" v-model="radioValue" value="food" />
     <label for="good">食べもの</label>
-    <input type="radio" id="tag3" v-model="radio" value="eat" />
+    <input type="radio" id="tag3" v-model="radioValue" value="eat" />
     <label for="good">自然</label>
 
     <ul>
@@ -186,7 +186,7 @@ export default {
         postContent: this.postContent,
         imgPath: this.imgPath,
         timestamp: now.getTime(),
-        category: this.radio,
+        category: this.radioValue,
         ID: randomString,
         selectedArea: this.selectedArea,
       }
