@@ -10,10 +10,14 @@
       <img :src="this.postArray[0].imgPath" class="img_content" />
     </div>
   </div>
-  <P>感想や押しポイント</P>
-  <p>{{ postArray[0].postContent }}</p>
-  <img :src="imgPathContent" />
-  <div>{{ timestamp }}</div>
+  <!-- <P>感想や押しポイント</P> -->
+  <div>
+    <p>{{ postArray[0].postContent }}</p>
+  </div>
+  <!-- 何に使う？ -->
+  <!-- <img :src="imgPathContent" /> -->
+  <!-- <p>ハッシュタグ類</p> -->
+  <div>#{{ selectedArea }} #{{}}</div>
   <div></div>
   <h3>コメントを追加する</h3>
   <textarea
@@ -30,30 +34,14 @@
 </template>
 <script>
 import { collection, query, getDocs, where } from "firebase/firestore"
-// import { ref, getDownloadURL } from "firebase/storage"
-// import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
 export default {
   //ListOfView.vueから受け取り
   props: {
-    // postTitle: {
-    //   type: String,
-    //   required: true,
-    // },
-    // imgPath: {
-    //   // type: String,
-    //   type: Array,
-    //   required: true,
-    // },
     timestamp: {
-      // type: String,
       type: String,
       required: true,
     },
-    // index: {
-    //   type: Number,
-    //   required: true,
-    // },
   },
   data() {
     return {
@@ -62,18 +50,14 @@ export default {
       postContent: "",
       postArray: [],
       imgPaths: [],
-      imgPathContent: "",
+      category: "",
+      selectedArea: "",
+      // imgPathContent: "",
       commentContent: "",
     }
   },
   created() {
     this.Read()
-    console.log(this.timestamp)
-    // const timestamp = this.timestamp
-    // const list =
-    // const data = this.$router
-    // const nameQuery = query(citiesRef, where("タイムスタンプ", "==", "受け取った値"));
-    //
   },
   methods: {
     //コメント追加機能
@@ -111,6 +95,13 @@ export default {
       console.log(this.postArray)
       //console.log(doc.id, " => ", doc.data())
     },
+    //カテゴリーを日本語に変換
+    // JpCategory() {
+    //   if (this.category == "eat") {
+    //     const JpCategory = "食べもの"
+
+    //   }
+    // },
   },
 }
 </script>
