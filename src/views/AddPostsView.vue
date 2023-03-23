@@ -37,14 +37,50 @@
     <input type="file" multiple @change="fileUpload" />
     <!-- アップロードされた画像が以下に表示される -->
     <img v-if="img_url" :src="img_url" />
-    <div class="form__buttons">
-      <button v-on:click="Post" class="form__submit-button">
-        <router-link to="/listOfPosts" class="nav__item nav__link"
-          >投稿</router-link
-        >
-      </button>
-    </div>
-    <h3>表示</h3>
+
+    <h2 class="titleTag_icon">
+      <span
+        ><img
+          src="@/assets/logo.png"
+          alt="Logo"
+          class="header__logo"
+        />必須</span
+      >エリア
+    </h2>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">北海道</label>
+    <input type="radio" id="tag2" v-model="radio" value="food" />
+    <label for="good">東北</label>
+    <input type="radio" id="tag3" v-model="radio" value="eat" />
+    <label for="good">関東</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">中部</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">関西</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">中国</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">四国</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">九州</label>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">沖縄</label>
+    <h2 class="titleTag_icon">
+      <span
+        ><img
+          src="@/assets/logo.png"
+          alt="Logo"
+          class="header__logo"
+        />必須</span
+      >カテゴリー
+    </h2>
+    <input type="radio" id="tag1" v-model="radio" value="place" />
+    <label for="good">場所</label>
+    <input type="radio" id="tag2" v-model="radio" value="food" />
+    <label for="good">食べもの</label>
+    <input type="radio" id="tag3" v-model="radio" value="eat" />
+    <label for="good">遊び</label>
+
     <ul>
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},
@@ -58,6 +94,13 @@
         </div>
       </li>
     </ul>
+  </div>
+  <div class="form__buttons">
+    <button v-on:click="Post" class="form__submit-button">
+      <router-link to="/listOfPosts" class="nav__item nav__link"
+        >投稿</router-link
+      >
+    </button>
   </div>
 </template>
 
@@ -77,6 +120,8 @@ export default {
       postContent: "",
       postArray: [],
       imgPath: [],
+      //ラジオボタン
+      category: "",
     }
   },
   // created() {
@@ -92,6 +137,7 @@ export default {
         this.postTitle === "" &&
         this.postContent === "" &&
         this.imgPath === ""
+        // this.radio === ""
       ) {
         console.log("postTitleが空でした")
         alert("タイトル/写真/感想/は必ず記載してください")
@@ -137,6 +183,7 @@ export default {
         postContent: this.postContent,
         imgPath: this.imgPath,
         timestamp: now.getTime(),
+        category: this.radio,
         ID: randomString,
       }
       const overvieRef = doc(db, "posts-test", randomString)
