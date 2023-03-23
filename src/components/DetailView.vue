@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="Detail_title"> -->
-  <h1>{{ postArray[0].postTitle }}</h1>
+  <!-- <h1>{{ postArray[0].postTitle }}</h1> -->
   <div class="img_box">
     <div
       class="img_collection"
@@ -10,10 +10,14 @@
       <img :src="this.postArray[0].imgPath" class="img_content" />
     </div>
   </div>
-  <P>感想や押しポイント</P>
+  <!-- <P>感想や押しポイント</P> -->
   <p>{{ postArray[0].postContent }}</p>
-  <img :src="imgPathContent" />
-  <div>{{ timestamp }}</div>
+  <!-- 何に使う？ -->
+  <!-- <img :src="imgPathContent" /> -->
+  <div>#{{ postArray[0].selectedArea }}</div>
+  <div>#{{ postArray[0].category }}</div>
+  <div>#{{ JpCategory }}</div>
+
   <div></div>
   <h3>コメントを追加する</h3>
   <textarea
@@ -110,6 +114,19 @@ export default {
       console.log("aaaaaaa")
       console.log(this.postArray)
       //console.log(doc.id, " => ", doc.data())
+      //カテゴリーを日本語に変換
+      if (this.postArray[0].category == "eat") {
+        const JpCategory = "食べもの"
+        console.log(JpCategory)
+      } else if (this.postArray[0].category == "place") {
+        const JpCategory = "場所"
+        console.log(JpCategory)
+      } else if (this.postArray[0].category == "play") {
+        const JpCategory = "自然"
+        console.log(JpCategory)
+      }
+      console.log("日本語")
+      console.log(this.postArray[0].category)
     },
   },
 }
