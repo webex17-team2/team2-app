@@ -17,7 +17,6 @@
         <button @click="routerBtn(postObjs)">詳細へ</button>
       </li>
     </ul>
-    -->
     <li v-for="(postArray, index) in postArray" :key="index">
       {{ postArray.postTitle }}
     </li>
