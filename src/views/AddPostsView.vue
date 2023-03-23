@@ -47,24 +47,15 @@
         />必須</span
       >エリア
     </h2>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">北海道</label>
-    <input type="radio" id="tag2" v-model="radio" value="food" />
-    <label for="good">東北</label>
-    <input type="radio" id="tag3" v-model="radio" value="eat" />
-    <label for="good">関東</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">中部</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">関西</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">中国</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">四国</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">九州</label>
-    <input type="radio" id="tag1" v-model="radio" value="place" />
-    <label for="good">沖縄</label>
+    <select v-model="selectedArea">
+      <option
+        v-for="Area in optionAreaName"
+        v-bind:value="Area.name"
+        v-bind:key="Area.id"
+      >
+        {{ Area.name }}
+      </option>
+    </select>
     <h2 class="titleTag_icon">
       <span
         ><img
@@ -79,7 +70,7 @@
     <input type="radio" id="tag2" v-model="radio" value="food" />
     <label for="good">食べもの</label>
     <input type="radio" id="tag3" v-model="radio" value="eat" />
-    <label for="good">遊び</label>
+    <label for="good">自然</label>
 
     <ul>
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
@@ -122,6 +113,18 @@ export default {
       imgPath: [],
       //ラジオボタン
       category: "",
+      selectedArea: "",
+      optionAreaName: [
+        { id: 1, name: "北海道" },
+        { id: 2, name: "東北" },
+        { id: 3, name: "関東" },
+        { id: 4, name: "中部" },
+        { id: 5, name: "関西" },
+        { id: 6, name: "中国" },
+        { id: 7, name: "四国" },
+        { id: 8, name: "九州" },
+        { id: 9, name: "沖縄" },
+      ],
     }
   },
   // created() {
@@ -185,6 +188,7 @@ export default {
         timestamp: now.getTime(),
         category: this.radio,
         ID: randomString,
+        selectedArea: this.selectedArea,
       }
       const overvieRef = doc(db, "posts-test", randomString)
       await setDoc(overvieRef, Post)
