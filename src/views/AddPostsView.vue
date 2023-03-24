@@ -201,7 +201,7 @@ export default {
       //   randomString
       // )
       // //今後消す
-      // await setDoc(postCommentsRef, { name: "kuji" })
+      //  await setDoc(postCommentsRef, { name: "kuji" })
       console.log(overvieRef)
       this.imgPath = []
     },
