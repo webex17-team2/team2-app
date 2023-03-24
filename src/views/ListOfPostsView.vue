@@ -4,10 +4,11 @@
     <ul>
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},{{ postObjs }},
-        <div v-for="(path, index) in postObj.imgPath" :key="index">
+        <div>
+          <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
           <img
-            v-if="postObj.imagePath !== null"
-            v-bind:src="path"
+            v-if="postObj.imgPath !== null"
+            v-bind:src="postObj.imgPath[0]"
             width="500"
             height="300"
           />
@@ -111,6 +112,7 @@ export default {
         let postdata = doc.data()
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
+
         //this.postArray.push(postdata)
       })
     },
