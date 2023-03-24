@@ -25,6 +25,7 @@
       class="form__textarea"
       v-model="commentContent"
       placeholder="コメントする"
+      @keydown.enter="Comments"
     ></textarea>
     <div class="form__buttons">
       <button v-on:click="Comments" class="form__submit-button">送信</button>
@@ -86,20 +87,14 @@ export default {
         "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2011.png?alt=media&token=d0607713-ec55-414d-a86b-7dafc7eeaf8f",
       ],
       randamImg: "",
+      commentNumber: 0,
     }
   },
   created() {
     this.Read()
-    // const randamImg = choose_at_random(this.randamImgArray)
-    // console.log(this.randamImg)
   },
   mounted() {
-    console.log("確認２")
-    console.log(this.userID)
     this.readComments(this.userID)
-    console.log("注目")
-    console.log(this.commentsArray[0])
-    this.choose_at_random()
   },
   methods: {
     choose_at_random() {
@@ -143,6 +138,8 @@ export default {
 
       await setDoc(postCommentsRef, Comments)
       this.readComments(randomString)
+
+      this.commentContent = ""
     },
     //コメント(サブコレクション)だけを読み込む関数
     async readComments(randomString) {
@@ -154,12 +151,13 @@ export default {
         )
       )
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data())
         let commentsData = doc.data()
         commentsData.timestamp = doc.data().timestamp
         this.commentsArray.unshift(commentsData)
+        this.commentNumber += 1
       })
+      console.log("commentnum", this.commentNumber)
+      this.choose_at_random()
     },
     generateRandomString(length) {
       var result = ""
@@ -172,11 +170,6 @@ export default {
       }
       return result
     },
-    //   const overvieRef
-    //   await setDoc()
-    //   await addDoc(collection(db, "posts", cid1, "comments"), Coments)
-    // },
-    //投稿読み込み機能
     async Read() {
       // const timeQuery = query(
       const timestamp = Number(this.timestamp)
@@ -191,13 +184,8 @@ export default {
         this.postArray.push(doc.data())
       })
       console.log("Array")
-      // console.log(imgs)
-      console.log("aaaaaaa")
-      console.log(this.postArray)
       console.log(this.postArray)
       this.userID = this.postArray[0].ID
-      console.log("確認")
-      console.log(this.postArray[0].ID)
       //console.log(doc.id, " => ", doc.data())
       // //カテゴリーを日本語に変換
       // if (this.postArray[0].category == "eat") {
@@ -299,5 +287,6 @@ h3:after {
 }
 .randam_icon {
   /* 画像を丸くする */
+  width: 20%;
 }
 </style>
