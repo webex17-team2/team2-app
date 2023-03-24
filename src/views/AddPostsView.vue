@@ -192,14 +192,16 @@ export default {
       }
       const overvieRef = doc(db, "posts-test", randomString)
       await setDoc(overvieRef, Post)
-      const postCommentsRef = doc(
-        db,
-        "posts-test",
-        randomString,
-        "postContent",
-        randomString
-      )
-      await setDoc(postCommentsRef, { name: "kuji" })
+      // サブコレクションを作成
+      // const postCommentsRef = doc(
+      //   db,
+      //   "posts-test",
+      //   randomString,
+      //   "postContent",
+      //   randomString
+      // )
+      // //今後消す
+      // await setDoc(postCommentsRef, { name: "kuji" })
       console.log(overvieRef)
       this.imgPath = []
     },

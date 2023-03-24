@@ -21,7 +21,7 @@
     <h3>コメントを追加する</h3>
     <textarea
       class="form__textarea"
-      v-model="postContent"
+      v-model="commentContent"
       placeholder="コメントする"
     ></textarea>
     <div class="form__buttons">
@@ -31,13 +31,23 @@
   <!-- </div> -->
   <div>
     <h3>~みんなのコメント~</h3>
-    <img class="randam_icon" />
-    <P>AAAA</P>
+    <div v-for="(comment, index) in commentsArray" :key="index">
+      <!-- <img class="randam_icon" /> -->
+      <P>{{ comment.commentContent }}</P>
+    </div>
   </div>
 </template>
 <script>
-import { collection, query, getDocs, where } from "firebase/firestore"
-//import { collection, query, getDocs, where, setDoc } from "firebase/firestore"
+//import { collection, query, getDocs, where } from "firebase/firestore"
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  setDoc,
+  doc,
+  orderBy,
+} from "firebase/firestore"
 // import { ref, getDownloadURL } from "firebase/storage"
 // import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
@@ -72,32 +82,82 @@ export default {
       imgPaths: [],
       imgPathContent: "",
       commentContent: "",
+      commentsArray: [],
+      userID: "",
     }
   },
   created() {
     this.Read()
-    console.log(this.timestamp)
+    // const ID = this.postArray
+
+    // console.log(ID)
     // const timestamp = this.timestamp
     // const list =
     // const data = this.$router
     // const nameQuery = query(citiesRef, where("タイムスタンプ", "==", "受け取った値"));
     //
   },
+  mounted() {
+    console.log("確認２")
+    console.log(this.userID)
+    this.readComments(this.userID)
+  },
   methods: {
-    //コメント追加機能
-    // async Comments() {
-    //   if (this.commentContent === "") {
-    //     console.log("コメントが空です")
-    //     alert("コメントを入力してください")
-    //     return
-    //   }
+    // コメント追加機能
+    async Comments() {
+      if (this.commentContent === "") {
+        console.log("コメントが空です")
+        alert("コメントを入力してください")
+        return
+      }
+      const now = new Date()
+      const Comments = {
+        commentContent: this.commentContent,
+        timestamp: now.getTime(),
+      }
 
-    // //   const cid1 =
-    //   const now = new Date()
-    //   const Comments = {
-    //     commentContent: this.commentContent,
-    //     timestamp: now.getTime(),
-    //   }
+      var randomID = String(this.generateRandomString(20))
+      //IDを変数に入れる
+      const randomString = this.postArray[0].ID
+      const postCommentsRef = doc(
+        db,
+        "posts-test",
+        randomString,
+        "postContent",
+        randomID
+      )
+
+      await setDoc(postCommentsRef, Comments)
+      this.readComments(randomString)
+    },
+    //コメント(サブコレクション)だけを読み込む関数
+    async readComments(randomString) {
+      this.commentsArray = []
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "posts-test", randomString, "postContent"),
+          orderBy("timestamp", "desc")
+        )
+      )
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+        let commentsData = doc.data()
+        commentsData.timestamp = doc.data().timestamp
+        this.commentsArray.unshift(commentsData)
+      })
+    },
+    generateRandomString(length) {
+      var result = ""
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        )
+      }
+      return result
+    },
     //   const overvieRef
     //   await setDoc()
     //   await addDoc(collection(db, "posts", cid1, "comments"), Coments)
@@ -120,20 +180,24 @@ export default {
       // console.log(imgs)
       console.log("aaaaaaa")
       console.log(this.postArray)
+      console.log(this.postArray)
+      this.userID = this.postArray[0].ID
+      console.log("確認")
+      console.log(this.postArray[0].ID)
       //console.log(doc.id, " => ", doc.data())
-      //カテゴリーを日本語に変換
-      if (this.postArray[0].category == "eat") {
-        const JpCategory = "食べもの"
-        console.log(JpCategory)
-      } else if (this.postArray[0].category == "place") {
-        const JpCategory = "場所"
-        console.log(JpCategory)
-      } else if (this.postArray[0].category == "play") {
-        const JpCategory = "自然"
-        console.log(JpCategory)
-      }
-      console.log("日本語")
-      console.log(this.postArray[0].category)
+      // //カテゴリーを日本語に変換
+      // if (this.postArray[0].category == "eat") {
+      //   const JpCategory = "食べもの"
+      //   console.log(JpCategory)
+      // } else if (this.postArray[0].category == "place") {
+      //   const JpCategory = "場所"
+      //   console.log(JpCategory)
+      // } else if (this.postArray[0].category == "play") {
+      //   const JpCategory = "自然"
+      //   console.log(JpCategory)
+      // }
+      // console.log("日本語")
+      // console.log(this.postArray[0].category)
     },
   },
 }
