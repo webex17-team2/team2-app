@@ -6,13 +6,13 @@
     <div v-if="two" class="num">2</div> -->
       <!-- <div class="container" v-if="seen"> -->
       <div class="box">
-        <button v-on:click="first">場所</button>
+        <button v-on:click="first">レジャー</button>
       </div>
       <div class="box">
-        <button v-on:click="second">飯</button>
+        <button v-on:click="second">グルメ</button>
       </div>
       <div class="box">
-        <button v-on:click="third">遊び</button>
+        <button v-on:click="third">その他</button>
       </div>
     </div>
   </div>

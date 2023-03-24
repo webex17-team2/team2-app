@@ -65,12 +65,12 @@
         />必須</span
       >カテゴリー
     </h2>
-    <input type="radio" id="tag1" v-model="radioValue" value="place" />
-    <label for="good">場所</label>
-    <input type="radio" id="tag2" v-model="radioValue" value="food" />
-    <label for="good">食べもの</label>
-    <input type="radio" id="tag3" v-model="radioValue" value="eat" />
-    <label for="good">自然</label>
+    <input type="radio" id="tag1" v-model="radioValue" value="レジャー" />
+    <label for="good">レジャー</label>
+    <input type="radio" id="tag2" v-model="radioValue" value="グルメ" />
+    <label for="good">グルメ</label>
+    <input type="radio" id="tag3" v-model="radioValue" value="その他" />
+    <label for="good">その他</label>
 
     <ul>
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">

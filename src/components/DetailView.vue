@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="Detail_title"> -->
-  <!-- <h1>{{ postArray[0].postTitle }}</h1> -->
+  <h1>{{ postArray[0].postTitle }}</h1>
   <div class="img_box">
     <div
       class="img_collection"
@@ -16,15 +16,18 @@
   <!-- <img :src="imgPathContent" /> -->
   <div>#{{ postArray[0].selectedArea }}</div>
   <div>#{{ postArray[0].category }}</div>
-  <div>#{{ JpCategory }}</div>
 
-  <div></div>
-  <h3>コメントを追加する</h3>
-  <textarea
-    class="form__textarea"
-    v-model="postContent"
-    placeholder="コメントする"
-  ></textarea>
+  <div>
+    <h3>コメントを追加する</h3>
+    <textarea
+      class="form__textarea"
+      v-model="postContent"
+      placeholder="コメントする"
+    ></textarea>
+    <div class="form__buttons">
+      <button v-on:click="Comments" class="form__submit-button">送信</button>
+    </div>
+  </div>
   <!-- </div> -->
   <div>
     <h3>~みんなのコメント~</h3>
@@ -34,6 +37,7 @@
 </template>
 <script>
 import { collection, query, getDocs, where } from "firebase/firestore"
+//import { collection, query, getDocs, where, setDoc } from "firebase/firestore"
 // import { ref, getDownloadURL } from "firebase/storage"
 // import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
@@ -87,12 +91,15 @@ export default {
     //     alert("コメントを入力してください")
     //     return
     //   }
-    //   const cid1 =
+
+    // //   const cid1 =
     //   const now = new Date()
-    //   const Coments = {
+    //   const Comments = {
     //     commentContent: this.commentContent,
     //     timestamp: now.getTime(),
     //   }
+    //   const overvieRef
+    //   await setDoc()
     //   await addDoc(collection(db, "posts", cid1, "comments"), Coments)
     // },
     //投稿読み込み機能
