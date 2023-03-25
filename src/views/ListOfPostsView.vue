@@ -20,9 +20,9 @@
         </button>
       </li>
     </ul>
-    <li v-for="(postArray, index) in postArray" :key="index">
+    <!-- <li v-for="(postArray, index) in postArray" :key="index">
       {{ postArray.postTitle }}
-    </li>
+    </li> -->
   </div>
 </template>
 <script>
