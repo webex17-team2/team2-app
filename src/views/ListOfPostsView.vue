@@ -9,8 +9,8 @@
           <img
             v-if="postObj.imgPath !== null"
             v-bind:src="postObj.imgPath[0]"
-            width="250"
-            height="200"
+            width="500"
+            height="300"
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
@@ -114,7 +114,6 @@ export default {
         let postdata = doc.data()
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
-
         //this.postArray.push(postdata)
       })
     },
@@ -129,7 +128,6 @@ export default {
     //       timestamp: data.timestamp,
     //       userName: data.userName,
     //     }
-
     //     if (data.imgPath !== "") {
     //       for (let i = 0; i < data.imgPath.length; i++) {
     //         const imgUrl = getDownloadURL(
@@ -185,7 +183,6 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-
 .my-page {
   padding: 0.5em 1em;
   margin: 2em 0;
@@ -193,13 +190,11 @@ export default {
   border: solid 10px #1dfdc9;
   border-radius: 10px;
 }
-
 .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 li {
   padding: 60px;
   margin: 20px;
@@ -211,7 +206,6 @@ li {
   animation-delay: 0s;
   animation-iteration-count: 1;
 }
-
 @keyframes color {
   0% {
     background-color: #fff;
@@ -220,6 +214,4 @@ li {
     background-color: #adaaaa;
   }
 }
-
-/* kujiHelp */
 </style>

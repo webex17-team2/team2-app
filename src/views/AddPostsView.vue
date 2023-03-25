@@ -128,7 +128,6 @@
 <script>
 // s
 //import { collection, addDoc } from "firebase/firestore"
-
 import { setDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 // firebase.js で db として export したものを import
@@ -183,7 +182,6 @@ export default {
       //   )
       //   postdata.imgPath[i] = imgUrl
       // }
-
       // const now = new Date()
       // const Post = {
       //   userName: this.userName,
@@ -235,7 +233,6 @@ export default {
       console.log(overvieRef)
       this.imgPath = []
     },
-
     //写真読み込み＋imgPathにURL名を入れる関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
       // let files = []
@@ -263,7 +260,6 @@ export default {
         )
         this.imgPath.push(getUrl)
       }
-
       console.log(this.imgPath)
       // postdata.imgPath[i] = imgUrl
       // }
@@ -309,7 +305,6 @@ export default {
   box-sizing: border-box;
   float: left;
 }
-
 .wrap {
   width: 100%;
   height: 100vh;
@@ -318,7 +313,6 @@ export default {
   display: flex;
   flex-flow: column;
 }
-
 .content {
   width: 95%;
   margin: 0 auto;
@@ -335,7 +329,6 @@ export default {
   padding: 0;
   border-radius: 0px 0px 10px 10px;
 }
-
 .contents {
   width: 50%;
   float: left;
@@ -343,7 +336,6 @@ export default {
   display: flex;
   flex-flow: column;
 }
-
 .text-center {
   text-align: center;
   margin-bottom: 50px;
@@ -352,11 +344,9 @@ export default {
   text-align: center;
   margin-bottom: 100px;
 }
-
 a {
   color: #3f82a8;
 }
-
 a:hover {
   text-decoration: none;
 }
@@ -373,12 +363,10 @@ a:hover {
 .form__textarea:focus {
   outline: none;
 }
-
 h2 {
   position: relative;
   padding-left: 6em;
 }
-
 h2 span {
   position: absolute;
   top: 0;
@@ -388,11 +376,9 @@ h2 span {
   border-radius: 10px;
   background: #319dcb;
 }
-
 h2 span i {
   margin-right: 1rem;
 }
-
 h2 span:after {
   position: absolute;
   top: calc(50% - 7px);
@@ -409,17 +395,14 @@ h2 span:after {
   /* weight: 30px; */
   height: 30px;
 }
-
 .buttons-center {
   width: 100%;
   display: flex;
   background-color: #a8d7ba;
 }
-
 .form__buttons {
   margin: auto;
 }
-
 /* 氏名記入フォーム */
 .cp_iptxt {
   position: relative;
@@ -506,7 +489,6 @@ h2 span:after {
   transition: 0.3s;
   color: #da3c41;
 }
-
 /* 記入フォーム用デザイン */
 .cp_iptxt {
   position: relative;
