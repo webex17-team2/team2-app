@@ -71,8 +71,6 @@ export default {
     //     commentContent: this.commentContent,
     //     timestamp: now.getTime(),
     //   }
-    //   await addDoc(collection(db, "posts", cid1, "comments"), Coments)
-    // },
     //投稿読み込み機能
     async Read() {
       // const timeQuery = query(
