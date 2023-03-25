@@ -1,10 +1,6 @@
 <template>
   <div class="app">
     <div class="container">
-      <!-- <div v-if="zero" class="num">0</div>
-    <div v-if="one" class="num">1</div>
-    <div v-if="two" class="num">2</div> -->
-      <!-- <div class="container" v-if="seen"> -->
       <div class="box">
         <button v-on:click="basyo">場所</button>
       </div>
@@ -21,29 +17,9 @@
 <script>
 export default {
   data() {
-    return {
-      //ラジオボタン ??
-      //category: "",
-      // seen: true,
-      // zero: false,
-      // one: false,
-      // two: false,
-    }
+    return {}
   },
   methods: {
-    // first: function () {
-    //   this.seen = false
-    //   this.zero = true
-    // },
-    // second: function () {
-    //   this.seen = false
-    //   this.one = true
-    // },
-    // third: function () {
-    //   this.seen = false
-    //   this.two = true
-    // },
-    // ボタン押す→遷移＋値渡し(buttonのID)→firebaseのcategory==IDのものを表示
     basyo() {
       this.$router.push({
         name: "CategoryList",

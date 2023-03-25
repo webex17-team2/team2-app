@@ -32,30 +32,17 @@
 <script>
 export default {
   data() {
-    return {
-      //ラジオボタン ??
-      //category: "",
-      // seen: true,
-      // zero: false,
-      // one: false,
-      // two: false,
-    }
+    return {}
+  },
+  created() {
+    this.empty()
   },
   methods: {
-    // first: function () {
-    //   this.seen = false
-    //   this.zero = true
-    // },
-    // second: function () {
-    //   this.seen = false
-    //   this.one = true
-    // },
-    // third: function () {
-    //   this.seen = false
-    //   this.two = true
-    // },
-    // ボタン押す→遷移＋値渡し(buttonのID)→firebaseのcategory==IDのものを表示
+    empty() {
+      console.log(this.$router)
+    },
     first() {
+      // location.reload()
       this.$router.push({
         name: "CategoryList",
         params: {
@@ -64,6 +51,7 @@ export default {
       })
     },
     second() {
+      // location.reload()
       this.$router.push({
         name: "CategoryList",
         params: {
@@ -72,6 +60,7 @@ export default {
       })
     },
     third() {
+      // location.reload()
       this.$router.push({
         name: "CategoryList",
         params: {

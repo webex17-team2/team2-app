@@ -1,6 +1,7 @@
 <template>
   <!-- リスト入れる -->
-  <router-link to="/about">⬅︎</router-link>
+  <router-link to="/about">⬅︎</router-link>{{ newProps }}
+  <!-- <button @click="changeProps()">change</button> -->
   <ul>
     <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
       {{ postObj.postTitle }},
@@ -29,6 +30,7 @@ export default {
       postContent: "",
       postArray: [],
       imgPath: [],
+      changeProps: "",
     }
   },
   props: {
@@ -39,9 +41,20 @@ export default {
   },
   async created() {
     console.log(this.choice)
-    //いる？
-    //postObj
     this.Read()
+  },
+  computed: {
+    newProps() {
+      const result = this.choice
+      return result
+    },
+  },
+  watch: {
+    changeProps(newValue, oldValue) {
+      if (this.newProps !== oldValue) {
+        console.log(newValue, oldValue)
+      }
+    },
   },
   methods: {
     async Read() {
@@ -55,6 +68,7 @@ export default {
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
       })
+      this.newProps = this.choice
     },
   },
 }
