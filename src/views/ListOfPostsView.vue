@@ -203,7 +203,11 @@ li {
   margin: 20px;
   list-style: none;
   background-color: rgb(178, 174, 174);
-  animation: gradient 15s ease infinite;
+  border-radius: 10px;
+  animation-name: color;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
 }
 
 @keyframes color {
@@ -213,10 +217,5 @@ li {
   100% {
     background-color: #adaaaa;
   }
-}
-li {
-  animation-name: color;
-  animation-duration: 0.5s;
-  animation-delay: 0.5s;
 }
 </style>
