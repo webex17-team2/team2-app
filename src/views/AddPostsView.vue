@@ -68,33 +68,22 @@
           <!-- アップロードされた画像が以下に表示される -->
           <img v-if="img_url" :src="img_url" />
         </div>
+        <select v-model="selectedArea">
+          <option
+            v-for="Area in optionAreaName"
+            v-bind:value="Area.name"
+            v-bind:key="Area.id"
+          >
+            {{ Area.name }}
+          </option>
+        </select>
         <div class="text-center">
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">北海道</label>
-          <input type="radio" id="tag2" v-model="radioValue" value="food" />
-          <label for="good">東北</label>
-          <input type="radio" id="tag3" v-model="radioValue" value="eat" />
-          <label for="good">関東</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">中部</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">関西</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">中国</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">四国</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">九州</label>
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">沖縄</label>
-        </div>
-        <div class="text-center">
-          <input type="radio" id="tag1" v-model="radioValue" value="place" />
-          <label for="good">場所</label>
-          <input type="radio" id="tag2" v-model="radioValue" value="food" />
-          <label for="good">食べもの</label>
-          <input type="radio" id="tag3" v-model="radiValue" value="eat" />
-          <label for="good">遊び</label>
+          <input type="radio" id="tag1" v-model="radioValue" value="レジャー" />
+          <label for="good">レジャー</label>
+          <input type="radio" id="tag2" v-model="radioValue" value="グルメ" />
+          <label for="good">グルメ</label>
+          <input type="radio" id="tag3" v-model="radiValue" value="その他" />
+          <label for="good">その他</label>
         </div>
       </div>
     </div>
