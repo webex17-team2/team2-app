@@ -162,6 +162,7 @@ export default {
     },
   },
 }
+//コミットするために加えました（消していいコメントです)
 </script>
 <style scoped>
 .form__wrapper {
