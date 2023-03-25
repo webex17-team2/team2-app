@@ -143,6 +143,18 @@ export default {
       imgPath: [],
       //ラジオボタン
       category: "",
+      selectedArea: "",
+      optionAreaName: [
+        { id: 1, name: "北海道" },
+        { id: 2, name: "東北" },
+        { id: 3, name: "関東" },
+        { id: 4, name: "中部" },
+        { id: 5, name: "関西" },
+        { id: 6, name: "中国" },
+        { id: 7, name: "四国" },
+        { id: 8, name: "九州" },
+        { id: 9, name: "沖縄" },
+      ],
     }
   },
   // created() {
@@ -204,19 +216,22 @@ export default {
         postContent: this.postContent,
         imgPath: this.imgPath,
         timestamp: now.getTime(),
-        category: this.radio,
+        category: this.radioValue,
         ID: randomString,
+        selectedArea: this.selectedArea,
       }
       const overvieRef = doc(db, "posts-test", randomString)
       await setDoc(overvieRef, Post)
-      const postCommentsRef = doc(
-        db,
-        "posts-test",
-        randomString,
-        "postContent",
-        randomString
-      )
-      await setDoc(postCommentsRef, { name: "kuji" })
+      // サブコレクションを作成
+      // const postCommentsRef = doc(
+      //   db,
+      //   "posts-test",
+      //   randomString,
+      //   "postContent",
+      //   randomString
+      // )
+      // //今後消す
+      //  await setDoc(postCommentsRef, { name: "kuji" })
       console.log(overvieRef)
       this.imgPath = []
     },
@@ -229,21 +244,27 @@ export default {
       //   this.imgPath.push(props.target.files[i].name)
       // }
       console.log(props)
-      let file = props.target.files[0]
+      let file = props.target.files
       // for (let i = 0; i < props.target.files.length; i++) {
       //URL作成
-      this.imgUrl = URL.createObjectURL(file)
-      //storageのfilesフォルダに入れたデータの名前を指定
-      const storageRef = ref(storage, "files/" + file.name)
-      // "files"はstorageに作成したフォルダ名
-      // Firebaseにデータを適切に送るために必要なコード
-      //storageRefでどの場所に入れるのか指定
-      //const snapshot = await uploadBytes(storageRef, file)
-      //console.log("追加画像情報" + snapshot)
-      //storageの中にあるデータを参照してimgPathにURLとして入れる
-      await uploadBytes(storageRef, file)
-      const getUrl = await getDownloadURL(ref(storage, `files/${file.name}`))
-      this.imgPath.push(getUrl)
+      for (let i = 0; i < file.length; i++) {
+        this.imgUrl = URL.createObjectURL(file[i])
+        //storageのfilesフォルダに入れたデータの名前を指定
+        const storageRef = ref(storage, "files/" + file[i].name)
+        // "files"はstorageに作成したフォルダ名
+        // Firebaseにデータを適切に送るために必要なコード
+        //storageRefでどの場所に入れるのか指定
+        //const snapshot = await uploadBytes(storageRef, file)
+        //console.log("追加画像情報" + snapshot)
+        //storageの中にあるデータを参照してimgPathにURLとして入れる
+        await uploadBytes(storageRef, file[i])
+        const getUrl = await getDownloadURL(
+          ref(storage, `files/${file[i].name}`)
+        )
+        this.imgPath.push(getUrl)
+      }
+
+      console.log(this.imgPath)
       // postdata.imgPath[i] = imgUrl
       // }
     },

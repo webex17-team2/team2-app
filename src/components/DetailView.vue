@@ -1,5 +1,6 @@
 <template>
   <!-- <div class="Detail_title"> -->
+  <router-link to="/listOfPosts">⬅︎</router-link>
   <h1>{{ postArray[0].postTitle }}</h1>
   <div class="img_box">
     <div
@@ -7,53 +8,61 @@
       v-for="(post, postId) in postArray[0].imgPath"
       :key="postId"
     >
-      <img :src="this.postArray[0].imgPath" class="img_content" />
+      <img :src="post" class="img_content" />
     </div>
   </div>
-  <P>感想や押しポイント</P>
+  <!-- <P>感想や押しポイント</P> -->
   <p>{{ postArray[0].postContent }}</p>
-  <img :src="imgPathContent" />
-  <div>{{ timestamp }}</div>
-  <div></div>
-  <h3>コメントを追加する</h3>
-  <textarea
-    class="form__textarea"
-    v-model="postContent"
-    placeholder="コメントする"
-  ></textarea>
+  <!-- 何に使う？ -->
+  <!-- <img :src="imgPathContent" /> -->
+  <div>#{{ postArray[0].selectedArea }}</div>
+  <div>#{{ postArray[0].category }}</div>
+
+  <div>
+    <h3>コメントを追加する</h3>
+    <!-- 入力後消えるようにする -->
+    <textarea
+      class="form__textarea"
+      v-model="commentContent"
+      placeholder="コメントする"
+      @keydown.enter="Comments"
+    ></textarea>
+    <div class="form__buttons">
+      <button v-on:click="Comments" class="form__submit-button">送信</button>
+    </div>
+  </div>
   <!-- </div> -->
   <div>
     <h3>~みんなのコメント~</h3>
-    <img class="randam_icon" />
-    <P>AAAA</P>
+    <div v-for="(comment, index) in commentsArray" :key="index">
+      <!-- ここ -->
+      <!-- <p>{{ randamImg }}</p> -->
+      <img :src="comment.randamImg" class="randam_icon" />
+      <P>{{ comment.commentContent }}</P>
+    </div>
   </div>
 </template>
 <script>
-import { collection, query, getDocs, where } from "firebase/firestore"
+//import { collection, query, getDocs, where } from "firebase/firestore"
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  setDoc,
+  doc,
+  orderBy,
+} from "firebase/firestore"
 // import { ref, getDownloadURL } from "firebase/storage"
 // import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
 export default {
   //ListOfView.vueから受け取り
   props: {
-    // postTitle: {
-    //   type: String,
-    //   required: true,
-    // },
-    // imgPath: {
-    //   // type: String,
-    //   type: Array,
-    //   required: true,
-    // },
     timestamp: {
-      // type: String,
       type: String,
       required: true,
     },
-    // index: {
-    //   type: Number,
-    //   required: true,
-    // },
   },
   data() {
     return {
@@ -64,34 +73,103 @@ export default {
       imgPaths: [],
       imgPathContent: "",
       commentContent: "",
+      commentsArray: [],
+      userID: "",
+      randamImgArray: [
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%206.png?alt=media&token=9e705c0c-6de5-478e-a801-2ddcc6791d4e",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2014.png?alt=media&token=892f2331-d0e1-4aaf-b594-0d49244152d2",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%207.png?alt=media&token=b6078c12-a5a3-4ce3-b048-fb09cb6a17af",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%208.png?alt=media&token=1207e350-245b-440c-96af-e633904ac703",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%209.png?alt=media&token=dde866af-0fed-4031-a041-82a8b93a2707",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2010.png?alt=media&token=3c2ce598-1ddb-4087-89cb-f788b0e591c6",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2013.png?alt=media&token=a1918504-376c-4a01-8153-9e0d40b71342",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2012.png?alt=media&token=320465fa-a7b8-42c8-b3f0-360a142b80a3",
+        "https://firebasestorage.googleapis.com/v0/b/team2-app.appspot.com/o/files%2FGroup%2011.png?alt=media&token=d0607713-ec55-414d-a86b-7dafc7eeaf8f",
+      ],
+      randamImg: "",
+      commentNumber: 0,
     }
   },
   created() {
     this.Read()
-    console.log(this.timestamp)
-    // const timestamp = this.timestamp
-    // const list =
-    // const data = this.$router
-    // const nameQuery = query(citiesRef, where("タイムスタンプ", "==", "受け取った値"));
-    //
+  },
+  mounted() {
+    this.readComments(this.userID)
   },
   methods: {
-    //コメント追加機能
-    // async Comments() {
-    //   if (this.commentContent === "") {
-    //     console.log("コメントが空です")
-    //     alert("コメントを入力してください")
-    //     return
-    //   }
-    //   const cid1 =
-    //   const now = new Date()
-    //   const Coments = {
-    //     commentContent: this.commentContent,
-    //     timestamp: now.getTime(),
-    //   }
-    //   await addDoc(collection(db, "posts", cid1, "comments"), Coments)
-    // },
-    //投稿読み込み機能
+    choose_at_random() {
+      console.log("aa")
+      console.log(this.commentsArray.length)
+      for (let i = 0; i < this.commentsArray.length; i++) {
+        var randamImg =
+          this.randamImgArray[
+            Math.floor(Math.random() * this.randamImgArray.length)
+          ]
+        console.log("ランダム")
+        console.log(randamImg)
+        this.commentsArray[i].randamImg = randamImg
+      }
+      console.log("コメントアレイ")
+      console.log(this.commentsArray)
+    },
+    // コメント追加機能
+    async Comments() {
+      if (this.commentContent === "") {
+        console.log("コメントが空です")
+        alert("コメントを入力してください")
+        return
+      }
+      const now = new Date()
+      const Comments = {
+        commentContent: this.commentContent,
+        timestamp: now.getTime(),
+      }
+
+      var randomID = String(this.generateRandomString(20))
+      //IDを変数に入れる
+      const randomString = this.postArray[0].ID
+      const postCommentsRef = doc(
+        db,
+        "posts-test",
+        randomString,
+        "postContent",
+        randomID
+      )
+
+      await setDoc(postCommentsRef, Comments)
+      this.readComments(randomString)
+
+      this.commentContent = ""
+    },
+    //コメント(サブコレクション)だけを読み込む関数
+    async readComments(randomString) {
+      this.commentsArray = []
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "posts-test", randomString, "postContent"),
+          orderBy("timestamp", "desc")
+        )
+      )
+      querySnapshot.forEach((doc) => {
+        let commentsData = doc.data()
+        commentsData.timestamp = doc.data().timestamp
+        this.commentsArray.unshift(commentsData)
+        this.commentNumber += 1
+      })
+      console.log("commentnum", this.commentNumber)
+      this.choose_at_random()
+    },
+    generateRandomString(length) {
+      var result = ""
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        )
+      }
+      return result
+    },
     async Read() {
       // const timeQuery = query(
       const timestamp = Number(this.timestamp)
@@ -106,10 +184,22 @@ export default {
         this.postArray.push(doc.data())
       })
       console.log("Array")
-      // console.log(imgs)
-      console.log("aaaaaaa")
       console.log(this.postArray)
+      this.userID = this.postArray[0].ID
       //console.log(doc.id, " => ", doc.data())
+      // //カテゴリーを日本語に変換
+      // if (this.postArray[0].category == "eat") {
+      //   const JpCategory = "食べもの"
+      //   console.log(JpCategory)
+      // } else if (this.postArray[0].category == "place") {
+      //   const JpCategory = "場所"
+      //   console.log(JpCategory)
+      // } else if (this.postArray[0].category == "play") {
+      //   const JpCategory = "自然"
+      //   console.log(JpCategory)
+      // }
+      // console.log("日本語")
+      // console.log(this.postArray[0].category)
     },
   },
 }
@@ -197,5 +287,6 @@ h3:after {
 }
 .randam_icon {
   /* 画像を丸くする */
+  width: 20%;
 }
 </style>

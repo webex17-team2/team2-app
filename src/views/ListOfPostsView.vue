@@ -4,12 +4,13 @@
     <ul class="row">
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},{{ postObjs }},
-        <div v-for="(path, index) in postObj.imgPath" :key="index">
+        <div>
+          <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
           <img
-            v-if="postObj.imagePath !== null"
-            v-bind:src="path"
-            width="250"
-            height="200"
+            v-if="postObj.imgPath !== null"
+            v-bind:src="postObj.imgPath[0]"
+            width="500"
+            height="300"
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
@@ -113,6 +114,7 @@ export default {
         let postdata = doc.data()
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
+
         //this.postArray.push(postdata)
       })
     },
