@@ -1,98 +1,128 @@
 <template>
-  <div class="form__wrapper">
-    <h2 class="titleTag_icon">
-      <span
-        ><img
-          src="@/assets/logo.png"
-          alt="Logo"
-          class="header__logo"
-        />必須</span
-      >場所の名前
-    </h2>
-
-    <input type="text" v-model="postTitle" />
-    <h2 class="titleTag_icon">
-      <span
-        ><img
-          src="@/assets/logo.png"
-          alt="Logo"
-          class="header__logo"
-        />必須</span
-      >感想や推しポイント
-    </h2>
-    <textarea
-      class="form__textarea"
-      v-model="postContent"
-      placeholder="ここが素敵！"
-    />
-    <h2 class="titleTag_icon">
-      <span
-        ><img
-          src="@/assets/logo.png"
-          alt="Logo"
-          class="header__logo"
-        />必須</span
-      >写真を追加
-    </h2>
-    <input type="file" multiple @change="fileUpload" />
-    <!-- アップロードされた画像が以下に表示される -->
-    <img v-if="img_url" :src="img_url" />
-
-    <h2 class="titleTag_icon">
-      <span
-        ><img
-          src="@/assets/logo.png"
-          alt="Logo"
-          class="header__logo"
-        />必須</span
-      >エリア
-    </h2>
-    <select v-model="selectedArea">
-      <option
-        v-for="Area in optionAreaName"
-        v-bind:value="Area.name"
-        v-bind:key="Area.id"
-      >
-        {{ Area.name }}
-      </option>
-    </select>
-    <h2 class="titleTag_icon">
-      <span
-        ><img
-          src="@/assets/logo.png"
-          alt="Logo"
-          class="header__logo"
-        />必須</span
-      >カテゴリー
-    </h2>
-    <input type="radio" id="tag1" v-model="radioValue" value="レジャー" />
-    <label for="good">レジャー</label>
-    <input type="radio" id="tag2" v-model="radioValue" value="グルメ" />
-    <label for="good">グルメ</label>
-    <input type="radio" id="tag3" v-model="radioValue" value="その他" />
-    <label for="good">その他</label>
-
-    <ul>
-      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-        {{ postObj.postTitle }},
-        <div v-for="(path, index) in postObj.imgPath" :key="index">
-          <img
-            v-if="postObj.imagePath !== null"
-            v-bind:src="path"
-            width="500"
-            height="300"
-          />
+  <body class="wrap">
+    <div class="content top">
+      <div class="contents left">
+        <div class="text-center__left">
+          <h2 class="titleTag_icon">
+            <span>
+              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              必須 </span
+            >場所の名前
+          </h2>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div class="form__buttons">
-    <button v-on:click="Post" class="form__submit-button">
-      <router-link to="/listOfPosts" class="nav__item nav__link"
-        >投稿</router-link
-      >
-    </button>
-  </div>
+        <div class="text-center__left">
+          <h2 class="titleTag_icon">
+            <span>
+              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              必須 </span
+            >感想や推しポイント
+          </h2>
+        </div>
+        <div class="text-center__left">
+          <h2 class="titleTag_icon">
+            <span>
+              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              必須 </span
+            >写真を追加
+          </h2>
+        </div>
+        <div class="text-center__left">
+          <h2 class="titleTag_icon">
+            <span>
+              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              必須 </span
+            >エリア
+          </h2>
+        </div>
+        <div class="text-center__left">
+          <h2 class="titleTag_icon">
+            <span>
+              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              必須 </span
+            >カテゴリー
+          </h2>
+        </div>
+      </div>
+      <div class="contents">
+        <div class="text-center">
+          <div class="cp_iptxt">
+            <input class="ef" type="text" v-model="postTitle" placeholder="" />
+            <label>お名前</label>
+            <span class="focus_line"><i></i></span>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="cp_iptxt">
+            <textarea
+              class="form__textarea"
+              type="text"
+              v-model="postContent"
+              placeholder="ここが素敵！"
+            />
+            <label>お名前</label>
+            <span class="focus_line"><i></i></span>
+          </div>
+        </div>
+        <div class="text-center">
+          <input type="file" multiple @change="fileUpload" />
+          <!-- アップロードされた画像が以下に表示される -->
+          <img v-if="img_url" :src="img_url" />
+        </div>
+        <div class="text-center">
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">北海道</label>
+          <input type="radio" id="tag2" v-model="radio" value="food" />
+          <label for="good">東北</label>
+          <input type="radio" id="tag3" v-model="radio" value="eat" />
+          <label for="good">関東</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">中部</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">関西</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">中国</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">四国</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">九州</label>
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">沖縄</label>
+        </div>
+        <div class="text-center">
+          <input type="radio" id="tag1" v-model="radio" value="place" />
+          <label for="good">場所</label>
+          <input type="radio" id="tag2" v-model="radio" value="food" />
+          <label for="good">食べもの</label>
+          <input type="radio" id="tag3" v-model="radio" value="eat" />
+          <label for="good">遊び</label>
+        </div>
+      </div>
+    </div>
+    <div class="content bottom">
+      <ul>
+        <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+          {{ postObj.postTitle }},
+          <div v-for="(path, index) in postObj.imgPath" :key="index">
+            <img
+              v-if="postObj.imagePath !== null"
+              v-bind:src="path"
+              width="500"
+              height="300"
+            />
+          </div>
+        </li>
+      </ul>
+      <div class="buttons-center">
+        <div class="form__buttons">
+          <button v-on:click="Post" class="form__submit-button">
+            <router-link to="/listOfPosts" class="nav__item nav__link"
+              >投稿</router-link
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -273,25 +303,77 @@ export default {
 </script>
 
 <style scoped>
-.form__wrapper {
-  padding: 1rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  float: left;
 }
+
+.wrap {
+  width: 100%;
+  height: 100vh;
+  padding: 32px 0 64px;
+  background-color: #a8d7ba;
+  display: flex;
+  flex-flow: column;
+}
+
+.content {
+  width: 95%;
+  margin: 0 auto;
+  padding: 150px 80px 0px;
+  background-color: #fff;
+  float: left;
+}
+.top {
+  border-radius: 10px 10px 0px 0px;
+}
+.bottom {
+  width: 95%;
+  height: 0px;
+  padding: 0;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.contents {
+  width: 50%;
+  float: left;
+  background-color: #fffdf6;
+  display: flex;
+  flex-flow: column;
+}
+
+.text-center {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.text-center__left {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+a {
+  color: #3f82a8;
+}
+
+a:hover {
+  text-decoration: none;
+}
+/* 全体デザイン変更後↑ */
 .form__textarea {
+  background-color: #319dcb;
   width: 100%;
   height: calc(1.3rem * 3 + 0.5rem * 2);
   padding: 0.5rem;
   line-height: 1.3rem;
-  border-radius: 5px;
   border: none;
   resize: none;
 }
 .form__textarea:focus {
   outline: none;
 }
-.form__buttons {
-  display: flex;
-  justify-content: flex-end;
-}
+
 h2 {
   position: relative;
   padding-left: 6em;
@@ -326,5 +408,189 @@ h2 span:after {
   padding-top: 8px;
   /* weight: 30px; */
   height: 30px;
+}
+
+.buttons-center {
+  width: 100%;
+  display: flex;
+  background-color: #a8d7ba;
+}
+
+.form__buttons {
+  margin: auto;
+}
+
+/* 氏名記入フォーム */
+.cp_iptxt {
+  position: relative;
+  width: 80%;
+  margin: 40px 3%;
+}
+.cp_iptxt input[type="text"] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  letter-spacing: 1px;
+  padding-left: 4em;
+}
+.cp_iptxt input[type="text"]:focus {
+  outline: none;
+}
+.ef {
+  padding: 7px 14px;
+  transition: 0.4s;
+  border: 1px solid #1b2538;
+  background: transparent;
+}
+.ef ~ .focus_line:before,
+.ef ~ .focus_line:after {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  content: "";
+  transition: 0.4s;
+  background-color: #da3c41;
+}
+.ef ~ .focus_line:after {
+  top: auto;
+  bottom: 0;
+}
+.ef ~ .focus_line i:before,
+.ef ~ .focus_line i:after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 0;
+  content: "";
+  transition: 0.6s;
+  background-color: #da3c41;
+}
+.ef ~ .focus_line i:after {
+  right: 0;
+  left: auto;
+}
+.ef:focus ~ .focus_line:before,
+.ef:focus ~ .focus_line:after,
+.cp_iptxt.ef ~ .focus_line:before,
+.cp_iptxt.ef ~ .focus_line:after {
+  left: 0;
+  width: 100%;
+  transition: 0.4s;
+}
+.ef:focus ~ .focus_line i:before,
+.ef:focus ~ .focus_line i:after,
+.cp_iptxt.ef ~ .focus_line i:before,
+.cp_iptxt.ef ~ .focus_line i:after {
+  top: -1px;
+  height: 100%;
+  transition: 0.6s;
+}
+.ef ~ label {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 14px;
+  width: 100%;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  color: #aaaaaa;
+}
+.ef:focus ~ label,
+.cp_iptxt.ef ~ label {
+  font-size: 12px;
+  top: -18px;
+  left: 0;
+  transition: 0.3s;
+  color: #da3c41;
+}
+
+/* 記入フォーム用デザイン */
+.cp_iptxt {
+  position: relative;
+  width: 80%;
+  margin: 40px 3%;
+}
+.cp_iptxt input[type="text"] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  letter-spacing: 1px;
+  padding-left: 4em;
+}
+.cp_iptxt input[type="text"]:focus {
+  outline: none;
+}
+.form__textarea {
+  padding: 7px 14px;
+  transition: 0.4s;
+  border: 1px solid #1b2538;
+  background: transparent;
+}
+.form__textarea ~ .focus_line:before,
+.form__textarea ~ .focus_line:after {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  content: "";
+  transition: 0.4s;
+  background-color: #da3c41;
+}
+.form__textarea ~ .focus_line:after {
+  top: auto;
+  bottom: 0;
+}
+.form__textarea ~ .focus_line i:before,
+.form__textarea ~ .focus_line i:after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 0;
+  content: "";
+  transition: 0.6s;
+  background-color: #da3c41;
+}
+.form__textarea ~ .focus_line i:after {
+  right: 0;
+  left: auto;
+}
+.form__textarea:focus ~ .focus_line:before,
+.form__textarea:focus ~ .focus_line:after,
+.cp_iptxt.form__textarea ~ .focus_line:before,
+.cp_iptxt.form__textarea ~ .focus_line:after {
+  left: 0;
+  width: 100%;
+  transition: 0.4s;
+}
+.form__textarea:focus ~ .focus_line i:before,
+.form__textarea:focus ~ .focus_line i:after,
+.cp_iptxt.ef ~ .focus_line i:before,
+.cp_iptxt.ef ~ .focus_line i:after {
+  top: -1px;
+  height: 100%;
+  transition: 0.6s;
+}
+.form__textarea ~ label {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 14px;
+  width: 100%;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  color: #aaaaaa;
+}
+.form__textarea:focus ~ label,
+.cp_iptxt.form__textarea ~ label {
+  font-size: 12px;
+  top: -18px;
+  left: 0;
+  transition: 0.3s;
+  color: #da3c41;
 }
 </style>
