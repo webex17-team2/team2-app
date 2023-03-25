@@ -1,20 +1,22 @@
 <template>
   <div class="my-page">
     <!-- <h1>投稿一覧</h1> -->
-    <ul>
+    <ul class="row">
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},{{ postObjs }},
         <div v-for="(path, index) in postObj.imgPath" :key="index">
           <img
             v-if="postObj.imagePath !== null"
             v-bind:src="path"
-            width="500"
-            height="300"
+            width="250"
+            height="200"
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
         </div>
-        <button @click="routerBtn(postObjs)">詳細へ</button>
+        <button class="btn btn-primary" @click="routerBtn(postObjs)">
+          詳細へ
+        </button>
       </li>
     </ul>
     <li v-for="(postArray, index) in postArray" :key="index">
@@ -180,5 +182,40 @@ export default {
 .form__buttons {
   display: flex;
   justify-content: flex-end;
+}
+
+.my-page {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  border: solid 10px #1dfdc9;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+li {
+  padding: 60px;
+  margin: 20px;
+  list-style: none;
+  background-color: rgb(178, 174, 174);
+  border-radius: 10px;
+  animation-name: color;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+
+@keyframes color {
+  0% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: #adaaaa;
+  }
 }
 </style>
