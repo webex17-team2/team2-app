@@ -1,27 +1,15 @@
 <template>
-  <div class="form__wrapper">
-    <textarea
-      class="form__textarea"
-      v-model="text"
-      placeholder="いまどうしてる？"
-    />
-    <div class="form__buttons">
-      <button v-on:click="postTweet" class="form__submit-button">投稿</button>
-    </div>
+  <div>
+    <JapanMap />
   </div>
 </template>
 
 <script>
+import JapanMap from "@/components/JapanMap.vue"
+
 export default {
-  data() {
-    return {
-      text: "",
-    }
-  },
-  methods: {
-    postTweet() {
-      alert("投稿機能の完成をお楽しみに！")
-    },
+  components: {
+    JapanMap,
   },
 }
 </script>

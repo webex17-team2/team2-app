@@ -106,8 +106,8 @@
             <img
               v-if="postObj.imagePath !== null"
               v-bind:src="path"
-              width="500"
-              height="300"
+              width="250"
+              height="250"
             />
           </div>
         </li>

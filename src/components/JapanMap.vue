@@ -180,6 +180,7 @@
       </div>
     </div>
   </div>
+  <div class="back_img"><img class="back" src="../assets/Group16-3.png" /></div>
 </template>
 
 <script>
@@ -340,15 +341,18 @@ export default {
 </script>
 <style scoped>
 .all {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
   position: relative;
+  left: 150px;
+  top: -70px;
 }
 
 .title {
   display: inline-block;
-  margin-top: 7%;
-  margin-left: 15%;
+  position: absolute;
+  top: 200px;
+  left: 200px;
   border: 9px solid black;
 }
 img {
@@ -391,7 +395,6 @@ img {
 /* ここまで */
 .Japan {
   margin-top: 8%;
-  width: 100%;
   position: absolute;
   left: 33%;
   top: 5%;
@@ -600,8 +603,8 @@ img {
   border-radius: 50%;
   background-color: rgba(226, 16, 16, 0);
   position: absolute;
-  left: 13em;
-  top: 38em;
+  left: -13em;
+  top: 30em;
 }
 .pin-7 {
   width: 35px;
@@ -662,7 +665,7 @@ img {
   background-color: rgba(226, 16, 16, 0);
   position: absolute;
   left: 40em;
-  top: 36em;
+  top: 30em;
 }
 .pin-9 {
   width: 40px;
@@ -738,6 +741,19 @@ img {
 .big-pin6:hover {
   animation: bounce2 1s;
   animation-fill-mode: both;
+}
+
+.back {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  opacity: 0.4;
+  z-index: -1;
+  background-color: rgba(242, 245, 212, 0.934);
 }
 
 /* asldkj */
