@@ -9,8 +9,8 @@
           <img
             v-if="postObj.imgPath !== null"
             v-bind:src="postObj.imgPath[0]"
-            width="500"
-            height="300"
+            width="250"
+            height="200"
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
           <p>{{ postObjs }}</p>
