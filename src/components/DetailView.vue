@@ -1,44 +1,46 @@
 <template>
-  <!-- <div class="Detail_title"> -->
   <router-link to="/listOfPosts">⬅︎</router-link>
-  <h1>{{ postArray[0].postTitle }}</h1>
-  <div class="img_box">
-    <div
-      class="img_collection"
-      v-for="(post, postId) in postArray[0].imgPath"
-      :key="postId"
-    >
-      <img :src="post" class="img_content" />
+  <div class="row">
+    <!-- <div class="Detail_title"> -->
+    <div class="post">
+      <h1>{{ postArray[0].postTitle }}</h1>
+      <div class="img_box">
+        <div
+          class="img_collection"
+          v-for="(post, postId) in postArray[0].imgPath"
+          :key="postId"
+        >
+          <img :src="post" class="img_content" />
+        </div>
+      </div>
+      <!-- <P>感想や押しポイント</P> -->
+      <p>{{ postArray[0].postContent }}</p>
+      <!-- 何に使う？ -->
+      <!-- <img :src="imgPathContent" /> -->
+      <div>#{{ postArray[0].selectedArea }}</div>
+      <div>#{{ postArray[0].category }}</div>
     </div>
-  </div>
-  <!-- <P>感想や押しポイント</P> -->
-  <p>{{ postArray[0].postContent }}</p>
-  <!-- 何に使う？ -->
-  <!-- <img :src="imgPathContent" /> -->
-  <div>#{{ postArray[0].selectedArea }}</div>
-  <div>#{{ postArray[0].category }}</div>
-
-  <div>
-    <h3>コメントを追加する</h3>
-    <!-- 入力後消えるようにする -->
-    <textarea
-      class="form__textarea"
-      v-model="commentContent"
-      placeholder="コメントする"
-      @keydown.enter="Comments"
-    ></textarea>
-    <div class="form__buttons">
-      <button v-on:click="Comments" class="form__submit-button">送信</button>
-    </div>
-  </div>
-  <!-- </div> -->
-  <div>
-    <h3>~みんなのコメント~</h3>
-    <div v-for="(comment, index) in commentsArray" :key="index">
-      <!-- ここ -->
-      <!-- <p>{{ randamImg }}</p> -->
-      <img :src="comment.randamImg" class="randam_icon" />
-      <P>{{ comment.commentContent }}</P>
+    <div class="comment">
+      <h3>コメントを追加する</h3>
+      <!-- 入力後消えるようにする -->
+      <p>
+        <textarea
+          class="form__textarea"
+          v-model="commentContent"
+          placeholder="コメントする"
+          @keydown.enter="Comments"
+        ></textarea>
+      </p>
+      <p class="form__buttons">
+        <button v-on:click="Comments" class="form__submit-button">送信</button>
+      </p>
+      <h3>~みんなのコメント~</h3>
+      <div v-for="(comment, index) in commentsArray" :key="index">
+        <!-- ここ -->
+        <!-- <p>{{ randamImg }}</p> -->
+        <img :src="comment.randamImg" class="randam_icon" />
+        <P>{{ comment.commentContent }}</P>
+      </div>
     </div>
   </div>
 </template>
@@ -240,7 +242,8 @@ h1:after {
 .img_box {
   border: 2px solid blue;
   display: flex;
-  width: 820px;
+  width: 400px;
+  overflow-x: scroll;
 }
 .img_collection {
   border: 2px solid red;
@@ -282,11 +285,27 @@ h3:after {
   width: 7px;
   height: 7px;
   content: "";
-  border-rasdius: 50%;
+  border-radius: 50%;
   background: #fff;
 }
 .randam_icon {
   /* 画像を丸くする */
   width: 20%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.post {
+  padding: 100px;
+}
+
+.comment {
+  padding: 100px;
 }
 </style>

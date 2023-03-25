@@ -194,7 +194,20 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  padding: 10px;
 }
+
+/* @media screen and (min-width: 480px) {
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+} */
+
 li {
   padding: 60px;
   margin: 20px;
