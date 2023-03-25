@@ -29,6 +29,7 @@ export default {
       postContent: "",
       postArray: [],
       imgPath: [],
+      changeProps: "",
     }
   },
   props: {
@@ -38,13 +39,21 @@ export default {
     },
   },
   async created() {
-    console.log(this.choice)
-    //いる？
-    //postObj
     this.Read()
+  },
+  computed: {
+    newProps() {
+      return { result: this.$route.params.choice }
+    },
+  },
+  watch: {
+    newProps() {
+      this.Read()
+    },
   },
   methods: {
     async Read() {
+      this.postArray = []
       const q = query(
         collection(db, "posts-test"),
         where("category", "==", this.choice)
@@ -55,6 +64,15 @@ export default {
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
       })
+    },
+    routerBtn(postObjs) {
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          timestamp: this.postArray[postObjs].timestamp,
+        },
+      })
+      console.log("ボタンが押されました")
     },
   },
 }
