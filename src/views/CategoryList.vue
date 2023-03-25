@@ -1,7 +1,6 @@
 <template>
   <!-- リスト入れる -->
-  <router-link to="/about">⬅︎</router-link>{{ newProps }}
-  <!-- <button @click="changeProps()">change</button> -->
+  <router-link to="/about">⬅︎</router-link>
   <ul>
     <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
       {{ postObj.postTitle }},
@@ -40,24 +39,21 @@ export default {
     },
   },
   async created() {
-    console.log(this.choice)
     this.Read()
   },
   computed: {
     newProps() {
-      const result = this.choice
-      return result
+      return { result: this.$route.params.choice }
     },
   },
   watch: {
-    changeProps(newValue, oldValue) {
-      if (this.newProps !== oldValue) {
-        console.log(newValue, oldValue)
-      }
+    newProps() {
+      this.Read()
     },
   },
   methods: {
     async Read() {
+      this.postArray = []
       const q = query(
         collection(db, "posts-test"),
         where("category", "==", this.choice)
@@ -68,7 +64,6 @@ export default {
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
       })
-      this.newProps = this.choice
     },
   },
 }
