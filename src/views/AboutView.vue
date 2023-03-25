@@ -6,13 +6,13 @@
     <div v-if="two" class="num">2</div> -->
       <!-- <div class="container" v-if="seen"> -->
       <div class="box">
-        <button v-on:click="first">場所</button>
+        <button v-on:click="basyo">場所</button>
       </div>
       <div class="box">
-        <button v-on:click="second">飯</button>
+        <button v-on:click="mesi">飯</button>
       </div>
       <div class="box">
-        <button v-on:click="third">遊び</button>
+        <button v-on:click="asobi">遊び</button>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
     //   this.two = true
     // },
     // ボタン押す→遷移＋値渡し(buttonのID)→firebaseのcategory==IDのものを表示
-    first() {
+    basyo() {
       this.$router.push({
         name: "CategoryList",
         params: {
@@ -52,7 +52,7 @@ export default {
         },
       })
     },
-    second() {
+    mesi() {
       this.$router.push({
         name: "CategoryList",
         params: {
@@ -60,7 +60,7 @@ export default {
         },
       })
     },
-    third() {
+    asobi() {
       this.$router.push({
         name: "CategoryList",
         params: {
@@ -126,5 +126,6 @@ button {
   display: flex;
   justify-content: flex-end;
 }
+/* ドロップアウトメニュー */
 </style>
 <!-- push -->

@@ -291,7 +291,7 @@ export default {
 
 .wrap {
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   padding: 32px 0 64px;
   background-color: #a8d7ba;
   display: flex;
@@ -309,6 +309,9 @@ export default {
   border-radius: 10px 10px 0px 0px;
 }
 .bottom {
+  width: 95%;
+  height: 0px;
+  padding: 0;
   border-radius: 0px 0px 10px 10px;
 }
 
@@ -337,9 +340,6 @@ a:hover {
   text-decoration: none;
 }
 /* 全体デザイン変更後↑ */
-.form__wrapper {
-  padding: 1rem;
-}
 .form__textarea {
   background-color: #319dcb;
   width: 100%;
@@ -392,6 +392,7 @@ h2 span:after {
 .buttons-center {
   width: 100%;
   display: flex;
+  background-color: #a8d7ba;
 }
 
 .form__buttons {
