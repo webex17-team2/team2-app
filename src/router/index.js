@@ -6,6 +6,8 @@ import JapanView from "../views/JapanView.vue"
 import ListOfPostsView from "../views/ListOfPostsView.vue"
 import AddPostsView from "../views/AddPostsView.vue"
 import DetailView from "../components/DetailView.vue"
+import CategoryList from "../views/CategoryList.vue"
+
 const routes = [
   {
     path: "/",
@@ -30,18 +32,27 @@ const routes = [
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
   {
-    path: "/detailView:imgPath/:timestamp",
+    path: "/detailView:timestamp",
     name: "DetailView",
     component: DetailView,
     props: (route) => ({
-      postTitle: route.params.postTitle,
+      //postTitle: route.params.postTitle,
       // postTitle: route.params.postTitle,
-      imgPath: route.params.imgPath,
+      //imgPath: route.params.imgPath,
       // index: route.params.index,
       timestamp: route.params.timestamp,
     }),
   },
+  {
+    path: "/aboutView:choice",
+    name: "CategoryList",
+    component: CategoryList,
+    props: (router) => ({
+      choice: router.params.choice,
+    }),
+  },
 ]
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,

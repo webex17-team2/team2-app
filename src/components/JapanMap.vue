@@ -7,12 +7,23 @@
       <img src="../assets/Japan.png" />
       <div @mouseover="oneOver" @mouseleave="oneLeave" class="box-1">
         <div class="big-pin">
-          <img
-            @click="hokkaidou"
-            v-if="hoverFlag_1"
-            class="pin-1"
-            src="../assets/flag-1.png"
-          />
+          <div v-if="hoverFlag_1">
+            <img @click="hokkaidou" class="pin-1" src="../assets/flag-1.png" />
+            <!-- <img
+              @click="hokkaidou"
+              v-if="hoverFlag_1"
+              class="pin-1"
+              src="../assets/flag-1.png"
+            /> -->
+          </div>
+        </div>
+      </div>
+      <!-- 追加 -->
+      <div class="box-1-2">
+        <div v-if="hoverFlag_1">
+          <img class="postImg" src="../assets/postImg/post1.png" />
+
+          <p class="postTitle1">場所の名前</p>
         </div>
       </div>
       <!-- 東北 -->
@@ -26,6 +37,14 @@
           />
         </div>
       </div>
+      <!-- 追加 -->
+      <div class="box-2-2">
+        <div v-if="hoverFlag_2">
+          <img class="postImg" src="../assets/postImg/post2.png" />
+
+          <p class="postTitle2">場所の名前</p>
+        </div>
+      </div>
       <!-- 関東 -->
       <div @mouseover="threeOver" @mouseleave="threeLeave" class="box-3">
         <div class="big-pin">
@@ -35,6 +54,14 @@
             class="pin-3"
             src="../assets/flag-3.png"
           />
+        </div>
+      </div>
+      <!-- 追加 -->
+      <div class="box-3-2">
+        <div v-if="hoverFlag_3">
+          <img class="postImg" src="../assets/postImg/post3.png" />
+
+          <p class="postTitle3">場所の名前</p>
         </div>
       </div>
       <!-- 中部 -->
@@ -48,6 +75,14 @@
           />
         </div>
       </div>
+      <!-- 追加 -->
+      <div class="box-4-2">
+        <div v-if="hoverFlag_4">
+          <img class="postImg" src="../assets/postImg/post4.png" />
+
+          <p class="postTitle4">場所の名前</p>
+        </div>
+      </div>
       <!-- 関西 -->
       <div @mouseover="fiveOver" @mouseleave="fiveLeave" class="box-5">
         <div class="big-pin">
@@ -57,6 +92,14 @@
             class="pin-5"
             src="../assets/flag-5.png"
           />
+        </div>
+      </div>
+      <!-- 追加 -->
+      <div class="box-5-2">
+        <div v-if="hoverFlag_5">
+          <img class="postImg" src="../assets/postImg/post1.png" />
+
+          <p class="postTitle5">場所の名前</p>
         </div>
       </div>
       <!-- 中国 -->
@@ -70,6 +113,14 @@
           />
         </div>
       </div>
+      <!-- 追加 -->
+      <div class="box-6-2">
+        <div v-if="hoverFlag_6">
+          <img class="postImg" src="../assets/postImg/post2.png" />
+
+          <p class="postTitle6">場所の名前</p>
+        </div>
+      </div>
       <!-- 四国 -->
       <div @mouseover="sevenOver" @mouseleave="sevenLeave" class="box-7">
         <div class="big-pin">
@@ -79,6 +130,14 @@
             class="pin-7"
             src="../assets/flag-7.png"
           />
+        </div>
+      </div>
+      <!-- 追加 -->
+      <div class="box-7-2">
+        <div v-if="hoverFlag_7">
+          <img class="postImg" src="../assets/postImg/post3.png" />
+
+          <p class="postTitle7">場所の名前</p>
         </div>
       </div>
       <!-- 九州 -->
@@ -92,6 +151,14 @@
           />
         </div>
       </div>
+      <!-- 追加 -->
+      <div class="box-8-2">
+        <div v-if="hoverFlag_8">
+          <img class="postImg" src="../assets/postImg/post4.png" />
+
+          <p class="postTitle8">場所の名前</p>
+        </div>
+      </div>
       <!-- 沖縄 -->
       <div @mouseover="nineOver" @mouseleave="nineLeave" class="box-9">
         <div class="big-pin">
@@ -101,6 +168,14 @@
             class="pin-9"
             src="../assets/flag-9.png"
           />
+        </div>
+      </div>
+      <!-- 追加 -->
+      <div class="box-9-2">
+        <div v-if="hoverFlag_9">
+          <img class="postImg" src="../assets/postImg/post1.png" />
+
+          <p class="postTitle9">場所の名前</p>
         </div>
       </div>
     </div>
@@ -216,13 +291,48 @@ export default {
 
 .title {
   display: inline-block;
-  margin-left: 45%;
+  margin-top: 7%;
+  margin-left: 15%;
   border: 9px solid black;
 }
 img {
   width: 570px;
   height: 700px;
 }
+
+/* 追加 */
+.postImg {
+  height: 100px;
+  width: 150px;
+}
+.postTitle1 {
+  padding-left: 40px;
+}
+.postTitle2 {
+  padding-left: 40px;
+}
+.postTitle3 {
+  padding-left: 40px;
+}
+.postTitle4 {
+  padding-left: 40px;
+}
+.postTitle5 {
+  padding-left: 40px;
+}
+.postTitle6 {
+  padding-left: 40px;
+}
+.postTitle7 {
+  padding-left: 40px;
+}
+.postTitle8 {
+  padding-left: 40px;
+}
+.postTitle9 {
+  padding-left: 40px;
+}
+/* ここまで */
 .Japan {
   margin-top: 8%;
   width: 100%;
@@ -239,6 +349,16 @@ img {
   position: absolute;
   left: 23em;
   top: 0.5em;
+}
+/* 追加 */
+.box-1-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 38em;
+  top: 3.5em;
 }
 .pin-1 {
   width: 50px;
@@ -261,6 +381,15 @@ img {
   left: 23.5em;
   top: 13em;
 }
+.box-2-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 35em;
+  top: 14em;
+}
 .pin-2 {
   width: 60px;
   height: 60px;
@@ -282,7 +411,15 @@ img {
   left: 23em;
   top: 25em;
 }
-
+.box-3-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 31em;
+  top: 25em;
+}
 .pin-3 {
   width: 40px;
   height: 40px;
@@ -305,6 +442,15 @@ img {
   left: 16em;
   top: 25em;
 }
+.box-4-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 10em;
+  top: 13em;
+}
 .pin-4 {
   width: 60px;
   height: 60px;
@@ -325,6 +471,15 @@ img {
   position: absolute;
   left: 12em;
   top: 30em;
+}
+.box-5-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 5em;
+  top: 18em;
 }
 .pin-5 {
   width: 45px;
@@ -347,6 +502,15 @@ img {
   position: absolute;
   left: 3.2em;
   top: 31.5em;
+}
+.box-6-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: -2em;
+  top: 20em;
 }
 .pin-6 {
   width: 40px;
@@ -374,6 +538,15 @@ img {
   left: 6.3em;
   top: 35em;
 }
+.box-7-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 13em;
+  top: 38em;
+}
 .pin-7 {
   width: 35px;
   height: 35px;
@@ -396,6 +569,15 @@ img {
   left: 0.4em;
   top: 36em;
 }
+.box-8-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: -12em;
+  top: 30em;
+}
 .pin-8 {
   width: 60px;
   height: 60px;
@@ -415,6 +597,15 @@ img {
   border-radius: 50%;
   position: absolute;
   left: 29em;
+  top: 36em;
+}
+.box-9-2 {
+  width: 250px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(226, 16, 16, 0);
+  position: absolute;
+  left: 40em;
   top: 36em;
 }
 .pin-9 {

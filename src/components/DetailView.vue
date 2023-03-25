@@ -7,7 +7,7 @@
       v-for="(post, postId) in postArray[0].imgPath"
       :key="postId"
     >
-      <img :src="imgPath" class="img_content" />
+      <img :src="this.postArray[0].imgPath" class="img_content" />
     </div>
   </div>
   <P>感想や押しポイント</P>
@@ -96,31 +96,19 @@ export default {
       // const timeQuery = query(
       const timestamp = Number(this.timestamp)
       const q = query(
-        collection(db, "posts"),
+        collection(db, "posts-test"),
         where("timestamp", "==", timestamp)
       )
       //const querySnapshot = await getDocs(timeQuery)
       //querySnapshot.forEach(async (doc) => {
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        //let postdata = doc.data()
-        // for (let i = 0; i < doc.data().imgPath.length; i++) {
-        //   const imgUrl = await getDownloadURL(
-        //     ref(storage, `files/${doc.data().imgPath[i]}`)
-        //   ).then((url) => {
-        //     return url
-        //   })
-        //   postdata.imgPath[i] = imgUrl
-        // }
-        //this.postArray.push(postdata)
-        // }
-        console.log(doc.id, " => ", doc.data())
+        this.postArray.push(doc.data())
       })
       console.log("Array")
       // console.log(imgs)
       console.log("aaaaaaa")
-      console.log(this.imgPaths)
+      console.log(this.postArray)
       //console.log(doc.id, " => ", doc.data())
     },
   },
