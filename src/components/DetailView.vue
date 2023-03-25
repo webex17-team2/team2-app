@@ -21,7 +21,6 @@
     v-model="postContent"
     placeholder="コメントする"
   ></textarea>
-  <!-- </div> -->
   <div>
     <h3>~みんなのコメント~</h3>
     <img class="randam_icon" />
@@ -30,30 +29,13 @@
 </template>
 <script>
 import { collection, query, getDocs, where } from "firebase/firestore"
-// import { ref, getDownloadURL } from "firebase/storage"
-// import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
 export default {
-  //ListOfView.vueから受け取り
   props: {
-    // postTitle: {
-    //   type: String,
-    //   required: true,
-    // },
-    // imgPath: {
-    //   // type: String,
-    //   type: Array,
-    //   required: true,
-    // },
     timestamp: {
-      // type: String,
       type: String,
       required: true,
     },
-    // index: {
-    //   type: Number,
-    //   required: true,
-    // },
   },
   data() {
     return {
