@@ -1,89 +1,123 @@
 <template>
   <body class="wrap">
     <div class="content top">
-      <div class="contents left">
-        <div class="text-center__left">
-          <h2 class="titleTag_icon">
-            <span>
-              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
-              必須 </span
-            >場所の名前
-          </h2>
-        </div>
-        <div class="text-center__left">
-          <h2 class="titleTag_icon">
-            <span>
-              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
-              必須 </span
-            >感想や推しポイント
-          </h2>
-        </div>
-        <div class="text-center__left">
-          <h2 class="titleTag_icon">
-            <span>
-              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
-              必須 </span
-            >写真を追加
-          </h2>
-        </div>
-        <div class="text-center__left">
-          <h2 class="titleTag_icon">
-            <span>
-              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
-              必須 </span
-            >エリア
-          </h2>
-        </div>
-        <div class="text-center__left">
-          <h2 class="titleTag_icon">
-            <span>
-              <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
-              必須 </span
-            >カテゴリー
-          </h2>
-        </div>
-      </div>
-      <div class="contents">
-        <div class="text-center">
-          <div class="cp_iptxt">
-            <input class="ef" type="text" v-model="postTitle" placeholder="" />
-            <label>お名前</label>
-            <span class="focus_line"><i></i></span>
+      <div class="contentsLeft">
+        <div class="contents left">
+          <div class="text-center__left">
+            <h2 class="titleTag_icon">
+              <span>
+                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+                必須 </span
+              >場所の名前
+            </h2>
+          </div>
+          <div class="text-center__left">
+            <h2 class="titleTag_icon">
+              <span>
+                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+                必須 </span
+              >感想や推しポイント
+            </h2>
+          </div>
+          <div class="text-center__left1">
+            <h2 class="titleTag_icon">
+              <span>
+                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+                必須 </span
+              >写真を追加
+            </h2>
+          </div>
+          <div class="text-center__left">
+            <h2 class="titleTag_icon">
+              <span>
+                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+                必須 </span
+              >エリア
+            </h2>
+          </div>
+          <div class="text-center__left">
+            <h2 class="titleTag_icon">
+              <span>
+                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+                必須 </span
+              >カテゴリー
+            </h2>
           </div>
         </div>
-        <div class="text-center">
-          <div class="cp_iptxt">
-            <textarea
-              class="form__textarea"
-              type="text"
-              v-model="postContent"
-              placeholder="ここが素敵！"
+        <div class="contents">
+          <div class="text-center">
+            <div class="cp_iptxt">
+              <input
+                class="ef"
+                type="text"
+                v-model="postTitle"
+                placeholder="◯◯公園"
+              />
+              <label>お名前</label>
+              <span class="focus_line"><i></i></span>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="cp_iptxt">
+              <textarea
+                class="form__textarea"
+                type="text"
+                v-model="postContent"
+                placeholder="ここが素敵！"
+              />
+              <label>お名前</label>
+              <span class="focus_line"><i></i></span>
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              type="file"
+              class="text-center-input"
+              multiple
+              @change="fileUpload"
             />
-            <label>お名前</label>
-            <span class="focus_line"><i></i></span>
+            <!-- アップロードされた画像が以下に表示される -->
+            <img v-if="img_url" :src="img_url" />
           </div>
-        </div>
-        <div class="text-center">
-          <input type="file" multiple @change="fileUpload" />
-          <!-- アップロードされた画像が以下に表示される -->
-          <img v-if="img_url" :src="img_url" />
-        </div>
-        <select v-model="selectedArea">
-          <option
-            v-for="Area in optionAreaName"
-            v-bind:value="Area.name"
-            v-bind:key="Area.id"
-          >
-            {{ Area.name }}
-          </option>
-        </select>
-        <div class="text-center">
-          <input type="radio" id="tag1" v-model="radioValue" value="レジャー" />
-          <label for="good">レジャー</label>
-          <input type="radio" id="tag2" v-model="radioValue" value="グルメ" />
-          <label for="good">グルメ</label>
-          <input type="radio" id="tag3" v-model="radiValue" value="その他" />
-          <label for="good">その他</label>
+          <div class="text-center">
+            <select v-model="selectedArea" class="text-center-select">
+              <option
+                v-for="Area in optionAreaName"
+                v-bind:value="Area.name"
+                v-bind:key="Area.id"
+              >
+                {{ Area.name }}
+              </option>
+            </select>
+          </div>
+          <div class="text-center">
+            <div class="text-center-radio">
+              <input
+                type="radio"
+                name="radios"
+                id="tag1"
+                v-model="radioValue"
+                value="レジャー"
+              />
+              <label for="good">レジャー</label>
+              <input
+                type="radio"
+                name="radios"
+                id="tag2"
+                v-model="radioValue"
+                value="グルメ"
+              />
+              <label for="good">グルメ</label>
+              <input
+                type="radio"
+                name="radios"
+                id="tag3"
+                v-model="radioValue"
+                value="その他"
+              />
+              <label for="good">その他</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -320,18 +354,67 @@ export default {
 }
 .contents {
   width: 50%;
+
   float: left;
-  background-color: #fffdf6;
+
   display: flex;
   flex-flow: column;
 }
+.contents left {
+  margin-top: -20px;
+}
+/* 入力側(右) */
 .text-center {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
+  height: 100px;
+  margin-right: 8%;
+}
+/* タグ側(左) */
+.contentsLeft {
+  margin-top: 20px;
+  margin-bottom: -10px;
+  width: 100%;
 }
 .text-center__left {
+  height: 0px;
   text-align: center;
-  margin-bottom: 100px;
+  margin-top: 0px;
+  margin-left: 25%;
+  margin-bottom: 80px;
+}
+.text-center__left1 {
+  height: 0px;
+  text-align: center;
+  margin-top: 25px;
+  margin-left: 25%;
+  margin-bottom: 80px;
+}
+.text-center textarea {
+  margin-top: -65px;
+}
+.text-center-input {
+  margin: -30px 20px;
+}
+.text-center-select {
+  margin: -50px 20px;
+}
+.text-center-select {
+  width: 150px;
+  height: 25px;
+}
+.text-center-radio {
+  margin: -85px 20px;
+}
+.text-center-radio label {
+  margin-top: -8px;
+  margin-left: 4px;
+  padding-right: 12px;
+  font-size: 20px;
+}
+.form__submit-button {
+  margin-top: -100px;
+  margin-left: -50px;
 }
 a {
   color: #3f82a8;
@@ -341,6 +424,7 @@ a:hover {
 }
 /* 全体デザイン変更後↑ */
 .form__textarea {
+  margin-top: -0px;
   background-color: #319dcb;
   width: 100%;
   height: calc(1.3rem * 3 + 0.5rem * 2);
@@ -352,9 +436,15 @@ a:hover {
 .form__textarea:focus {
   outline: none;
 }
+.titleTag_icon {
+  font-size: 23px;
+  padding-top: 2px;
+  padding-left: 130px;
+}
 h2 {
   position: relative;
-  padding-left: 6em;
+  padding-left: 5em;
+  font-size: 25px;
 }
 h2 span {
   position: absolute;
@@ -364,6 +454,7 @@ h2 span {
   color: #fff;
   border-radius: 10px;
   background: #319dcb;
+  font-size: 20px;
 }
 h2 span i {
   margin-right: 1rem;
@@ -380,7 +471,7 @@ h2 span:after {
   border-color: transparent transparent transparent #319dcb;
 }
 .header__logo {
-  padding-top: 8px;
+  padding-top: 4px;
   /* weight: 30px; */
   height: 30px;
 }
@@ -396,7 +487,7 @@ h2 span:after {
 .cp_iptxt {
   position: relative;
   width: 80%;
-  margin: 40px 3%;
+  margin: 30px 3%;
 }
 .cp_iptxt input[type="text"] {
   font: 15px/24px sans-serif;
@@ -409,7 +500,8 @@ h2 span:after {
   outline: none;
 }
 .ef {
-  padding: 7px 14px;
+  margin-top: -35px;
+  padding: 7px 14px 7px 14px;
   transition: 0.4s;
   border: 1px solid #1b2538;
   background: transparent;
@@ -472,7 +564,7 @@ h2 span:after {
 }
 .ef:focus ~ label,
 .cp_iptxt.ef ~ label {
-  font-size: 12px;
+  font-size: 10px;
   top: -18px;
   left: 0;
   transition: 0.3s;
@@ -489,12 +581,13 @@ h2 span:after {
   box-sizing: border-box;
   width: 100%;
   letter-spacing: 1px;
-  padding-left: 4em;
+  padding-left: 1em;
 }
 .cp_iptxt input[type="text"]:focus {
   outline: none;
 }
 .form__textarea {
+  margin-top: -45px;
   padding: 7px 14px;
   transition: 0.4s;
   border: 1px solid #1b2538;
