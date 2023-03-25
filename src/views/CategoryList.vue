@@ -65,6 +65,15 @@ export default {
         this.postArray.unshift(postdata)
       })
     },
+    routerBtn(postObjs) {
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          timestamp: this.postArray[postObjs].timestamp,
+        },
+      })
+      console.log("ボタンが押されました")
+    },
   },
 }
 </script>
