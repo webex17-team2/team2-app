@@ -3,7 +3,7 @@
     <router-link to="/" class="nav__logo nav__link">GeekTwitter</router-link>
     <div class="nav__items">
       <router-link to="/japan-page" class="nav__item nav__link"
-        >エリア</router-link
+        >Map Chose</router-link
       >
 
       <ul class="menu">

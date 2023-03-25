@@ -7,6 +7,8 @@ import ListOfPostsView from "../views/ListOfPostsView.vue"
 import AddPostsView from "../views/AddPostsView.vue"
 import DetailView from "../components/DetailView.vue"
 import CategoryList from "../views/CategoryList.vue"
+import AreaListView from "../components/AreaListView.vue"
+import JapanMap from "../components/JapanMap.vue"
 
 const routes = [
   {
@@ -31,6 +33,7 @@ const routes = [
   },
   { path: "/listOfPosts", name: "ListOfPosts", component: ListOfPostsView },
   { path: "/addPostsView", name: "AddPostsView", component: AddPostsView },
+  { path: "/japanMap", name: "JapanMap", component: JapanMap },
   {
     path: "/detailView:timestamp",
     name: "DetailView",
@@ -49,6 +52,18 @@ const routes = [
     component: CategoryList,
     props: (router) => ({
       choice: router.params.choice,
+    }),
+  },
+  {
+    path: "/areaListView:selectedArea",
+    name: "AreaListView",
+    component: AreaListView,
+    props: (route) => ({
+      //postTitle: route.params.postTitle,
+      // postTitle: route.params.postTitle,
+      //imgPath: route.params.imgPath,
+      // index: route.params.index,
+      selectedArea: route.params.selectedArea,
     }),
   },
 ]

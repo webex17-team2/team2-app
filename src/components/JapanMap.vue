@@ -253,31 +253,87 @@ export default {
       this.hoverFlag_9 = false
     },
     hokkaidou() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      // window.location.href = "http://localhost:8080/listOfPosts"
+      // ここはてな？
+      // 移動して、その先で一覧、戻るボタンもつける
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          // // postArray: this.postArray[index],
+          // postTitle: this.postArray[postObjs].postTitle,
+          // // postTitle: this.postArray[postObjs].postTitle,
+          // imgPath: this.postArray[postObjs].imgPath[0],
+          // index: postObjs,
+          // //タイムー>time: this.postArray[postObjs].
+          // timestamp: this.postArray[postObjs].timestamp,
+          selectedArea: "北海道",
+        },
+      })
     },
     touhoku() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      // window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "東北",
+        },
+      })
     },
     kannsai() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "関西",
+        },
+      })
     },
     tyubu() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "中部",
+        },
+      })
     },
     kanntou() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "関東",
+        },
+      })
     },
     tyugoku() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "中国",
+        },
+      })
     },
     shikoku() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "四国",
+        },
+      })
     },
     Kyusyu() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "九州",
+        },
+      })
     },
     Okinawa() {
-      window.location.href = "http://localhost:8080/listOfPosts"
+      this.$router.push({
+        name: "AreaListView",
+        params: {
+          selectedArea: "沖縄",
+        },
+      })
     },
   },
 }
