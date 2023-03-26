@@ -163,6 +163,7 @@ export default {
   },
 }
 </script>
+
 <style scoped>
 .form__wrapper {
   padding: 1rem;

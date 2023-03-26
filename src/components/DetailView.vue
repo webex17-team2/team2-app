@@ -32,7 +32,7 @@
         ></textarea>
       </p>
       <p class="form__buttons">
-        <button v-on:click="Comments" class="form__submit-button">送信</button>
+        <button class="btn btn-primary" v-on:click="Comments">送信</button>
       </p>
       <h3>~みんなのコメント~</h3>
       <div v-for="(comment, index) in commentsArray" :key="index">
@@ -243,7 +243,7 @@ h1:after {
   border: 2px solid blue;
   display: flex;
   width: 400px;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 .img_collection {
   border: 2px solid red;

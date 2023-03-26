@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <h2>気になる地域を選んで下さい！</h2>
-    <p>カテゴリーを選んでください。</p>
-    <div class="container">
+    <div class="container-one">カテゴリーを選んでください。</div>
+    <div class="container-two">
       <div class="box">
         <button class="btn btn-primary" v-on:click="basyo">場所</button>
       </div>
@@ -62,17 +62,34 @@ export default {
   padding: 50px 100px 0px 100px;
 }
 
-.container {
+.container-one {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
   height: 300px;
-  padding: 1em;
+  padding: 0.5em;
   justify-content: space-around;
   align-content: center;
   background-color: rgb(196, 196, 196);
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
+  animation-name: color;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+
+.container-two {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 300px;
+  padding: 2em;
+  justify-content: space-around;
+  align-content: center;
+  background-color: rgb(196, 196, 196);
+  border-radius: 0 0 10px 10px;
   animation-name: color;
   animation-duration: 20s;
   animation-delay: 0s;
