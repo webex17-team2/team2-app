@@ -1,5 +1,5 @@
 <template>
-  <body class="wrap">
+  <div class="wrap">
     <div class="content top">
       <div class="contentsLeft">
         <div class="contents left">
@@ -53,7 +53,7 @@
                 v-model="postTitle"
                 placeholder="◯◯公園"
               />
-              <label>お名前</label>
+              <label></label>
               <span class="focus_line"><i></i></span>
             </div>
           </div>
@@ -65,7 +65,7 @@
                 v-model="postContent"
                 placeholder="ここが素敵！"
               />
-              <label>お名前</label>
+              <label></label>
               <span class="focus_line"><i></i></span>
             </div>
           </div>
@@ -145,7 +145,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -331,16 +331,19 @@ export default {
 .wrap {
   width: 100%;
   height: 100vh;
-  padding: 32px 0 64px;
-  background-color: #a8d7ba;
+  padding: 100px 0 64px;
+  background-color: rgba(242, 245, 212, 0.49);
   display: flex;
   flex-flow: column;
+  position: absolute;
+  top: 0;
+  z-index: -2;
 }
 .content {
   width: 95%;
   margin: 0 auto;
   padding: 150px 80px 0px;
-  background-color: #fff;
+
   float: left;
 }
 .top {
@@ -365,6 +368,7 @@ export default {
 }
 /* 入力側(右) */
 .text-center {
+  position: relative;
   text-align: center;
   margin-bottom: 10px;
   height: 100px;

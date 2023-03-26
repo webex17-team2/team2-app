@@ -1,45 +1,41 @@
 <template>
-  <div class="nav__bar">
-    <div class="head">
-      <div class="nav__items">
-        <router-link to="/" class="nav__logo nav__link" @click="resetImgSize"
-          >GeekTwitter</router-link
-        >
-        >
+  <div class="head">
+    <div>
+      <router-link to="/" @click="resetImgSize">GeekTwitter</router-link>
+      >
 
-        <router-link to="/japan-page" class="nav__item nav__link">
-          <img
-            class="img img_1"
-            :class="{ 'img-hover1': activeImg === 'img_1' }"
-            @click="activeImg = 'img_1'"
-            src="../assets/Group_2.png"
-          />
-        </router-link>
-        <router-link to="/about" class="nav__item nav__link">
-          <img
-            class="img img_2"
-            :class="{ 'img-hover2': activeImg === 'img_2' }"
-            @click="activeImg = 'img_2'"
-            src="../assets/Group_15.png"
-          />
-        </router-link>
-        <router-link to="/listOfPosts" class="nav__item nav__link">
-          <img
-            class="img img_3"
-            :class="{ 'img-hover3': activeImg === 'img_3' }"
-            @click="activeImg = 'img_3'"
-            src="../assets/Group_5.png"
-          />
-        </router-link>
-        <router-link to="/addPostsView" class="nav__item nav__link">
-          <img
-            class="img img_4"
-            :class="{ 'img-hover4': activeImg === 'img_4' }"
-            @click="activeImg = 'img_4'"
-            src="../assets/Group_4.png"
-          />
-        </router-link>
-      </div>
+      <router-link to="/japan-page">
+        <img
+          class="img img_1"
+          :class="{ 'img-hover1': activeImg === 'img_1' }"
+          @click="activeImg = 'img_1'"
+          src="../assets/Group_2.png"
+        />
+      </router-link>
+      <router-link to="/about">
+        <img
+          class="img img_2"
+          :class="{ 'img-hover2': activeImg === 'img_2' }"
+          @click="activeImg = 'img_2'"
+          src="../assets/Group_15.png"
+        />
+      </router-link>
+      <router-link to="/listOfPosts">
+        <img
+          class="img img_3"
+          :class="{ 'img-hover3': activeImg === 'img_3' }"
+          @click="activeImg = 'img_3'"
+          src="../assets/Group_5.png"
+        />
+      </router-link>
+      <router-link to="/addPostsView">
+        <img
+          class="img img_4"
+          :class="{ 'img-hover4': activeImg === 'img_4' }"
+          @click="activeImg = 'img_4'"
+          src="../assets/Group_4.png"
+        />
+      </router-link>
     </div>
   </div>
 </template>
@@ -47,7 +43,7 @@
 <style scoped>
 .head {
   position: relative;
-  top: 20px;
+  top: 50px;
   text-align: center;
 }
 

@@ -1,28 +1,30 @@
 <template>
-  <div class="my-page">
-    <!-- <h1>投稿一覧</h1> -->
-    <ul class="row">
-      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-        {{ postObj.postTitle }},{{ postObjs }},
-        <div>
-          <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
-          <img
-            v-if="postObj.imgPath !== null"
-            v-bind:src="postObj.imgPath[0]"
-            width="250"
-            height="250"
-          />
-          <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
-          <p>{{ postObjs }}</p>
-        </div>
-        <button class="btn btn-primary" @click="routerBtn(postObjs)">
-          詳細へ
-        </button>
-      </li>
-    </ul>
-    <!-- <li v-for="(postArray, index) in postArray" :key="index">
+  <div class="bar">
+    <div class="my-page">
+      <!-- <h1>投稿一覧</h1> -->
+      <ul class="row">
+        <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+          {{ postObj.postTitle }},{{ postObjs }},
+          <div>
+            <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
+            <img
+              v-if="postObj.imgPath !== null"
+              v-bind:src="postObj.imgPath[0]"
+              width="250"
+              height="250"
+            />
+            <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
+            <p>{{ postObjs }}</p>
+          </div>
+          <button class="btn btn-primary" @click="routerBtn(postObjs)">
+            詳細へ
+          </button>
+        </li>
+      </ul>
+      <!-- <li v-for="(postArray, index) in postArray" :key="index">
       {{ postArray.postTitle }}
     </li> -->
+    </div>
   </div>
 </template>
 <script>
@@ -166,6 +168,12 @@ export default {
 </script>
 
 <style scoped>
+.bar {
+  border: solid 10px hsl(166, 98%, 55%);
+  position: absolute;
+  top: 0;
+  z-index: -2;
+}
 .form__wrapper {
   padding: 1rem;
 }
@@ -187,9 +195,10 @@ export default {
 }
 .my-page {
   padding: 0.5em 1em;
+  padding-top: 200px;
   margin: 2em 0;
   font-weight: bold;
-  border: solid 10px #1dfdc9;
+  /* border: solid 10px hsl(166, 98%, 55%); */
   border-radius: 10px;
 }
 .row {
