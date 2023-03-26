@@ -5,56 +5,61 @@
       <div>
         <h1>{{ postArray[0].postTitle }}</h1>
       </div>
-      <div class="img_box">
-        <div class="img_collection">
-          <Carousel
-            id="gallery"
-            :items-to-show="1"
-            :wrap-around="false"
-            v-model="currentSlide"
-          >
-            <Slide
-              v-for="(slide, slideId) in postArray[0].imgPath"
-              :key="slideId"
+      <div class="img-com">
+        <div class="img_box">
+          <div class="img_collection">
+            <Carousel
+              id="gallery"
+              :items-to-show="1"
+              :wrap-around="false"
+              v-model="currentSlide"
             >
-              <div class="carousel__item">
-                <img :src="slide" width="250" height="250" />
-              </div>
-            </Slide>
-          </Carousel>
+              <Slide
+                v-for="(slide, slideId) in postArray[0].imgPath"
+                :key="slideId"
+              >
+                <div class="carousel__item">
+                  <img :src="slide" width="400" height="300" />
+                </div>
+              </Slide>
+            </Carousel>
 
-          <Carousel
-            class="img_collection2"
-            id="thumbnails"
-            :items-to-show="showNumber"
-            :wrap-around="true"
-            v-model="currentSlide"
-            ref="carousel"
-          >
-            <Slide
-              v-for="(slide, slideId) in postArray[0].imgPath"
-              :key="slideId"
+            <Carousel
+              class="img_collection2"
+              id="thumbnails"
+              :items-to-show="showNumber"
+              :wrap-around="true"
+              v-model="currentSlide"
+              ref="carousel"
             >
-              <div class="carousel__item" v-on:click="slideTo(slideId)">
-                <img :src="slide" width="120" height="100" />
-              </div>
-            </Slide>
-          </Carousel>
+              <Slide
+                v-for="(slide, slideId) in postArray[0].imgPath"
+                :key="slideId"
+              >
+                <div class="carousel__item" v-on:click="slideTo(slideId)">
+                  <img :src="slide" width="120" height="100" />
+                </div>
+              </Slide>
+            </Carousel>
+          </div>
         </div>
         <!-- <div
-                class="img_collection"
-                v-for="(post, postId) in postArray[0].imgPath"
-                :key="postId"
-                >
-                <img :src="post" class="img_content" />
-                </div> -->
+                    class="img_collection"
+                    v-for="(post, postId) in postArray[0].imgPath"
+                    :key="postId"
+                    >
+                    <img :src="post" class="img_content" />
+                    </div> -->
+        <div class="context">
+          <h3>投稿内容</h3>
+          <!-- <P>感想や押しポイント</P> -->
+          <p>{{ postArray[0].postContent }}</p>
+          <!-- 何に使う？ -->
+          <!-- <img :src="imgPathContent" /> -->
+          <div>#{{ postArray[0].selectedArea }}</div>
+          <div>#{{ postArray[0].category }}</div>
+        </div>
       </div>
-      <!-- <P>感想や押しポイント</P> -->
-      <p>{{ postArray[0].postContent }}</p>
-      <!-- 何に使う？ -->
-      <!-- <img :src="imgPathContent" /> -->
-      <div>#{{ postArray[0].selectedArea }}</div>
-      <div>#{{ postArray[0].category }}</div>
     </div>
     <div class="comment">
       <div>
@@ -71,9 +76,13 @@
         </div>
       </div>
       <!-- </div> -->
-      <div>
+      <div class="top">
         <h3>~みんなのコメント~</h3>
-        <div v-for="(comment, index) in commentsArray" :key="index">
+        <div
+          v-for="(comment, index) in commentsArray"
+          :key="index"
+          class="all-comment"
+        >
           <!-- ここ -->
           <!-- <p>{{ randamImg }}</p> -->
           <img :src="comment.randamImg" class="randam_icon" />
@@ -321,8 +330,8 @@ h1:after {
   padding: 0;
 }
 .img_content {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
 }
 .carousel__track {
   width: 250px;
@@ -375,16 +384,60 @@ h3:after {
 }
 
 .post {
-  width: 30%;
+  width: 50%;
 }
 
 @media screen and (max-width: 480px) {
   .post {
-    width: 70%;
+    width: 100%;
   }
 }
 
 .comment {
-  padding: 100px;
+  padding: 20px;
+  width: 40%;
+}
+
+textarea {
+  width: 70%;
+}
+
+.top {
+  padding-top: 30px;
+}
+
+button {
+  position: relative;
+  left: 200px;
+}
+
+.context {
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 20px;
+  border: solid 5px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.all-comment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+  padding: 20px;
+  margin: 20px;
+  border: solid 2px;
+  border-color: black;
+  width: 70%;
+}
+
+.img-com {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
 }
 </style>
