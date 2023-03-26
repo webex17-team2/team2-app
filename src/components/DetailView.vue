@@ -1,50 +1,81 @@
 <template>
   <router-link to="/listOfPosts">⬅︎</router-link>
-  <div class="row">
-    <!-- <div class="Detail_title"> -->
-    <div class="post">
-      <h1>{{ postArray[0].postTitle }}</h1>
-      <div class="img_box">
-        <div
-          class="img_collection"
-          v-for="(post, postId) in postArray[0].imgPath"
-          :key="postId"
-        >
-          <img :src="post" class="img_content" />
-        </div>
-      </div>
-      <!-- <P>感想や押しポイント</P> -->
-      <p>{{ postArray[0].postContent }}</p>
-      <!-- 何に使う？ -->
-      <!-- <img :src="imgPathContent" /> -->
-      <div>#{{ postArray[0].selectedArea }}</div>
-      <div>#{{ postArray[0].category }}</div>
+  <div>
+    <h1>{{ postArray[0].postTitle }}</h1>
+  </div>
+  <div class="img_box">
+    <div class="img_collection">
+      <Carousel
+        id="gallery"
+        :items-to-show="1"
+        :wrap-around="false"
+        v-model="currentSlide"
+      >
+        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
+          <div class="carousel__item">
+            <img :src="slide" width="500" height="400" />
+          </div>
+        </Slide>
+      </Carousel>
+
+      <Carousel
+        class="img_collection2"
+        id="thumbnails"
+        :items-to-show="showNumber"
+        :wrap-around="true"
+        v-model="currentSlide"
+        ref="carousel"
+      >
+        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
+          <div class="carousel__item" v-on:click="slideTo(slideId)">
+            <img :src="slide" width="120" height="100" />
+          </div>
+        </Slide>
+      </Carousel>
     </div>
-    <div class="comment">
-      <h3>コメントを追加する</h3>
-      <!-- 入力後消えるようにする -->
-      <p>
-        <textarea
-          class="form__textarea"
-          v-model="commentContent"
-          placeholder="コメントする"
-          @keydown.enter="Comments"
-        ></textarea>
-      </p>
-      <p class="form__buttons">
-        <button class="btn btn-primary" v-on:click="Comments">送信</button>
-      </p>
-      <h3>~みんなのコメント~</h3>
-      <div v-for="(comment, index) in commentsArray" :key="index">
-        <!-- ここ -->
-        <!-- <p>{{ randamImg }}</p> -->
-        <img :src="comment.randamImg" class="randam_icon" />
-        <P>{{ comment.commentContent }}</P>
-      </div>
+    <!-- <div
+      class="img_collection"
+      v-for="(post, postId) in postArray[0].imgPath"
+      :key="postId"
+    >
+      <img :src="post" class="img_content" />
+    </div> -->
+  </div>
+  <!-- <P>感想や押しポイント</P> -->
+  <p>{{ postArray[0].postContent }}</p>
+  <!-- 何に使う？ -->
+  <!-- <img :src="imgPathContent" /> -->
+  <div>#{{ postArray[0].selectedArea }}</div>
+  <div>#{{ postArray[0].category }}</div>
+
+  <div>
+    <h3>コメントを追加する</h3>
+    <!-- 入力後消えるようにする -->
+    <textarea
+      class="form__textarea"
+      v-model="commentContent"
+      placeholder="コメントする"
+      @keydown.enter="Comments"
+    ></textarea>
+    <div class="form__buttons">
+      <button v-on:click="Comments" class="form__submit-button">送信</button>
+    </div>
+  </div>
+  <!-- </div> -->
+  <div>
+    <h3>~みんなのコメント~</h3>
+    <div v-for="(comment, index) in commentsArray" :key="index">
+      <!-- ここ -->
+      <!-- <p>{{ randamImg }}</p> -->
+      <img :src="comment.randamImg" class="randam_icon" />
+      <P>{{ comment.commentContent }}</P>
     </div>
   </div>
 </template>
 <script>
+// import { defineComponent } from "vue"
+import { Carousel, Slide } from "vue3-carousel"
+import "vue3-carousel/dist/carousel.css"
 //import { collection, query, getDocs, where } from "firebase/firestore"
 import {
   collection,
@@ -59,6 +90,11 @@ import {
 // import { db, storage } from "../firebase.js"
 import { db } from "../firebase.js"
 export default {
+  components: {
+    Carousel,
+    Slide,
+    // Navigation,
+  },
   //ListOfView.vueから受け取り
   props: {
     timestamp: {
@@ -90,6 +126,8 @@ export default {
       ],
       randamImg: "",
       commentNumber: 0,
+      currentSlide: 0,
+      showNumber: 4,
     }
   },
   created() {
@@ -97,8 +135,13 @@ export default {
   },
   mounted() {
     this.readComments(this.userID)
+    console.log("カーソル")
+    console.log(this)
   },
   methods: {
+    slideTo(val) {
+      this.currentSlide = val
+    },
     choose_at_random() {
       console.log("aa")
       console.log(this.commentsArray.length)
@@ -188,6 +231,11 @@ export default {
       console.log("Array")
       console.log(this.postArray)
       this.userID = this.postArray[0].ID
+      if (this.postArray[0].imgPath.length < 3) {
+        this.showNumber = this.postArray[0].imgPath.length
+      }
+      // Carousel.id("")
+
       //console.log(doc.id, " => ", doc.data())
       // //カテゴリーを日本語に変換
       // if (this.postArray[0].category == "eat") {
@@ -239,24 +287,35 @@ h1:after {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-.img_box {
+
+/* 写真関連 */
+
+/* .img_box {
   border: 2px solid blue;
   display: flex;
-  width: 400px;
-  /* overflow-x: scroll; */
-}
+  width: 820px;
+} *
 .img_collection {
-  border: 2px solid red;
+  margin: 25px 50px 30px;
+  /* border: 2px solid red; */
   widows: 40%;
-  height: 30%;
+  width: 50%;
+  height: 0%;
   word-wrap: break-word;
 
   /* padding: 1.5rem 5rem 0.8rem; */
+}
+.img_collection2 {
+  margin: 20px 50px 0px 50px;
 }
 .img_content {
   width: 400px;
   height: 300px;
 }
+.carousel__track {
+  width: 150px;
+}
+/* タグ型 */
 h3 {
   font-size: 15px;
   position: relative;
@@ -288,6 +347,8 @@ h3:after {
   border-radius: 50%;
   background: #fff;
 }
+
+/* コメントアイコン*/
 .randam_icon {
   /* 画像を丸くする */
   width: 20%;
