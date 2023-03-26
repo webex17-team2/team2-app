@@ -369,10 +369,22 @@ h3:after {
   background: #fff;
 }
 
+@media screen and (max-width: 480px) {
+  h3 {
+    height: 42px;
+    border: 5px;
+    border-color: #f45252;
+    background-color: #f45252;
+    display: inline-block;
+  }
+}
+
 /* コメントアイコン*/
 .randam_icon {
   /* 画像を丸くする */
-  width: 20%;
+  width: 10%;
+  height: 10%;
+  margin-right: 20px;
 }
 
 .row {
@@ -394,6 +406,7 @@ h3:after {
 }
 
 .comment {
+  margin-top: 60px;
   padding: 20px;
   width: 40%;
 }
@@ -430,9 +443,15 @@ button {
   margin: 20px;
   border: solid 2px;
   border-color: black;
+  border-radius: 10px;
   width: 70%;
 }
 
+@media screen and (max-width: 480px) {
+  .all-comment {
+    width: 100%;
+  }
+}
 .img-com {
   display: flex;
   flex-direction: column;
