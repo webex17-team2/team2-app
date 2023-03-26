@@ -1,74 +1,85 @@
 <template>
   <router-link to="/listOfPosts">⬅︎</router-link>
-  <div>
-    <h1>{{ postArray[0].postTitle }}</h1>
-  </div>
-  <div class="img_box">
-    <div class="img_collection">
-      <Carousel
-        id="gallery"
-        :items-to-show="1"
-        :wrap-around="false"
-        v-model="currentSlide"
-      >
-        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
-          <div class="carousel__item">
-            <img :src="slide" width="500" height="400" />
-          </div>
-        </Slide>
-      </Carousel>
+  <div class="row">
+    <div class="post">
+      <div>
+        <h1>{{ postArray[0].postTitle }}</h1>
+      </div>
+      <div class="img_box">
+        <div class="img_collection">
+          <Carousel
+            id="gallery"
+            :items-to-show="1"
+            :wrap-around="false"
+            v-model="currentSlide"
+          >
+            <Slide
+              v-for="(slide, slideId) in postArray[0].imgPath"
+              :key="slideId"
+            >
+              <div class="carousel__item">
+                <img :src="slide" width="250" height="250" />
+              </div>
+            </Slide>
+          </Carousel>
 
-      <Carousel
-        class="img_collection2"
-        id="thumbnails"
-        :items-to-show="showNumber"
-        :wrap-around="true"
-        v-model="currentSlide"
-        ref="carousel"
-      >
-        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
-          <div class="carousel__item" v-on:click="slideTo(slideId)">
-            <img :src="slide" width="120" height="100" />
-          </div>
-        </Slide>
-      </Carousel>
+          <Carousel
+            class="img_collection2"
+            id="thumbnails"
+            :items-to-show="showNumber"
+            :wrap-around="true"
+            v-model="currentSlide"
+            ref="carousel"
+          >
+            <Slide
+              v-for="(slide, slideId) in postArray[0].imgPath"
+              :key="slideId"
+            >
+              <div class="carousel__item" v-on:click="slideTo(slideId)">
+                <img :src="slide" width="120" height="100" />
+              </div>
+            </Slide>
+          </Carousel>
+        </div>
+        <!-- <div
+                class="img_collection"
+                v-for="(post, postId) in postArray[0].imgPath"
+                :key="postId"
+                >
+                <img :src="post" class="img_content" />
+                </div> -->
+      </div>
+      <!-- <P>感想や押しポイント</P> -->
+      <p>{{ postArray[0].postContent }}</p>
+      <!-- 何に使う？ -->
+      <!-- <img :src="imgPathContent" /> -->
+      <div>#{{ postArray[0].selectedArea }}</div>
+      <div>#{{ postArray[0].category }}</div>
     </div>
-    <!-- <div
-      class="img_collection"
-      v-for="(post, postId) in postArray[0].imgPath"
-      :key="postId"
-    >
-      <img :src="post" class="img_content" />
-    </div> -->
-  </div>
-  <!-- <P>感想や押しポイント</P> -->
-  <p>{{ postArray[0].postContent }}</p>
-  <!-- 何に使う？ -->
-  <!-- <img :src="imgPathContent" /> -->
-  <div>#{{ postArray[0].selectedArea }}</div>
-  <div>#{{ postArray[0].category }}</div>
-
-  <div>
-    <h3>コメントを追加する</h3>
-    <!-- 入力後消えるようにする -->
-    <textarea
-      class="form__textarea"
-      v-model="commentContent"
-      placeholder="コメントする"
-      @keydown.enter="Comments"
-    ></textarea>
-    <div class="form__buttons">
-      <button v-on:click="Comments" class="form__submit-button">送信</button>
-    </div>
-  </div>
-  <!-- </div> -->
-  <div>
-    <h3>~みんなのコメント~</h3>
-    <div v-for="(comment, index) in commentsArray" :key="index">
-      <!-- ここ -->
-      <!-- <p>{{ randamImg }}</p> -->
-      <img :src="comment.randamImg" class="randam_icon" />
-      <P>{{ comment.commentContent }}</P>
+    <div class="comment">
+      <div>
+        <h3>コメントを追加する</h3>
+        <!-- 入力後消えるようにする -->
+        <textarea
+          class="form__textarea"
+          v-model="commentContent"
+          placeholder="コメントする"
+          @keydown.enter="Comments"
+        ></textarea>
+        <div class="form__buttons">
+          <button class="btn btn-primary" v-on:click="Comments">送信</button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div>
+        <h3>~みんなのコメント~</h3>
+        <div v-for="(comment, index) in commentsArray" :key="index">
+          <!-- ここ -->
+          <!-- <p>{{ randamImg }}</p> -->
+          <img :src="comment.randamImg" class="randam_icon" />
+          <P>{{ comment.commentContent }}</P>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -306,14 +317,15 @@ h1:after {
 /* padding: 1.5rem 5rem 0.8rem; */
 
 .img_collection2 {
-  margin: 20px 50px 0px 50px;
+  margin: 0;
+  padding: 0;
 }
 .img_content {
-  width: 400px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
 }
 .carousel__track {
-  width: 150px;
+  width: 250px;
 }
 /* タグ型 */
 h3 {
@@ -363,7 +375,13 @@ h3:after {
 }
 
 .post {
-  padding: 100px;
+  width: 30%;
+}
+
+@media screen and (max-width: 480px) {
+  .post {
+    width: 70%;
+  }
 }
 
 .comment {
