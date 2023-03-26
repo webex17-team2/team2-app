@@ -298,13 +298,13 @@ h1:after {
 .img_collection {
   margin: 25px 50px 30px;
   /* border: 2px solid red; */
-  widows: 40%;
+/* widows: 40%;
   width: 50%;
   height: 0%;
-  word-wrap: break-word;
+  word-wrap: break-word; */
 
-  /* padding: 1.5rem 5rem 0.8rem; */
-}
+/* padding: 1.5rem 5rem 0.8rem; */
+
 .img_collection2 {
   margin: 20px 50px 0px 50px;
 }
