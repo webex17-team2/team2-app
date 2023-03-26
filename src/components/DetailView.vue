@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="Detail_title"> -->
   <router-link to="/listOfPosts">⬅︎</router-link>
   <div>
     <h1>{{ postArray[0].postTitle }}</h1>
@@ -295,7 +294,7 @@ h1:after {
   border: 2px solid blue;
   display: flex;
   width: 820px;
-} */
+} *
 .img_collection {
   margin: 25px 50px 30px;
   /* border: 2px solid red; */
@@ -345,7 +344,7 @@ h3:after {
   width: 7px;
   height: 7px;
   content: "";
-  border-rasdius: 50%;
+  border-radius: 50%;
   background: #fff;
 }
 
@@ -353,5 +352,21 @@ h3:after {
 .randam_icon {
   /* 画像を丸くする */
   width: 20%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.post {
+  padding: 100px;
+}
+
+.comment {
+  padding: 100px;
 }
 </style>
