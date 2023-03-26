@@ -5,40 +5,61 @@
         <div class="contents left">
           <div class="text-center__left">
             <h2 class="titleTag_icon">
-              <span>
-                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              <span class="span_text">
+                <img
+                  src="@/assets/icon/Mogura.png"
+                  alt="Logo"
+                  class="header__logo"
+                />
                 必須 </span
               >場所の名前
             </h2>
           </div>
           <div class="text-center__left">
             <h2 class="titleTag_icon">
-              <span>
-                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              <span class="span_text">
+                <img
+                  src="@/assets/icon/Ari.png"
+                  alt="Logo"
+                  class="header__logo"
+                  width="30px"
+                />
                 必須 </span
               >感想や推しポイント
             </h2>
           </div>
           <div class="text-center__left1">
             <h2 class="titleTag_icon">
-              <span>
-                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              <span class="span_text">
+                <img
+                  src="@/assets/icon/tori.png"
+                  alt="Logo"
+                  class="header__logo"
+                />
                 必須 </span
               >写真を追加
             </h2>
           </div>
           <div class="text-center__left">
             <h2 class="titleTag_icon">
-              <span>
-                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              <span class="span_text">
+                <img
+                  src="@/assets/icon/hiyo.png"
+                  alt="Logo"
+                  class="header__logo"
+                />
                 必須 </span
               >エリア
             </h2>
           </div>
           <div class="text-center__left">
             <h2 class="titleTag_icon">
-              <span>
-                <img src="@/assets/logo.png" alt="Logo" class="header__logo" />
+              <span class="span_text">
+                <img
+                  src="@/assets/icon/tentou.png"
+                  alt="Logo"
+                  class="header__logo"
+                />
                 必須 </span
               >カテゴリー
             </h2>
@@ -340,7 +361,7 @@ export default {
   width: 95%;
   margin: 0 auto;
   padding: 150px 80px 0px;
-  background-color: #fff;
+  background-color: #fffcf2;
   float: left;
 }
 .top {
@@ -415,9 +436,14 @@ export default {
 .form__submit-button {
   margin-top: -100px;
   margin-left: -50px;
+  width: 60px;
+  height: 20px;
+  background-color: #a8d7ba;
+  border: #a8d7ba 0.5px solid;
+  font-size: 16px;
 }
 a {
-  color: #3f82a8;
+  color: #fff;
 }
 a:hover {
   text-decoration: none;
@@ -438,7 +464,7 @@ a:hover {
 }
 .titleTag_icon {
   font-size: 23px;
-  padding-top: 2px;
+  padding-top: 0px;
   padding-left: 130px;
 }
 h2 {
@@ -446,14 +472,19 @@ h2 {
   padding-left: 5em;
   font-size: 25px;
 }
+.span_text {
+  padding-top: 5px;
+}
 h2 span {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0 1rem;
+  padding-right: 1rem;
+
+  padding-left: 15px;
   color: #fff;
   border-radius: 10px;
-  background: #319dcb;
+  background: #a8d7ba;
   font-size: 20px;
 }
 h2 span i {
@@ -468,12 +499,14 @@ h2 span:after {
   content: "";
   border-width: 7px 0 7px 12px;
   border-style: solid;
-  border-color: transparent transparent transparent #319dcb;
+  border-color: transparent transparent transparent #a8d7ba;
 }
 .header__logo {
-  padding-top: 4px;
+  padding-top: 2px;
+  padding-right: 5px;
   /* weight: 30px; */
   height: 30px;
+  margin-left: -10px;
 }
 .buttons-center {
   width: 100%;
@@ -509,7 +542,7 @@ h2 span:after {
 .ef ~ .focus_line:before,
 .ef ~ .focus_line:after {
   position: absolute;
-  top: -1px;
+  top: -36px;
   left: 50%;
   width: 0;
   height: 2px;
@@ -568,7 +601,7 @@ h2 span:after {
   top: -18px;
   left: 0;
   transition: 0.3s;
-  color: #da3c41;
+  color: #ed6a5a;
 }
 /* 記入フォーム用デザイン */
 .cp_iptxt {
@@ -596,7 +629,7 @@ h2 span:after {
 .form__textarea ~ .focus_line:before,
 .form__textarea ~ .focus_line:after {
   position: absolute;
-  top: -1px;
+  top: -66px;
   left: 50%;
   width: 0;
   height: 2px;

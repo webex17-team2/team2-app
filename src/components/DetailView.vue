@@ -1,6 +1,8 @@
 <template>
-  <router-link to="/listOfPosts">⬅︎</router-link>
   <div>
+    <router-link to="/listOfPosts" class="MyRouter" data-replace="⬅︎もどる"
+      ><span>⬅︎もどる</span></router-link
+    >
     <h1>{{ postArray[0].postTitle }}</h1>
   </div>
   <div class="img_box">
@@ -255,6 +257,73 @@ export default {
 }
 </script>
 <style scoped>
+.MyRouter {
+  margin: 50px 50px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  color: #18272f;
+}
+
+.MyRouter::before,
+.MyRouter::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.MyRouter::before {
+  background-color: #ed6a5a;
+  height: 2px;
+  bottom: 0;
+  transform-origin: 100% 50%;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.MyRouter::after {
+  content: attr(data-replace);
+  height: 100%;
+  top: 0;
+  transform-origin: 100% 50%;
+  transform: translate3d(200%, 0, 0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  color: #54b3d6 2px;
+}
+
+.MyRouter:hover::before {
+  transform-origin: 0% 50%;
+  transform: scaleX(1);
+}
+.MyRouter:hover::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.MyRouter span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.MyRouter:hover span {
+  transform: translate3d(-200%, 0, 0);
+}
+
+/* Presentational Styles */
+body {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+  font-size: 27px;
+  line-height: 1.5;
+  height: 100vh;
+  place-items: center;
+}
+
+.MyRouter {
+  text-decoration: none;
+  color: #18272f;
+  font-weight: 700;
+  vertical-align: top;
+}
+
 h1 {
   position: relative;
   padding: 1.5rem 5rem 0.8rem;
