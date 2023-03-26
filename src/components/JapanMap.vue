@@ -1,180 +1,186 @@
 <template>
-  <div class="all">
-    <div class="title"><h1>エリアを選んでね！</h1></div>
+  <div class="bar">
+    <div class="all">
+      <div class="title"><h1>エリアを選んでね！</h1></div>
 
-    <div class="Japan">
-      <!-- 北海道 -->
-      <img src="../assets/Japan.png" />
-      <div @mouseover="oneOver" @mouseleave="oneLeave" class="box-1">
-        <div class="big-pin">
-          <div v-if="hoverFlag_1">
-            <img @click="hokkaidou" class="pin-1" src="../assets/flag-1.png" />
+      <div class="Japan">
+        <!-- 北海道 -->
+        <img src="../assets/Japan.png" />
+        <div @mouseover="oneOver" @mouseleave="oneLeave" class="box-1">
+          <div class="big-pin">
+            <div v-if="hoverFlag_1">
+              <img
+                @click="hokkaidou"
+                class="pin-1"
+                src="../assets/flag-1.png"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-1-2">
-        <div v-if="hoverFlag_1" class="image">
-          <img class="postImg" src="../assets/postImg/post1.png" />
+        <!-- 追加 -->
+        <div class="box-1-2">
+          <div v-if="hoverFlag_1" class="image">
+            <img class="postImg" src="../assets/postImg/post1.png" />
 
-          <p class="postTitle1">場所の名前</p>
+            <p class="postTitle1">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 東北 -->
-      <div @mouseover="twoOver" @mouseleave="twoLeave" class="box-2">
-        <div class="big-pin">
-          <img
-            @click="touhoku"
-            v-if="hoverFlag_2"
-            class="pin-2"
-            src="../assets/flag-2.png"
-          />
+        <!-- 東北 -->
+        <div @mouseover="twoOver" @mouseleave="twoLeave" class="box-2">
+          <div class="big-pin">
+            <img
+              @click="touhoku"
+              v-if="hoverFlag_2"
+              class="pin-2"
+              src="../assets/flag-2.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-2-2">
-        <div v-if="hoverFlag_2" class="image">
-          <img class="postImg" src="../assets/postImg/post2.png" />
+        <!-- 追加 -->
+        <div class="box-2-2">
+          <div v-if="hoverFlag_2" class="image">
+            <img class="postImg" src="../assets/postImg/post2.png" />
 
-          <p class="postTitle2">場所の名前</p>
+            <p class="postTitle2">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 関東 -->
-      <div @mouseover="threeOver" @mouseleave="threeLeave" class="box-3">
-        <div class="big-pin">
-          <img
-            @click="kanntou"
-            v-if="hoverFlag_3"
-            class="pin-3"
-            src="../assets/flag-3.png"
-          />
+        <!-- 関東 -->
+        <div @mouseover="threeOver" @mouseleave="threeLeave" class="box-3">
+          <div class="big-pin">
+            <img
+              @click="kanntou"
+              v-if="hoverFlag_3"
+              class="pin-3"
+              src="../assets/flag-3.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-3-2">
-        <div v-if="hoverFlag_3" class="image">
-          <img class="postImg" src="../assets/postImg/post3.png" />
+        <!-- 追加 -->
+        <div class="box-3-2">
+          <div v-if="hoverFlag_3" class="image">
+            <img class="postImg" src="../assets/postImg/post3.png" />
 
-          <p class="postTitle3">場所の名前</p>
+            <p class="postTitle3">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 中部 -->
-      <div @mouseover="fourOver" @mouseleave="fourLeave" class="box-4">
-        <div class="big-pin">
-          <img
-            @click="tyubu"
-            v-if="hoverFlag_4"
-            class="pin-4"
-            src="../assets/flag-4.png"
-          />
+        <!-- 中部 -->
+        <div @mouseover="fourOver" @mouseleave="fourLeave" class="box-4">
+          <div class="big-pin">
+            <img
+              @click="tyubu"
+              v-if="hoverFlag_4"
+              class="pin-4"
+              src="../assets/flag-4.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-4-2">
-        <div v-if="hoverFlag_4" class="image">
-          <img class="postImg" src="../assets/postImg/post4.png" />
+        <!-- 追加 -->
+        <div class="box-4-2">
+          <div v-if="hoverFlag_4" class="image">
+            <img class="postImg" src="../assets/postImg/post4.png" />
 
-          <p class="postTitle4">場所の名前</p>
+            <p class="postTitle4">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 関西 -->
-      <div @mouseover="fiveOver" @mouseleave="fiveLeave" class="box-5">
-        <div class="big-pin">
-          <img
-            @click="kannsai"
-            v-if="hoverFlag_5"
-            class="pin-5"
-            src="../assets/flag-5.png"
-          />
+        <!-- 関西 -->
+        <div @mouseover="fiveOver" @mouseleave="fiveLeave" class="box-5">
+          <div class="big-pin">
+            <img
+              @click="kannsai"
+              v-if="hoverFlag_5"
+              class="pin-5"
+              src="../assets/flag-5.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-5-2">
-        <div v-if="hoverFlag_5" class="image">
-          <img class="postImg" src="../assets/postImg/post1.png" />
+        <!-- 追加 -->
+        <div class="box-5-2">
+          <div v-if="hoverFlag_5" class="image">
+            <img class="postImg" src="../assets/postImg/post1.png" />
 
-          <p class="postTitle5">場所の名前</p>
+            <p class="postTitle5">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 中国 -->
-      <div @mouseover="sixOver" @mouseleave="sixLeave" class="box-6">
-        <div class="big-pin big-pin6">
-          <img
-            @click="tyugoku"
-            v-if="hoverFlag_6"
-            class="pin-6"
-            src="../assets/flag-6.png"
-          />
+        <!-- 中国 -->
+        <div @mouseover="sixOver" @mouseleave="sixLeave" class="box-6">
+          <div class="big-pin big-pin6">
+            <img
+              @click="tyugoku"
+              v-if="hoverFlag_6"
+              class="pin-6"
+              src="../assets/flag-6.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-6-2">
-        <div v-if="hoverFlag_6" class="image">
-          <img class="postImg" src="../assets/postImg/post2.png" />
+        <!-- 追加 -->
+        <div class="box-6-2">
+          <div v-if="hoverFlag_6" class="image">
+            <img class="postImg" src="../assets/postImg/post2.png" />
 
-          <p class="postTitle6">場所の名前</p>
+            <p class="postTitle6">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 四国 -->
-      <div @mouseover="sevenOver" @mouseleave="sevenLeave" class="box-7">
-        <div class="big-pin">
-          <img
-            @click="shikoku"
-            v-if="hoverFlag_7"
-            class="pin-7"
-            src="../assets/flag-7.png"
-          />
+        <!-- 四国 -->
+        <div @mouseover="sevenOver" @mouseleave="sevenLeave" class="box-7">
+          <div class="big-pin">
+            <img
+              @click="shikoku"
+              v-if="hoverFlag_7"
+              class="pin-7"
+              src="../assets/flag-7.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-7-2">
-        <div v-if="hoverFlag_7" class="image">
-          <img class="postImg" src="../assets/postImg/post3.png" />
+        <!-- 追加 -->
+        <div class="box-7-2">
+          <div v-if="hoverFlag_7" class="image">
+            <img class="postImg" src="../assets/postImg/post3.png" />
 
-          <p class="postTitle7">場所の名前</p>
+            <p class="postTitle7">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 九州 -->
-      <div @mouseover="eightOver" @mouseleave="eightLeave" class="box-8">
-        <div class="big-pin">
-          <img
-            @click="Kyusyu"
-            v-if="hoverFlag_8"
-            class="pin-8"
-            src="../assets/flag-8.png"
-          />
+        <!-- 九州 -->
+        <div @mouseover="eightOver" @mouseleave="eightLeave" class="box-8">
+          <div class="big-pin">
+            <img
+              @click="Kyusyu"
+              v-if="hoverFlag_8"
+              class="pin-8"
+              src="../assets/flag-8.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-8-2">
-        <div v-if="hoverFlag_8" class="image">
-          <img class="postImg" src="../assets/postImg/post4.png" />
+        <!-- 追加 -->
+        <div class="box-8-2">
+          <div v-if="hoverFlag_8" class="image">
+            <img class="postImg" src="../assets/postImg/post4.png" />
 
-          <p class="postTitle8">場所の名前</p>
+            <p class="postTitle8">場所の名前</p>
+          </div>
         </div>
-      </div>
-      <!-- 沖縄 -->
-      <div @mouseover="nineOver" @mouseleave="nineLeave" class="box-9">
-        <div class="big-pin">
-          <img
-            @click="Okinawa"
-            v-if="hoverFlag_9"
-            class="pin-9"
-            src="../assets/flag-9.png"
-          />
+        <!-- 沖縄 -->
+        <div @mouseover="nineOver" @mouseleave="nineLeave" class="box-9">
+          <div class="big-pin">
+            <img
+              @click="Okinawa"
+              v-if="hoverFlag_9"
+              class="pin-9"
+              src="../assets/flag-9.png"
+            />
+          </div>
         </div>
-      </div>
-      <!-- 追加 -->
-      <div class="box-9-2">
-        <div v-if="hoverFlag_9" class="image">
-          <img class="postImg" src="../assets/postImg/post1.png" />
+        <!-- 追加 -->
+        <div class="box-9-2">
+          <div v-if="hoverFlag_9" class="image">
+            <img class="postImg" src="../assets/postImg/post1.png" />
 
-          <p class="postTitle9">場所の名前</p>
+            <p class="postTitle9">場所の名前</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="back_img"><img class="back" src="../assets/Group16-3.png" /></div>
+  <div class="back_img"><img class="back" src="../assets/Group16-6.png" /></div>
 </template>
 
 <script>
@@ -334,20 +340,34 @@ export default {
 }
 </script>
 <style scoped>
+.bar {
+  width: 100%;
+  height: 63vw;
+  border: solid 18px hsla(166, 98%, 55%, 0.816);
+  position: absolute;
+  top: 0;
+  z-index: -4;
+}
 .all {
   width: 60%;
   height: 60%;
   position: relative;
   left: 150px;
-  top: -50px;
+  top: -10px;
+  z-index: 1;
 }
 
 .title {
   display: inline-block;
   position: absolute;
-  top: 200px;
-  left: 200px;
-  border: 9px solid black;
+  top: 320px;
+  left: 100px;
+  border: 8px solid #a8d7ba;
+  background-color: #a8d7ba;
+  border-radius: 10px;
+  color: #ffff;
+  padding-left: 10px;
+  font-size: 25px;
 }
 img {
   width: 570px;
@@ -391,7 +411,7 @@ img {
   margin-top: 8%;
   position: absolute;
   left: 33%;
-  top: 5%;
+  top: 37%;
 }
 
 .box-1 {
@@ -678,6 +698,7 @@ img {
   border: solid 3px;
   border-color: rgb(114, 113, 113);
   border-radius: 5px;
+  background-color: #ffff;
   display: inline-block;
   padding: 10px;
 }
@@ -748,14 +769,15 @@ img {
 
 .back {
   width: 100vw;
-  height: 100vh;
+  height: 115vh;
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   opacity: 0.4;
-  z-index: -1;
+  z-index: -5;
+
   background-color: rgba(242, 245, 212, 0.934);
 }
 

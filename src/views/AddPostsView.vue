@@ -337,6 +337,7 @@ export default {
   flex-flow: column;
   position: absolute;
   top: 0;
+  border: solid 18px hsla(166, 98%, 55%, 0.816);
   z-index: -2;
 }
 .content {
@@ -357,9 +358,7 @@ export default {
 }
 .contents {
   width: 50%;
-
   float: left;
-
   display: flex;
   flex-flow: column;
 }

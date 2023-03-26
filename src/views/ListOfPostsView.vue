@@ -169,7 +169,7 @@ export default {
 
 <style scoped>
 .bar {
-  border: solid 10px hsl(166, 98%, 55%);
+  border: solid 18px hsla(166, 98%, 55%, 0.816);
   position: absolute;
   top: 0;
   z-index: -2;

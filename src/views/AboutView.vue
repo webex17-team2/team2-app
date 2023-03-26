@@ -58,7 +58,6 @@ export default {
   flex-direction: column;
   align-items: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-
   padding: 50px 100px 0px 100px;
 }
 

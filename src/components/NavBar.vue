@@ -53,26 +53,26 @@
 }
 
 .img_1 {
-  width: 260px;
-  height: 180px;
+  width: 250px;
+  height: 170px;
   display: inline-block;
 }
 
 .img_2 {
-  width: 240px;
-  height: 180px;
+  width: 230px;
+  height: 170px;
   display: inline-block;
 }
 
 .img_3 {
-  width: 240px;
-  height: 180px;
+  width: 230px;
+  height: 170px;
   display: inline-block;
 }
 
 .img_4 {
   width: 230px;
-  height: 200px;
+  height: 180px;
   display: inline-block;
 }
 
