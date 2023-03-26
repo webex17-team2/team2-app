@@ -1,14 +1,16 @@
 <template>
   <div class="app">
-    <div class="container">
+    <h2>気になる地域を選んで下さい！</h2>
+    <div class="container-one">カテゴリーを選んでください。</div>
+    <div class="container-two">
       <div class="box">
-        <button v-on:click="basyo">場所</button>
+        <button class="btn btn-primary" v-on:click="basyo">場所</button>
       </div>
       <div class="box">
-        <button v-on:click="mesi">飯</button>
+        <button class="btn btn-primary" v-on:click="mesi">飯</button>
       </div>
       <div class="box">
-        <button v-on:click="asobi">遊び</button>
+        <button class="btn btn-primary" v-on:click="asobi">遊び</button>
       </div>
     </div>
   </div>
@@ -60,17 +62,51 @@ export default {
   padding: 50px 100px 0px 100px;
 }
 
-.container {
+.container-one {
   display: flex;
-  width: 90%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
   height: 300px;
-  padding: 1em;
+  padding: 0.5em;
   justify-content: space-around;
-  background-color: aquamarine;
+  align-content: center;
+  background-color: rgb(196, 196, 196);
+  border-radius: 10px 10px 0 0;
+  animation-name: color;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+
+.container-two {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 300px;
+  padding: 2em;
+  justify-content: space-around;
+  align-content: center;
+  background-color: rgb(196, 196, 196);
+  border-radius: 0 0 10px 10px;
+  animation-name: color;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+
+@keyframes color {
+  0% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: #adaaaa;
+  }
 }
 
 .box {
-  padding: 100px 20px;
+  padding: 30px;
 }
 
 button {
@@ -101,6 +137,14 @@ button {
 .form__buttons {
   display: flex;
   justify-content: flex-end;
+}
+
+h2 {
+  padding: 30px;
+}
+
+p {
+  padding-top: 30px;
 }
 /* ドロップアウトメニュー */
 </style>

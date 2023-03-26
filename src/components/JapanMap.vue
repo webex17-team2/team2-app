@@ -14,7 +14,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-1-2">
-        <div v-if="hoverFlag_1">
+        <div v-if="hoverFlag_1" class="image">
           <img class="postImg" src="../assets/postImg/post1.png" />
 
           <p class="postTitle1">場所の名前</p>
@@ -33,7 +33,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-2-2">
-        <div v-if="hoverFlag_2">
+        <div v-if="hoverFlag_2" class="image">
           <img class="postImg" src="../assets/postImg/post2.png" />
 
           <p class="postTitle2">場所の名前</p>
@@ -52,7 +52,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-3-2">
-        <div v-if="hoverFlag_3">
+        <div v-if="hoverFlag_3" class="image">
           <img class="postImg" src="../assets/postImg/post3.png" />
 
           <p class="postTitle3">場所の名前</p>
@@ -71,7 +71,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-4-2">
-        <div v-if="hoverFlag_4">
+        <div v-if="hoverFlag_4" class="image">
           <img class="postImg" src="../assets/postImg/post4.png" />
 
           <p class="postTitle4">場所の名前</p>
@@ -90,7 +90,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-5-2">
-        <div v-if="hoverFlag_5">
+        <div v-if="hoverFlag_5" class="image">
           <img class="postImg" src="../assets/postImg/post1.png" />
 
           <p class="postTitle5">場所の名前</p>
@@ -109,7 +109,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-6-2">
-        <div v-if="hoverFlag_6">
+        <div v-if="hoverFlag_6" class="image">
           <img class="postImg" src="../assets/postImg/post2.png" />
 
           <p class="postTitle6">場所の名前</p>
@@ -128,7 +128,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-7-2">
-        <div v-if="hoverFlag_7">
+        <div v-if="hoverFlag_7" class="image">
           <img class="postImg" src="../assets/postImg/post3.png" />
 
           <p class="postTitle7">場所の名前</p>
@@ -147,7 +147,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-8-2">
-        <div v-if="hoverFlag_8">
+        <div v-if="hoverFlag_8" class="image">
           <img class="postImg" src="../assets/postImg/post4.png" />
 
           <p class="postTitle8">場所の名前</p>
@@ -166,7 +166,7 @@
       </div>
       <!-- 追加 -->
       <div class="box-9-2">
-        <div v-if="hoverFlag_9">
+        <div v-if="hoverFlag_9" class="image">
           <img class="postImg" src="../assets/postImg/post1.png" />
 
           <p class="postTitle9">場所の名前</p>
@@ -565,6 +565,7 @@ img {
   left: -2em;
   top: 20em;
 }
+
 .pin-6 {
   width: 40px;
   height: 40px;
@@ -671,6 +672,14 @@ img {
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
   opacity: 0;
+}
+
+.image {
+  border: solid 3px;
+  border-color: rgb(114, 113, 113);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
 }
 
 @keyframes rotateAnime {
