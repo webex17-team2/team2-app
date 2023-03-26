@@ -5,10 +5,10 @@
     <ul class="row">
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
         {{ postObj.postTitle }},
-        <div v-for="(path, index) in postObj.imgPath" :key="index">
+        <div>
           <img
             v-if="postObj.imagePath !== null"
-            v-bind:src="path"
+            v-bind:src="postObj.imgPath[0]"
             width="250"
             height="250"
           />
@@ -60,6 +60,15 @@ export default {
         postdata.timestamp = doc.data().timestamp
         this.postArray.unshift(postdata)
       })
+    },
+    routerBtn(postObjs) {
+      this.$router.push({
+        name: "DetailView",
+        params: {
+          timestamp: this.postArray[postObjs].timestamp,
+        },
+      })
+      console.log("ボタンが押されました")
     },
   },
 }
