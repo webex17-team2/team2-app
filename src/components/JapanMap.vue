@@ -9,12 +9,6 @@
         <div class="big-pin">
           <div v-if="hoverFlag_1">
             <img @click="hokkaidou" class="pin-1" src="../assets/flag-1.png" />
-            <!-- <img
-              @click="hokkaidou"
-              v-if="hoverFlag_1"
-              class="pin-1"
-              src="../assets/flag-1.png"
-            /> -->
           </div>
         </div>
       </div>
@@ -345,7 +339,7 @@ export default {
   height: 60%;
   position: relative;
   left: 150px;
-  top: -70px;
+  top: -50px;
 }
 
 .title {
