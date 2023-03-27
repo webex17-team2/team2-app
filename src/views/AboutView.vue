@@ -171,9 +171,12 @@ button {
 h2 {
   padding: 30px;
 }
-
+.app h2 {
+  color: #333;
+}
 p {
   padding-top: 30px;
+  color: #333;
 }
 /* ドロップアウトメニュー */
 </style>

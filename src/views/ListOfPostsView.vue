@@ -219,19 +219,19 @@ export default {
   font-size: 20px;
 
   color: #333;
-  text-decoration: 2.5px underline wavy #a8d7ba;
+  text-decoration: 4px underline wavy #a8d7ba;
   text-underline-offset: 5px;
-
+  text-align: center;
   font-weight: bold;
+  font-size: 24px;
 }
 .row button {
   margin: 30px 0px 0px 220px;
   background-color: #a8d7ba;
   border: #a8d7ba 0.5px solid;
-  font-size: 16px;
 }
 li {
-  padding: 60px;
+  padding: 30px;
   margin: 20px;
   list-style: none;
   background-color: #fdfdfd;

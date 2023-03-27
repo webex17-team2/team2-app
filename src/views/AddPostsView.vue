@@ -120,7 +120,9 @@
                 v-model="radioValue"
                 value="レジャー"
               />
+
               <label for="good">レジャー</label>
+
               <input
                 type="radio"
                 name="radios"
@@ -170,11 +172,9 @@
 </template>
 
 <script>
-// s
-//import { collection, addDoc } from "firebase/firestore"
 import { setDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-// firebase.js で db として export したものを import
+
 import { db, storage } from "../firebase.js" //const db = getDatabase()
 export default {
   data() {
@@ -200,11 +200,7 @@ export default {
       ],
     }
   },
-  // created() {
-  //   //いる？
-  //   //postObj
-  //   // this.Read()
-  // },
+
   methods: {
     // 投稿を追加する関数
     async Post() {
@@ -219,24 +215,7 @@ export default {
         alert("タイトル/写真/感想/は必ず記載してください")
         return
       }
-      //投稿内容全てをまとめたPostオブジェクト
-      // for (let i = 0; i < postdata.imgPath.length; i++) {
-      //   const imgUrl = await getDownloadURL(
-      //     ref(storage, `files/${doc.data().imgPath[i]}`)
-      //   )
-      //   postdata.imgPath[i] = imgUrl
-      // }
-      // const now = new Date()
-      // const Post = {
-      //   userName: this.userName,
-      //   postTitle: this.postTitle,
-      //   postContent: this.postContent,
-      //   imgPath: this.imgPath,
-      //   timestamp: now.getTime(),
-      // }
-      //追加
-      // await addDoc(collection(db, "posts"), Post)
-      // this.imgPath = []
+
       //追加
       function generateRandomString(length) {
         var result = ""
@@ -252,7 +231,6 @@ export default {
       var randomString = String(generateRandomString(20))
       const now = new Date()
       const Post = {
-        //いらないuserName: this.userName,
         userName: this.userName,
         postTitle: this.postTitle,
         postContent: this.postContent,
@@ -264,39 +242,21 @@ export default {
       }
       const overvieRef = doc(db, "posts-test", randomString)
       await setDoc(overvieRef, Post)
-      // サブコレクションを作成
-      // const postCommentsRef = doc(
-      //   db,
-      //   "posts-test",
-      //   randomString,
-      //   "postContent",
-      //   randomString
-      // )
-      // //今後消す
-      //  await setDoc(postCommentsRef, { name: "kuji" })
+
       console.log(overvieRef)
       this.imgPath = []
     },
     //写真読み込み＋imgPathにURL名を入れる関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
-      // let files = []
-      // for (let i = 0; i < props.target.files.length; i++) {
-      //   files[i] = props.target.files[i]
-      //   this.imgPath.push(props.target.files[i].name)
-      // }
       console.log(props)
       let file = props.target.files
-      // for (let i = 0; i < props.target.files.length; i++) {
+
       //URL作成
       for (let i = 0; i < file.length; i++) {
         this.imgUrl = URL.createObjectURL(file[i])
         //storageのfilesフォルダに入れたデータの名前を指定
         const storageRef = ref(storage, "files/" + file[i].name)
-        // "files"はstorageに作成したフォルダ名
-        // Firebaseにデータを適切に送るために必要なコード
-        //storageRefでどの場所に入れるのか指定
-        //const snapshot = await uploadBytes(storageRef, file)
-        //console.log("追加画像情報" + snapshot)
+
         //storageの中にあるデータを参照してimgPathにURLとして入れる
         await uploadBytes(storageRef, file[i])
         const getUrl = await getDownloadURL(
@@ -308,36 +268,6 @@ export default {
       // postdata.imgPath[i] = imgUrl
       // }
     },
-    //画像の表示
-    // async filedownload(imgPath) {
-    //   const url = await getDownloadURL(ref(storage, imgPath))
-    //   return url
-    // },
-    //投稿を１回読み込む関数 posts.dbRef.id/ref.id
-    // async Read() {
-    //   const q = query(collection(db, "posts"))
-    //   const querySnapshot = await getDocs(q)
-    //   querySnapshot.forEach(async (doc) => {
-    //     if (doc.data().imgPath !== "") {
-    //       let postdata = doc.data()
-    //       for (let i = 0; i < doc.data().imgPath.length; i++) {
-    //         const imgUrl = await getDownloadURL(
-    //           ref(storage, `files/${doc.data().imgPath[i]}`)
-    //         ).then((url) => {
-    //           return url
-    //         })
-    //         postdata.imgPath[i] = imgUrl
-    //       }
-    //       this.postArray.push(postdata)
-    //     } else {
-    //       const postdata = doc.data()
-    //       postdata.imgPath = null
-    //       this.postArray.push(postdata)
-    //     }
-    //   })
-    //   console.log("read後")
-    //   console.log(this.postArray)
-    // },
   },
 }
 </script>
@@ -419,19 +349,87 @@ export default {
 }
 .text-center-select {
   margin: -50px 20px;
+
+  background-color: #fffcf2;
 }
 .text-center-select {
   width: 150px;
   height: 25px;
+  border-radius: 5px;
+  color: #cd6145;
 }
 .text-center-radio {
-  margin: -85px 20px;
+  margin: -105px 20px;
+  width: 90%;
+  text-align: left;
+}
+@keyframes click-wave {
+  0% {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    opacity: 0.35;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    margin-top: -80px;
+    margin-left: -80px;
+    opacity: 0;
+  }
+}
+.text-center-radio input {
+  position: relative;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  /* margin-top: -20px; */
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease-out 0s;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background: #e8c7c4;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+}
+
+.text-center-radio input:hover {
+  background: #ebb4ad;
+}
+.text-center-radio input:checked {
+  background: #ed6a5a;
+}
+.text-center-radio input:checked::before {
+  font-size: 20px;
+  line-height: 30px;
+  position: absolute;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  content: "✔";
+  text-align: center;
+}
+.text-center-radio input:checked::after {
+  position: relative;
+  display: block;
+  content: "";
+  -webkit-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #da3c41;
+  border-radius: 50%;
 }
 .text-center-radio label {
-  margin-top: -8px;
-  margin-left: 4px;
-  padding-right: 12px;
-  font-size: 20px;
+  margin-top: 15px;
+  margin-left: 0px;
+  padding-right: 15px;
+  font-size: 18px;
 }
 .form__submit-button {
   margin-top: -100px;
@@ -458,6 +456,7 @@ a:hover {
   line-height: 1.3rem;
   border: none;
   resize: none;
+  border-radius: 5px;
 }
 .form__textarea:focus {
   outline: none;
@@ -471,6 +470,7 @@ h2 {
   position: relative;
   padding-left: 5em;
   font-size: 25px;
+  color: #333;
 }
 .span_text {
   padding-top: 5px;
@@ -528,6 +528,7 @@ h2 span:after {
   width: 100%;
   letter-spacing: 1px;
   padding-left: 4em;
+  border-radius: 5px;
 }
 .cp_iptxt input[type="text"]:focus {
   outline: none;
