@@ -173,6 +173,7 @@ export default {
   position: absolute;
   top: 0;
   z-index: -2;
+  background-color: rgba(242, 245, 212, 0.49);
 }
 .form__wrapper {
   padding: 1rem;
@@ -200,6 +201,7 @@ export default {
   font-weight: bold;
   /* border: solid 10px hsl(166, 98%, 55%); */
   border-radius: 10px;
+  margin-top: 120px;
 }
 .row {
   display: flex;

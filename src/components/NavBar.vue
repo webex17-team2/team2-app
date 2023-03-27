@@ -1,7 +1,8 @@
 <template>
   <div class="head">
     <div>
-      <router-link to="/" @click="resetImgSize">GeekTwitter</router-link>
+      <router-link class="routerLink" to="/" @click="resetImgSize"
+        ><h1 class="logo">Hidden Treasure</h1></router-link
       >
 
       <router-link to="/japan-page">
@@ -41,10 +42,41 @@
 </template>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 .head {
   position: relative;
-  top: 50px;
+  top: 70px;
+  bottom: 60px;
   text-align: center;
+}
+.routerLink {
+  text-decoration: none;
+}
+h1 {
+  font-family: "Itim", cursive;
+  margin-top: -20px;
+  margin-bottom: 30px;
+  font-size: 50px;
+  color: #e96241;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.5s ease-in-out; /*変化のアニメーションを追加*/
+}
+h1::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #190b009b;
+  transition: width 0.5s ease-in-out; /*変化のアニメーションを追加*/
+  transform: translateX(-50%);
+}
+h1:hover::before {
+  display: inline-block;
+  width: 30%;
 }
 
 .img {
@@ -77,29 +109,29 @@
 }
 
 .img-hover1 {
-  width: 270px;
-  height: 190px;
+  width: 260px;
+  height: 170px;
   transform: scale(1.09);
   transition: all 0.3s ease-in-out;
   z-index: 2;
 }
 .img-hover2 {
-  width: 250px;
-  height: 190px;
+  width: 240px;
+  height: 180px;
   transform: scale(1.09);
   transition: all 0.3s ease-in-out;
   z-index: 2;
 }
 .img-hover3 {
-  width: 250px;
-  height: 190px;
+  width: 240px;
+  height: 180px;
   transform: scale(1.09);
   transition: all 0.3s ease-in-out;
   z-index: 2;
 }
 .img-hover4 {
   width: 240px;
-  height: 210px;
+  height: 190px;
   transform: scale(1.09);
   transition: all 0.3s ease-in-out;
   z-index: 2;

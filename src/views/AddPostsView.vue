@@ -361,6 +361,7 @@ export default {
   float: left;
   display: flex;
   flex-flow: column;
+  margin-top: 100px;
 }
 .contents left {
   margin-top: -20px;
