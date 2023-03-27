@@ -208,7 +208,9 @@ export default {
       if (
         this.postTitle === "" &&
         this.postContent === "" &&
-        this.imgPath === ""
+        this.imgPath === "" &&
+        this.category === "" &&
+        this.selectedArea === ""
         // this.radio === ""
       ) {
         console.log("postTitleが空でした")
@@ -231,7 +233,6 @@ export default {
       var randomString = String(generateRandomString(20))
       const now = new Date()
       const Post = {
-        userName: this.userName,
         postTitle: this.postTitle,
         postContent: this.postContent,
         imgPath: this.imgPath,
