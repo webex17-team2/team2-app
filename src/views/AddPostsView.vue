@@ -161,9 +161,7 @@
       <div class="buttons-center">
         <div class="form__buttons">
           <button v-on:click="Post" class="form__submit-button">
-            <router-link to="/listOfPosts" class="btn btn-primary"
-              >投稿</router-link
-            >
+            <p to="/listOfPosts" class="btn btn-primary">投稿</p>
           </button>
         </div>
       </div>
@@ -206,46 +204,50 @@ export default {
     async Post() {
       // もしtextareaが空の状態で投稿ボタンが押されたら、この関数を抜けるという処理
       if (
-        this.postTitle === "" &&
-        this.postContent === "" &&
-        this.imgPath === "" &&
-        this.category === "" &&
+        this.postTitle === "" ||
+        this.postContent === "" ||
+        this.imgPath === [] ||
+        this.radioValue === "" ||
         this.selectedArea === ""
         // this.radio === ""
       ) {
         console.log("postTitleが空でした")
         alert("タイトル/写真/感想/は必ず記載してください")
-        return
-      }
-
-      //追加
-      function generateRandomString(length) {
-        var result = ""
-        var characters =
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-        for (var i = 0; i < length; i++) {
-          result += characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          )
+      } else {
+        var randomString = String(this.generateRandomString(20))
+        const now = new Date()
+        const Post = {
+          postTitle: this.postTitle,
+          postContent: this.postContent,
+          imgPath: this.imgPath,
+          timestamp: now.getTime(),
+          category: this.radioValue,
+          ID: randomString,
+          selectedArea: this.selectedArea,
         }
-        return result
-      }
-      var randomString = String(generateRandomString(20))
-      const now = new Date()
-      const Post = {
-        postTitle: this.postTitle,
-        postContent: this.postContent,
-        imgPath: this.imgPath,
-        timestamp: now.getTime(),
-        category: this.radioValue,
-        ID: randomString,
-        selectedArea: this.selectedArea,
-      }
-      const overvieRef = doc(db, "posts-test", randomString)
-      await setDoc(overvieRef, Post)
+        const overvieRef = doc(db, "posts-test", randomString)
+        await setDoc(overvieRef, Post)
 
-      console.log(overvieRef)
-      this.imgPath = []
+        console.log(overvieRef)
+        this.imgPath = []
+
+        this.$router.push({
+          name: "ListOfPosts",
+        })
+      }
+    },
+
+    //追加
+    generateRandomString(length) {
+      var result = ""
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        )
+      }
+      return result
     },
     //写真読み込み＋imgPathにURL名を入れる関数 資料(https://qiita.com/ohanawb/items/14dd538007d74e773096)
     async fileUpload(props) {
