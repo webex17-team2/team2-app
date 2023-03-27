@@ -1,5 +1,5 @@
 <template>
-  <body class="wrap">
+  <div class="wrap">
     <div class="content top">
       <div class="contentsLeft">
         <div class="contents left">
@@ -53,7 +53,7 @@
                 v-model="postTitle"
                 placeholder="◯◯公園"
               />
-              <label>お名前</label>
+              <label></label>
               <span class="focus_line"><i></i></span>
             </div>
           </div>
@@ -65,7 +65,7 @@
                 v-model="postContent"
                 placeholder="ここが素敵！"
               />
-              <label>お名前</label>
+              <label></label>
               <span class="focus_line"><i></i></span>
             </div>
           </div>
@@ -145,7 +145,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -331,16 +331,20 @@ export default {
 .wrap {
   width: 100%;
   height: 100vh;
-  padding: 32px 0 64px;
-  background-color: #a8d7ba;
+  padding: 100px 0 64px;
+  background-color: rgba(242, 245, 212, 0.49);
   display: flex;
   flex-flow: column;
+  position: absolute;
+  top: 0;
+  border: solid 18px #a8d7ba;
+  z-index: -2;
 }
 .content {
   width: 95%;
   margin: 0 auto;
   padding: 150px 80px 0px;
-  background-color: #fff;
+
   float: left;
 }
 .top {
@@ -354,17 +358,17 @@ export default {
 }
 .contents {
   width: 50%;
-
   float: left;
-
   display: flex;
   flex-flow: column;
+  margin-top: 100px;
 }
 .contents left {
   margin-top: -20px;
 }
 /* 入力側(右) */
 .text-center {
+  position: relative;
   text-align: center;
   margin-bottom: 10px;
   height: 100px;
@@ -668,5 +672,6 @@ button :hover {
   left: 0;
   transition: 0.3s;
   color: #da3c41;
+  /* sss */
 }
 </style>
