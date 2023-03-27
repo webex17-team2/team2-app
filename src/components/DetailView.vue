@@ -1,8 +1,10 @@
 <template>
-  <router-link to="/listOfPosts">⬅︎</router-link>
   <div class="row">
     <div class="post">
       <div>
+        <router-link to="/listOfPosts" class="MyRouter" data-replace="⬅︎もどる"
+          ><span>⬅︎もどる</span></router-link
+        >
         <h1>{{ postArray[0].postTitle }}</h1>
       </div>
       <div class="img-com">
@@ -42,20 +44,8 @@
               </Slide>
             </Carousel>
           </div>
-        </div>
-        <!-- <div
-                    class="img_collection"
-                    v-for="(post, postId) in postArray[0].imgPath"
-                    :key="postId"
-                    >
-                    <img :src="post" class="img_content" />
-                    </div> -->
-        <div class="context">
-          <h3>投稿内容</h3>
-          <!-- <P>感想や押しポイント</P> -->
+
           <p>{{ postArray[0].postContent }}</p>
-          <!-- 何に使う？ -->
-          <!-- <img :src="imgPathContent" /> -->
           <div>#{{ postArray[0].selectedArea }}</div>
           <div>#{{ postArray[0].category }}</div>
         </div>
@@ -72,17 +62,15 @@
           @keydown.enter="Comments"
         ></textarea>
         <div class="form__buttons">
-          <button class="btn btn-primary" v-on:click="Comments">送信</button>
+          <button v-on:click="Comments" class="form__submit-button">
+            送信
+          </button>
         </div>
       </div>
       <!-- </div> -->
-      <div class="top">
+      <div>
         <h3>~みんなのコメント~</h3>
-        <div
-          v-for="(comment, index) in commentsArray"
-          :key="index"
-          class="all-comment"
-        >
+        <div v-for="(comment, index) in commentsArray" :key="index">
           <!-- ここ -->
           <!-- <p>{{ randamImg }}</p> -->
           <img :src="comment.randamImg" class="randam_icon" />
@@ -275,6 +263,73 @@ export default {
 }
 </script>
 <style scoped>
+.MyRouter {
+  margin: 50px 50px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  color: #18272f;
+}
+
+.MyRouter::before,
+.MyRouter::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.MyRouter::before {
+  background-color: #ed6a5a;
+  height: 2px;
+  bottom: 0;
+  transform-origin: 100% 50%;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.MyRouter::after {
+  content: attr(data-replace);
+  height: 100%;
+  top: 0;
+  transform-origin: 100% 50%;
+  transform: translate3d(200%, 0, 0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  color: #54b3d6 2px;
+}
+
+.MyRouter:hover::before {
+  transform-origin: 0% 50%;
+  transform: scaleX(1);
+}
+.MyRouter:hover::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.MyRouter span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.MyRouter:hover span {
+  transform: translate3d(-200%, 0, 0);
+}
+
+/* Presentational Styles */
+body {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+  font-size: 27px;
+  line-height: 1.5;
+  height: 100vh;
+  place-items: center;
+}
+
+.MyRouter {
+  text-decoration: none;
+  color: #18272f;
+  font-weight: 700;
+  vertical-align: top;
+}
+
 h1 {
   position: relative;
   padding: 1.5rem 5rem 0.8rem;

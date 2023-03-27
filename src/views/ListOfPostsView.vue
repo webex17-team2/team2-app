@@ -4,17 +4,17 @@
       <!-- <h1>投稿一覧</h1> -->
       <ul class="row">
         <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-          {{ postObj.postTitle }},{{ postObjs }},
-          <div>
+          <p>{{ postObj.postTitle }}</p>
+
+          <div class="row_item2">
             <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
             <img
               v-if="postObj.imgPath !== null"
               v-bind:src="postObj.imgPath[0]"
-              width="250"
+              width="300"
               height="250"
             />
             <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
-            <p>{{ postObjs }}</p>
           </div>
           <button class="btn btn-primary" @click="routerBtn(postObjs)">
             詳細へ
@@ -209,7 +209,7 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
-  padding: 10px;
+  padding: 0px;
 }
 
 /* @media screen and (min-width: 480px) {
@@ -221,23 +221,46 @@ export default {
   }
 } */
 
+.row p {
+  margin-bottom: 50px;
+  margin-top: -15px;
+  margin-left: center;
+  text-align: center;
+  font-size: 20px;
+
+  color: #333;
+  text-decoration: 4px underline wavy #a8d7ba;
+  text-underline-offset: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+}
+.row button {
+  margin: 30px 0px 0px 220px;
+  background-color: #a8d7ba;
+  border: #a8d7ba 0.5px solid;
+}
 li {
-  padding: 60px;
+  padding: 30px;
   margin: 20px;
   list-style: none;
-  background-color: rgb(178, 174, 174);
+  background-color: #fdfdfd;
+  /* background-color: rgb(178, 174, 174); */
   border-radius: 10px;
   animation-name: color;
   animation-duration: 20s;
   animation-delay: 0s;
   animation-iteration-count: 1;
+  border: 1px #9a9999bf solid;
 }
 @keyframes color {
   0% {
-    background-color: #fff;
+    background-color: #ffffffc8;
+    border: 1px #9a999926 solid;
   }
-  100% {
-    background-color: #adaaaa;
+  20% {
+    background-color: #fdfdfd;
+    border: 1px #9a9999bf solid;
   }
 }
 </style>

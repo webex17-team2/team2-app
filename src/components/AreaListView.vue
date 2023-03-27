@@ -1,19 +1,21 @@
 <template>
   <!-- to="変える" -->
-  <router-link to="/japanMap">⬅︎</router-link>
+
   <div class="my-page">
+    <router-link to="/japanMap" class="MyRouter" data-replace="⬅︎もどる"
+      ><span>⬅︎もどる</span></router-link
+    >
     <ul class="row">
       <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-        {{ postObj.postTitle }},
+        <p>{{ postObj.postTitle }}</p>
         <div>
           <img
             v-if="postObj.imagePath !== null"
             v-bind:src="postObj.imgPath[0]"
-            width="250"
+            width="300"
             height="250"
           />
           <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
-          <p>{{ postObjs }}</p>
         </div>
         <button class="btn btn-primary" @click="routerBtn(postObjs)">
           詳細へ
@@ -79,36 +81,125 @@ export default {
   padding: 0.5em 1em;
   margin: 2em 0;
   font-weight: bold;
-  border: solid 10px #1dfdc9;
+  border: solid 10px #a8d7ba;
   border-radius: 10px;
+  background-color: #fffcf2;
 }
+.MyRouter {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  color: #18272f;
+}
+
+.MyRouter::before,
+.MyRouter::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.MyRouter::before {
+  background-color: #ed6a5a;
+  height: 2px;
+  bottom: 0;
+  transform-origin: 100% 50%;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.MyRouter::after {
+  content: attr(data-replace);
+  height: 100%;
+  top: 0;
+  transform-origin: 100% 50%;
+  transform: translate3d(200%, 0, 0);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  color: #54b3d6 2px;
+}
+
+.MyRouter:hover::before {
+  transform-origin: 0% 50%;
+  transform: scaleX(1);
+}
+.MyRouter:hover::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.MyRouter span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.MyRouter:hover span {
+  transform: translate3d(-200%, 0, 0);
+}
+
+/* Presentational Styles */
+body {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+  font-size: 27px;
+  line-height: 1.5;
+  height: 100vh;
+  place-items: center;
+}
+
+.MyRouter {
+  text-decoration: none;
+  color: #18272f;
+  font-weight: 700;
+  vertical-align: top;
+}
+
 .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
-  padding: 10px;
+  padding: 0px;
 }
+.row p {
+  margin-bottom: 50px;
+  margin-top: -15px;
+  margin-left: center;
+  text-align: center;
+  font-size: 20px;
 
+  color: #333;
+  text-decoration: 2.5px underline wavy #a8d7ba;
+  text-underline-offset: 5px;
+
+  font-weight: bold;
+}
+.row button {
+  margin: 30px 0px 0px 220px;
+  background-color: #a8d7ba;
+  border: #a8d7ba 0.5px solid;
+  font-size: 16px;
+}
 li {
   padding: 60px;
   margin: 20px;
   list-style: none;
-  background-color: rgb(178, 174, 174);
+  background-color: #fdfdfd;
+  /* background-color: rgb(178, 174, 174); */
   border-radius: 10px;
   animation-name: color;
   animation-duration: 20s;
   animation-delay: 0s;
   animation-iteration-count: 1;
+  border: 1px #9a9999bf solid;
 }
 
 @keyframes color {
   0% {
-    background-color: #fff;
+    background-color: #ffffffc8;
+    border: 1px #9a999926 solid;
   }
-  100% {
-    background-color: #adaaaa;
+  20% {
+    background-color: #fdfdfd;
+    border: 1px #9a9999bf solid;
   }
 }
 </style>
