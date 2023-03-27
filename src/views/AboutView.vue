@@ -7,13 +7,13 @@
       <div class="container-one">
         <div class="container-two">
           <div class="box">
-            <button class="btn btn-primary" v-on:click="basyo">場所</button>
+            <button class="btn btn-primary" v-on:click="basyo">レジャー</button>
           </div>
           <div class="box">
-            <button class="btn btn-primary" v-on:click="mesi">飯</button>
+            <button class="btn btn-primary" v-on:click="mesi">グルメ</button>
           </div>
           <div class="box">
-            <button class="btn btn-primary" v-on:click="asobi">遊び</button>
+            <button class="btn btn-primary" v-on:click="asobi">その他</button>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default {
       this.$router.push({
         name: "CategoryList",
         params: {
-          choice: "place",
+          choice: "レジャー",
         },
       })
     },
@@ -39,7 +39,7 @@ export default {
       this.$router.push({
         name: "CategoryList",
         params: {
-          choice: "eat",
+          choice: "グルメ",
         },
       })
     },
@@ -47,7 +47,7 @@ export default {
       this.$router.push({
         name: "CategoryList",
         params: {
-          choice: "play",
+          choice: "その他",
         },
       })
     },
