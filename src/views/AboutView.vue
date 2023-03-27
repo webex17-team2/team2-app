@@ -56,7 +56,7 @@ export default {
 .bar {
   width: 100%;
   height: 100%;
-  border: solid 18px hsla(166, 98%, 55%, 0.816);
+  border: solid 18px #a8d7ba;
   position: absolute;
   top: 0;
   z-index: -2;
