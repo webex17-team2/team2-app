@@ -282,7 +282,7 @@ export default {
 }
 .wrap {
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   padding: 100px 0 64px;
   background-color: rgba(242, 245, 212, 0.49);
   display: flex;
@@ -296,7 +296,7 @@ export default {
   width: 95%;
   margin: 0 auto;
   padding: 150px 80px 0px;
-  background-color: #fffcf2;
+  /* background-color: #fffcf2; */
 
   float: left;
 }

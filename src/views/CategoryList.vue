@@ -1,28 +1,29 @@
 <template>
   <!-- リスト入れる -->
+  <div class="bar">
+    <div class="my-page">
+      <router-link to="/about" class="MyRouter" data-replace="⬅︎もどる"
+        ><span>⬅︎もどる</span></router-link
+      >
 
-  <div class="my-page">
-    <router-link to="/about" class="MyRouter" data-replace="⬅︎もどる"
-      ><span>⬅︎もどる</span></router-link
-    >
-
-    <ul class="row">
-      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-        <p>{{ postObj.postTitle }}</p>
-        <div>
-          <img
-            v-if="postObj.imagePath !== null"
-            v-bind:src="postObj.imgPath[0]"
-            width="300"
-            height="250"
-          />
-          <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
-        </div>
-        <button class="btn btn-primary" @click="routerBtn(postObjs)">
-          詳細へ
-        </button>
-      </li>
-    </ul>
+      <ul class="row">
+        <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+          <p>{{ postObj.postTitle }}</p>
+          <div>
+            <img
+              v-if="postObj.imagePath !== null"
+              v-bind:src="postObj.imgPath[0]"
+              width="300"
+              height="250"
+            />
+            <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
+          </div>
+          <button class="btn btn-primary" @click="routerBtn(postObjs)">
+            詳細へ
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -85,13 +86,22 @@ export default {
 }
 </script>
 <style scoped>
+.bar {
+  width: 100%;
+  /* height: 85vw; */
+  border: solid 18px #a8d7ba;
+  position: absolute;
+  top: 0;
+  z-index: -4;
+  background-color: rgba(242, 245, 212, 0.49);
+}
 .my-page {
   padding: 0.5em 1em;
   margin: 2em 0;
   font-weight: bold;
-  border: solid 10px #a8d7ba;
+
   border-radius: 10px;
-  background-color: #fffcf2;
+  margin-top: 340px;
 }
 .MyRouter {
   overflow: hidden;
