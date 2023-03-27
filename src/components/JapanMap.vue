@@ -342,7 +342,7 @@ export default {
 <style scoped>
 .bar {
   width: 100%;
-  height: 63vw;
+  height: 66vw;
   border: solid 18px hsla(166, 98%, 55%, 0.816);
   position: absolute;
   top: 0;
@@ -353,7 +353,7 @@ export default {
   height: 60%;
   position: relative;
   left: 150px;
-  top: -10px;
+  top: 35px;
   z-index: 1;
 }
 
@@ -411,7 +411,7 @@ img {
   margin-top: 8%;
   position: absolute;
   left: 33%;
-  top: 37%;
+  top: 40%;
 }
 
 .box-1 {
@@ -769,7 +769,7 @@ img {
 
 .back {
   width: 100vw;
-  height: 115vh;
+  height: 120vh;
   position: absolute;
   top: 0px;
   left: 0px;
