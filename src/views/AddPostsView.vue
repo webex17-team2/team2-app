@@ -138,7 +138,7 @@
       <div class="buttons-center">
         <div class="form__buttons">
           <button v-on:click="Post" class="form__submit-button">
-            <router-link to="/listOfPosts" class="nav__item nav__link"
+            <router-link to="/listOfPosts" class="btn btn-primary"
               >投稿</router-link
             >
           </button>
@@ -415,6 +415,14 @@ export default {
 .form__submit-button {
   margin-top: -100px;
   margin-left: -50px;
+  border: none;
+}
+
+.btn {
+  background-color: #a8d7ba;
+  color: #fff;
+  display: inline-block;
+  border: none;
 }
 a {
   color: #3f82a8;
@@ -478,6 +486,10 @@ h2 span:after {
 .buttons-center {
   width: 100%;
   display: flex;
+  background-color: #a8d7ba;
+}
+
+button :hover {
   background-color: #a8d7ba;
 }
 .form__buttons {
