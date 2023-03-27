@@ -357,7 +357,7 @@ export default {
   width: 150px;
   height: 25px;
   border-radius: 5px;
-  color: #cd6145;
+  /* color: #cd6145; */
 }
 .text-center-radio {
   margin: -105px 20px;
