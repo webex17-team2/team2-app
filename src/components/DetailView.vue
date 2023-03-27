@@ -396,7 +396,7 @@ h3:after {
 }
 
 .post {
-  width: 50%;
+  width: 60%;
 }
 
 @media screen and (max-width: 480px) {
@@ -407,6 +407,7 @@ h3:after {
 
 .comment {
   margin-top: 60px;
+  margin-left: -50px;
   padding: 20px;
   width: 40%;
 }

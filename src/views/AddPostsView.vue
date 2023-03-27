@@ -488,6 +488,10 @@ h2 span:after {
   display: flex;
   background-color: #a8d7ba;
 }
+
+button :hover {
+  background-color: #a8d7ba;
+}
 .form__buttons {
   margin: auto;
 }
