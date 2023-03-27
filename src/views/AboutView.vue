@@ -1,37 +1,24 @@
 <template>
-  <div class="app">
-    <h2>気になる地域を選んで下さい！</h2>
-    <div class="container">
-      <!-- <div class="container-one"> -->
-      <p>カテゴリーを選んでください。</p>
-      <div class="container-one">
-        <div class="container-two">
-          <div class="box">
-            <button class="btn btn-primary" v-on:click="basyo">レジャー</button>
-          </div>
-          <div class="box">
-            <button class="btn btn-primary" v-on:click="mesi">グルメ</button>
-          </div>
-          <div class="box">
-            <button class="btn btn-primary" v-on:click="asobi">その他</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="bar">
     <div class="app">
       <h2>気になる地域を選んで下さい！</h2>
-      <div class="container-one">カテゴリーを選んでください。</div>
-      <div class="container-two">
-        <div class="box">
-          <button class="btn btn-primary" v-on:click="basyo">場所</button>
-        </div>
-        <div class="box">
-          <button class="btn btn-primary" v-on:click="mesi">飯</button>
-        </div>
-        <div class="box">
-          <button class="btn btn-primary" v-on:click="asobi">遊び</button>
+      <div class="container">
+        <!-- <div class="container-one"> -->
+        <p>カテゴリーを選んでください。</p>
+        <div class="container-one">
+          <div class="container-two">
+            <div class="box">
+              <button class="btn btn-primary" v-on:click="basyo">
+                レジャー
+              </button>
+            </div>
+            <div class="box">
+              <button class="btn btn-primary" v-on:click="mesi">グルメ</button>
+            </div>
+            <div class="box">
+              <button class="btn btn-primary" v-on:click="asobi">その他</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,7 +76,7 @@ export default {
   flex-direction: column;
   align-items: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fffcf2;
+  /* background-color: #fffcf2; */
   padding: 50px 100px 0px 100px;
   position: absolute;
   top: 280px;

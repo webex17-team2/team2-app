@@ -1,80 +1,91 @@
 <template>
-  <div class="row">
-    <div class="post">
-      <div>
-        <router-link to="/listOfPosts" class="MyRouter" data-replace="⬅︎もどる"
-          ><span>⬅︎もどる</span></router-link
-        >
-        <h1>{{ postArray[0].postTitle }}</h1>
-      </div>
-      <div class="img-com">
-        <div class="img_box">
-          <div class="img_collection">
-            <Carousel
-              id="gallery"
-              :items-to-show="1"
-              :wrap-around="false"
-              v-model="currentSlide"
-            >
-              <Slide
-                v-for="(slide, slideId) in postArray[0].imgPath"
-                :key="slideId"
+  <div class="bar">
+    <div class="row">
+      <div class="post">
+        <div class="ren">
+          <router-link
+            to="/listOfPosts"
+            class="MyRouter"
+            data-replace="⬅︎もどる"
+            ><span>⬅︎もどる</span></router-link
+          >
+          <h1>{{ postArray[0].postTitle }}</h1>
+        </div>
+        <div class="img-com">
+          <div class="img_box">
+            <div class="img_collection">
+              <Carousel
+                id="gallery"
+                :items-to-show="1"
+                :wrap-around="false"
+                v-model="currentSlide"
               >
-                <div class="carousel__item">
-                  <img :src="slide" width="400" height="300" />
-                </div>
-              </Slide>
-            </Carousel>
+                <Slide
+                  v-for="(slide, slideId) in postArray[0].imgPath"
+                  :key="slideId"
+                >
+                  <div class="carousel__item">
+                    <img :src="slide" width="400" height="300" />
+                  </div>
+                </Slide>
+              </Carousel>
 
-            <Carousel
-              class="img_collection2"
-              id="thumbnails"
-              :items-to-show="showNumber"
-              :wrap-around="true"
-              v-model="currentSlide"
-              ref="carousel"
-            >
-              <Slide
-                v-for="(slide, slideId) in postArray[0].imgPath"
-                :key="slideId"
+              <Carousel
+                class="img_collection2"
+                id="thumbnails"
+                :items-to-show="showNumber"
+                :wrap-around="true"
+                v-model="currentSlide"
+                ref="carousel"
               >
-                <div class="carousel__item" v-on:click="slideTo(slideId)">
-                  <img :src="slide" width="120" height="100" />
-                </div>
-              </Slide>
-            </Carousel>
+                <Slide
+                  v-for="(slide, slideId) in postArray[0].imgPath"
+                  :key="slideId"
+                >
+                  <div class="carousel__item" v-on:click="slideTo(slideId)">
+                    <img :src="slide" width="120" height="100" />
+                  </div>
+                </Slide>
+              </Carousel>
+            </div>
+
+            <p class="Kanso">{{ postArray[0].postContent }}</p>
+            <div class="Hassyu">
+              <p>#{{ postArray[0].selectedArea }}</p>
+              <p>#{{ postArray[0].category }}</p>
+            </div>
           </div>
-
-          <p>{{ postArray[0].postContent }}</p>
-          <div>#{{ postArray[0].selectedArea }}</div>
-          <div>#{{ postArray[0].category }}</div>
         </div>
       </div>
-    </div>
-    <div class="comment">
-      <div>
-        <h3>コメントを追加する</h3>
-        <!-- 入力後消えるようにする -->
-        <textarea
-          class="form__textarea"
-          v-model="commentContent"
-          placeholder="コメントする"
-          @keydown.enter="Comments"
-        ></textarea>
-        <div class="form__buttons">
-          <button v-on:click="Comments" class="form__submit-button">
-            送信
-          </button>
+      <div class="comment">
+        <div>
+          <h3>コメントを追加する</h3>
+          <!-- 入力後消えるようにする -->
+          <textarea
+            class="form__textarea"
+            v-model="commentContent"
+            placeholder="コメントする"
+            @keydown.enter="Comments"
+          ></textarea>
+          <div class="form__buttons">
+            <button v-on:click="Comments" class="btn btn-outline-success">
+              送信
+            </button>
+          </div>
         </div>
-      </div>
-      <!-- </div> -->
-      <div>
-        <h3>~みんなのコメント~</h3>
-        <div v-for="(comment, index) in commentsArray" :key="index">
-          <!-- ここ -->
-          <!-- <p>{{ randamImg }}</p> -->
-          <img :src="comment.randamImg" class="randam_icon" />
-          <P>{{ comment.commentContent }}</P>
+        <!-- </div> -->
+        <div class="h3-2">
+          <h3>~みんなのコメント~</h3>
+          <div
+            v-for="(comment, index) in commentsArray"
+            :key="index"
+            class="randam"
+          >
+            <!-- ここ -->
+            <!-- <p>{{ randamImg }}</p> -->
+            <img :src="comment.randamImg" class="randam_icon" />
+            <P class="randam_icon_text">{{ comment.commentContent }}</P>
+          </div>
         </div>
       </div>
     </div>
@@ -263,6 +274,18 @@ export default {
 }
 </script>
 <style scoped>
+.bar {
+  width: 100%;
+  /* height: 85vw; */
+  border: solid 18px #a8d7ba;
+  position: absolute;
+  top: 0;
+  z-index: -4;
+  background-color: rgba(242, 245, 212, 0.49);
+}
+.img_box {
+  width: 70%;
+}
 .MyRouter {
   margin: 50px 50px;
   overflow: hidden;
@@ -346,15 +369,15 @@ h1:after {
   content: "";
   background-image: -webkit-repeating-linear-gradient(
     135deg,
-    #f45252,
-    #f45252 2px,
+    #a8d7ba,
+    #a8d7ba 4px,
     transparent 2px,
     transparent 5px
   );
   background-image: repeating-linear-gradient(
     -45deg,
-    #f45252,
-    #f45252 2px,
+    #a8d7ba,
+    #a8d7ba 2.2px,
     transparent 2px,
     transparent 5px
   );
@@ -379,7 +402,10 @@ h1:after {
   word-wrap: break-word; */
 
 /* padding: 1.5rem 5rem 0.8rem; */
-
+/*
+.img_collection {
+  width: 50%;
+} */
 .img_collection2 {
   margin: 0;
   padding: 0;
@@ -391,16 +417,44 @@ h1:after {
 .carousel__track {
   width: 250px;
 }
+
+.Kanso {
+  width: 400px;
+  /* height: 80px; */
+  border: #333 1px solid;
+  border-radius: 5px;
+  margin: 50px 100px;
+  background-color: #ffffffd1;
+  padding: 20px 20px;
+  color: #333;
+}
+.Hassyu {
+  display: flex;
+  margin-left: 100px;
+  margin-top: -30px;
+}
+.Hassyu p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 5px;
+  margin-right: 30px;
+  font-size: 18px;
+  color: #333;
+}
+
 /* タグ型 */
 h3 {
-  font-size: 15px;
+  font-size: 20px;
   position: relative;
   display: inline-block;
   height: 32px;
-  margin-left: 15px;
+  margin-left: -10px;
+  margin-bottom: -10px;
   padding: 0.3rem 1.5rem 1rem 1.5rem;
   color: #fff;
-  background: #fa4141;
+  background: #ed6a5a;
+  margin-bottom: 40px;
 }
 
 h3:before {
@@ -410,7 +464,7 @@ h3:before {
   content: "";
   border-width: 16px 15px 16px 0;
   border-style: solid;
-  border-color: transparent #fa4141 transparent transparent;
+  border-color: transparent#ed6a5a transparent transparent;
 }
 
 h3:after {
@@ -428,20 +482,41 @@ h3:after {
   h3 {
     height: 42px;
     border: 5px;
-    border-color: #f45252;
-    background-color: #f45252;
+    border-color: #ed6a5a;
+    background-color: #ed6a5a;
     display: inline-block;
   }
 }
 
+.form__textarea {
+  height: 150px;
+  margin-bottom: 80x;
+}
+.form__buttons {
+  margin: 20px 0px 0px 140px;
+}
+.h3-2 {
+  margin-top: 50px;
+}
 /* コメントアイコン*/
 .randam_icon {
   /* 画像を丸くする */
-  width: 10%;
-  height: 10%;
+  width: 6%;
+  height: 6%;
   margin-right: 20px;
 }
-
+.randam {
+  display: flex;
+}
+.randam_icon_text {
+  width: 330px;
+  padding: 8px 8px;
+  border: #333 1px solid;
+  border-radius: 5px;
+  color: #333;
+  background-color: #ffffffd1;
+  font-size: 16px;
+}
 .row {
   display: flex;
   flex-direction: row;
@@ -452,6 +527,7 @@ h3:after {
 
 .post {
   width: 60%;
+  padding-top: 350px;
 }
 
 @media screen and (max-width: 480px) {
@@ -463,7 +539,7 @@ h3:after {
 .comment {
   margin-top: 60px;
   margin-left: -50px;
-  padding: 20px;
+  padding-top: 330px;
   width: 40%;
 }
 

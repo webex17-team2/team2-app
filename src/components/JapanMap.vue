@@ -342,7 +342,7 @@ export default {
 <style scoped>
 .bar {
   width: 100%;
-  height: 66vw;
+  height: 85vw;
   border: solid 18px #a8d7ba;
   position: absolute;
   top: 0;
@@ -768,8 +768,8 @@ img {
 }
 
 .back {
-  width: 100vw;
-  height: 120vh;
+  width: 100%;
+  height: 155vh;
   position: absolute;
   top: 0px;
   left: 0px;
