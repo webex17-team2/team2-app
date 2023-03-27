@@ -660,5 +660,6 @@ h2 span:after {
   left: 0;
   transition: 0.3s;
   color: #da3c41;
+  /* sss */
 }
 </style>
