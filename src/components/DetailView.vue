@@ -65,7 +65,6 @@
             class="form__textarea"
             v-model="commentContent"
             placeholder="コメントする"
-            @keydown.enter="Comments"
           ></textarea>
           <div class="form__buttons">
             <button v-on:click="Comments" class="btn btn-outline-success">
