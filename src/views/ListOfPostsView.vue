@@ -1,28 +1,30 @@
 <template>
-  <div class="my-page">
-    <!-- <h1>投稿一覧</h1> -->
-    <ul class="row">
-      <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
-        <p>{{ postObj.postTitle }}</p>
+  <div class="bar">
+    <div class="my-page">
+      <!-- <h1>投稿一覧</h1> -->
+      <ul class="row">
+        <li v-for="(postObj, postObjs) in postArray" :key="postObjs">
+          <p>{{ postObj.postTitle }}</p>
 
-        <div class="row_item2">
-          <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
-          <img
-            v-if="postObj.imgPath !== null"
-            v-bind:src="postObj.imgPath[0]"
-            width="300"
-            height="250"
-          />
-          <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
-        </div>
-        <button class="btn btn-primary" @click="routerBtn(postObjs)">
-          詳細へ
-        </button>
-      </li>
-    </ul>
-    <!-- <li v-for="(postArray, index) in postArray" :key="index">
+          <div class="row_item2">
+            <!-- <div v-for="(path, index) in postObj.imgPath" :key="index"> -->
+            <img
+              v-if="postObj.imgPath !== null"
+              v-bind:src="postObj.imgPath[0]"
+              width="300"
+              height="250"
+            />
+            <!-- 詳細リンクえお押された時、postArrayの何番目か(index)を取得する -->
+          </div>
+          <button class="btn btn-primary" @click="routerBtn(postObjs)">
+            詳細へ
+          </button>
+        </li>
+      </ul>
+      <!-- <li v-for="(postArray, index) in postArray" :key="index">
       {{ postArray.postTitle }}
     </li> -->
+    </div>
   </div>
 </template>
 <script>
@@ -166,6 +168,13 @@ export default {
 </script>
 
 <style scoped>
+.bar {
+  border: solid 18px #a8d7ba;
+  position: absolute;
+  top: 0;
+  z-index: -2;
+  background-color: rgba(242, 245, 212, 0.49);
+}
 .form__wrapper {
   padding: 1rem;
 }
@@ -187,11 +196,12 @@ export default {
 }
 .my-page {
   padding: 0.5em 1em;
+  padding-top: 200px;
   margin: 2em 0;
   font-weight: bold;
-  border: solid 10px #a8d7ba;
+  /* border: solid 10px hsl(166, 98%, 55%); */
   border-radius: 10px;
-  background-color: #fffcf2;
+  margin-top: 120px;
 }
 .row {
   display: flex;

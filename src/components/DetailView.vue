@@ -1,76 +1,82 @@
 <template>
-  <div>
-    <router-link to="/listOfPosts" class="MyRouter" data-replace="⬅︎もどる"
-      ><span>⬅︎もどる</span></router-link
-    >
-    <h1>{{ postArray[0].postTitle }}</h1>
-  </div>
-  <div class="img_box">
-    <div class="img_collection">
-      <Carousel
-        id="gallery"
-        :items-to-show="1"
-        :wrap-around="false"
-        v-model="currentSlide"
-      >
-        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
-          <div class="carousel__item">
-            <img :src="slide" width="500" height="400" />
-          </div>
-        </Slide>
-      </Carousel>
+  <div class="row">
+    <div class="post">
+      <div>
+        <router-link to="/listOfPosts" class="MyRouter" data-replace="⬅︎もどる"
+          ><span>⬅︎もどる</span></router-link
+        >
+        <h1>{{ postArray[0].postTitle }}</h1>
+      </div>
+      <div class="img-com">
+        <div class="img_box">
+          <div class="img_collection">
+            <Carousel
+              id="gallery"
+              :items-to-show="1"
+              :wrap-around="false"
+              v-model="currentSlide"
+            >
+              <Slide
+                v-for="(slide, slideId) in postArray[0].imgPath"
+                :key="slideId"
+              >
+                <div class="carousel__item">
+                  <img :src="slide" width="400" height="300" />
+                </div>
+              </Slide>
+            </Carousel>
 
-      <Carousel
-        class="img_collection2"
-        id="thumbnails"
-        :items-to-show="showNumber"
-        :wrap-around="true"
-        v-model="currentSlide"
-        ref="carousel"
-      >
-        <Slide v-for="(slide, slideId) in postArray[0].imgPath" :key="slideId">
-          <div class="carousel__item" v-on:click="slideTo(slideId)">
-            <img :src="slide" width="120" height="100" />
+            <Carousel
+              class="img_collection2"
+              id="thumbnails"
+              :items-to-show="showNumber"
+              :wrap-around="true"
+              v-model="currentSlide"
+              ref="carousel"
+            >
+              <Slide
+                v-for="(slide, slideId) in postArray[0].imgPath"
+                :key="slideId"
+              >
+                <div class="carousel__item" v-on:click="slideTo(slideId)">
+                  <img :src="slide" width="120" height="100" />
+                </div>
+              </Slide>
+            </Carousel>
           </div>
-        </Slide>
-      </Carousel>
-    </div>
-    <!-- <div
-      class="img_collection"
-      v-for="(post, postId) in postArray[0].imgPath"
-      :key="postId"
-    >
-      <img :src="post" class="img_content" />
-    </div> -->
-  </div>
-  <!-- <P>感想や押しポイント</P> -->
-  <p>{{ postArray[0].postContent }}</p>
-  <!-- 何に使う？ -->
-  <!-- <img :src="imgPathContent" /> -->
-  <div>#{{ postArray[0].selectedArea }}</div>
-  <div>#{{ postArray[0].category }}</div>
 
-  <div>
-    <h3>コメントを追加する</h3>
-    <!-- 入力後消えるようにする -->
-    <textarea
-      class="form__textarea"
-      v-model="commentContent"
-      placeholder="コメントする"
-      @keydown.enter="Comments"
-    ></textarea>
-    <div class="form__buttons">
-      <button v-on:click="Comments" class="form__submit-button">送信</button>
+          <p>{{ postArray[0].postContent }}</p>
+          <div>#{{ postArray[0].selectedArea }}</div>
+          <div>#{{ postArray[0].category }}</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <!-- </div> -->
-  <div>
-    <h3>~みんなのコメント~</h3>
-    <div v-for="(comment, index) in commentsArray" :key="index">
-      <!-- ここ -->
-      <!-- <p>{{ randamImg }}</p> -->
-      <img :src="comment.randamImg" class="randam_icon" />
-      <P>{{ comment.commentContent }}</P>
+    <div class="comment">
+      <div>
+        <h3>コメントを追加する</h3>
+        <!-- 入力後消えるようにする -->
+        <textarea
+          class="form__textarea"
+          v-model="commentContent"
+          placeholder="コメントする"
+          @keydown.enter="Comments"
+        ></textarea>
+        <div class="form__buttons">
+          <button v-on:click="Comments" class="form__submit-button">
+            送信
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div>
+        <h3>~みんなのコメント~</h3>
+        <div v-for="(comment, index) in commentsArray" :key="index">
+          <!-- ここ -->
+          <!-- <p>{{ randamImg }}</p> -->
+          <img :src="comment.randamImg" class="randam_icon" />
+          <P>{{ comment.commentContent }}</P>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -375,14 +381,15 @@ h1:after {
 /* padding: 1.5rem 5rem 0.8rem; */
 
 .img_collection2 {
-  margin: 20px 50px 0px 50px;
+  margin: 0;
+  padding: 0;
 }
 .img_content {
-  width: 400px;
+  width: 300px;
   height: 300px;
 }
 .carousel__track {
-  width: 150px;
+  width: 250px;
 }
 /* タグ型 */
 h3 {
@@ -417,10 +424,22 @@ h3:after {
   background: #fff;
 }
 
+@media screen and (max-width: 480px) {
+  h3 {
+    height: 42px;
+    border: 5px;
+    border-color: #f45252;
+    background-color: #f45252;
+    display: inline-block;
+  }
+}
+
 /* コメントアイコン*/
 .randam_icon {
   /* 画像を丸くする */
-  width: 20%;
+  width: 10%;
+  height: 10%;
+  margin-right: 20px;
 }
 
 .row {
@@ -432,10 +451,69 @@ h3:after {
 }
 
 .post {
-  padding: 100px;
+  width: 60%;
+}
+
+@media screen and (max-width: 480px) {
+  .post {
+    width: 100%;
+  }
 }
 
 .comment {
-  padding: 100px;
+  margin-top: 60px;
+  margin-left: -50px;
+  padding: 20px;
+  width: 40%;
 }
+
+textarea {
+  width: 70%;
+}
+
+.top {
+  padding-top: 30px;
+}
+
+button {
+  position: relative;
+  left: 200px;
+}
+
+.context {
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 20px;
+  border: solid 5px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.all-comment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+  padding: 20px;
+  margin: 20px;
+  border: solid 2px;
+  border-color: black;
+  border-radius: 10px;
+  width: 70%;
+}
+
+@media screen and (max-width: 480px) {
+  .all-comment {
+    width: 100%;
+  }
+}
+.img-com {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+/* つд⊂ｴｰﾝ */
 </style>
