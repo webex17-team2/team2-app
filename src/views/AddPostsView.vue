@@ -121,7 +121,7 @@
                 value="レジャー"
               />
 
-              <label for="good">レジャー</label>
+              <label for="tag1">レジャー</label>
 
               <input
                 type="radio"
@@ -130,7 +130,7 @@
                 v-model="radioValue"
                 value="グルメ"
               />
-              <label for="good">グルメ</label>
+              <label for="tag2">グルメ</label>
               <input
                 type="radio"
                 name="radios"
@@ -138,7 +138,7 @@
                 v-model="radioValue"
                 value="その他"
               />
-              <label for="good">その他</label>
+              <label for="tag3">その他</label>
             </div>
           </div>
         </div>
