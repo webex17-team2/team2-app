@@ -169,6 +169,7 @@ export default {
 
 <style scoped>
 .bar {
+  width: 100%;
   border: solid 18px #a8d7ba;
   position: absolute;
   top: 0;
@@ -243,6 +244,8 @@ export default {
 li {
   padding: 30px;
   margin: 20px;
+  width: 30%;
+  height: 550px;
   list-style: none;
   background-color: #fdfdfd;
   /* background-color: rgb(178, 174, 174); */
@@ -255,12 +258,12 @@ li {
 }
 @keyframes color {
   0% {
-    background-color: #ffffffc8;
-    border: 1px #9a999926 solid;
-  }
-  20% {
-    background-color: #fdfdfd;
+    background-color: rgba(242, 245, 212, 0.49);
     border: 1px #9a9999bf solid;
+  }
+  25% {
+    background-color: #fdfdfd;
+    border: 2px #403f3fbf solid;
   }
 }
 </style>

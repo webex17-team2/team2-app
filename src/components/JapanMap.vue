@@ -369,7 +369,7 @@ export default {
 <style scoped>
 .bar {
   width: 100%;
-  height: 85vw;
+  height: 95vw;
   border: solid 18px #a8d7ba;
   position: absolute;
   top: 0;
