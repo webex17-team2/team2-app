@@ -20,9 +20,12 @@
         <!-- 追加 -->
         <div class="box-1-2">
           <div v-if="hoverFlag_1" class="image">
-            <img class="postImg" src="../assets/postImg/post1.png" />
+            <img
+              class="postImg"
+              src="https://stat.ameba.jp/user_images/20180630/05/sanfrancisco-by-foot/73/9a/j/o6000400014220303097.jpg"
+            />
 
-            <p class="postTitle1">場所の名前</p>
+            <p class="postTitle1">北海道</p>
           </div>
         </div>
         <!-- 東北 -->
@@ -39,9 +42,12 @@
         <!-- 追加 -->
         <div class="box-2-2">
           <div v-if="hoverFlag_2" class="image">
-            <img class="postImg" src="../assets/postImg/post2.png" />
+            <img
+              class="postImg"
+              src="https://res.cloudinary.com/macm/image/upload/v1546050001/aktd4fg0ctcoiekjuvms.jpg"
+            />
 
-            <p class="postTitle2">場所の名前</p>
+            <p class="postTitle2">東北</p>
           </div>
         </div>
         <!-- 関東 -->
@@ -58,9 +64,12 @@
         <!-- 追加 -->
         <div class="box-3-2">
           <div v-if="hoverFlag_3" class="image">
-            <img class="postImg" src="../assets/postImg/post3.png" />
+            <img
+              class="postImg"
+              src="https://c.wallhere.com/photos/8c/ef/2048x1365_px_city_Japan_Tokyo_Tokyo_Tower-1191665.jpg!d"
+            />
 
-            <p class="postTitle3">場所の名前</p>
+            <p class="postTitle3">関東</p>
           </div>
         </div>
         <!-- 中部 -->
@@ -77,9 +86,12 @@
         <!-- 追加 -->
         <div class="box-4-2">
           <div v-if="hoverFlag_4" class="image">
-            <img class="postImg" src="../assets/postImg/post4.png" />
+            <img
+              class="postImg"
+              src="https://skima-shinshu.com/wp-content/uploads/2018/06/DSC_9102-1-1920x1282.jpg"
+            />
 
-            <p class="postTitle4">場所の名前</p>
+            <p class="postTitle4">中部</p>
           </div>
         </div>
         <!-- 関西 -->
@@ -96,9 +108,12 @@
         <!-- 追加 -->
         <div class="box-5-2">
           <div v-if="hoverFlag_5" class="image">
-            <img class="postImg" src="../assets/postImg/post1.png" />
+            <img
+              class="postImg"
+              src="https://th.bing.com/th/id/OIP.V-sL6d_QabGqn6zE_9QhHAHaEK?pid=ImgDet&rs=1"
+            />
 
-            <p class="postTitle5">場所の名前</p>
+            <p class="postTitle5">近畿</p>
           </div>
         </div>
         <!-- 中国 -->
@@ -115,9 +130,12 @@
         <!-- 追加 -->
         <div class="box-6-2">
           <div v-if="hoverFlag_6" class="image">
-            <img class="postImg" src="../assets/postImg/post2.png" />
+            <img
+              class="postImg"
+              src="https://d1d37e9z843vy6.cloudfront.net/jp/images/3453520/c40b67af26848d5c0d5480e95b4dd0c3aa27ca38.jpeg"
+            />
 
-            <p class="postTitle6">場所の名前</p>
+            <p class="postTitle6">中国</p>
           </div>
         </div>
         <!-- 四国 -->
@@ -134,9 +152,12 @@
         <!-- 追加 -->
         <div class="box-7-2">
           <div v-if="hoverFlag_7" class="image">
-            <img class="postImg" src="../assets/postImg/post3.png" />
+            <img
+              class="postImg"
+              src="https://kagawaweekly.com/contents/wp-content/uploads/2021/05/db60cce27637aaafcc16e2c14a2f407e-scaled.jpg"
+            />
 
-            <p class="postTitle7">場所の名前</p>
+            <p class="postTitle7">四国</p>
           </div>
         </div>
         <!-- 九州 -->
@@ -153,9 +174,12 @@
         <!-- 追加 -->
         <div class="box-8-2">
           <div v-if="hoverFlag_8" class="image">
-            <img class="postImg" src="../assets/postImg/post4.png" />
+            <img
+              class="postImg"
+              src="https://www.dr-agent.co.jp/wp/wp-content/uploads/aa5ccb7c4dac24a70b9560c2300e2f40.jpg"
+            />
 
-            <p class="postTitle8">場所の名前</p>
+            <p class="postTitle8">九州</p>
           </div>
         </div>
         <!-- 沖縄 -->
@@ -172,9 +196,12 @@
         <!-- 追加 -->
         <div class="box-9-2">
           <div v-if="hoverFlag_9" class="image">
-            <img class="postImg" src="../assets/postImg/post1.png" />
+            <img
+              class="postImg"
+              src="https://skyticket.jp/guide/wp-content/uploads/pixta_39954881_M-min.jpg"
+            />
 
-            <p class="postTitle9">場所の名前</p>
+            <p class="postTitle9">沖縄</p>
           </div>
         </div>
       </div>
@@ -380,31 +407,31 @@ img {
   width: 150px;
 }
 .postTitle1 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle2 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle3 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle4 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle5 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle6 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle7 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle8 {
-  padding-left: 40px;
+  text-align: center;
 }
 .postTitle9 {
-  padding-left: 40px;
+  text-align: center;
 }
 /* ここまで */
 .Japan {
