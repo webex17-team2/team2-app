@@ -20,6 +20,10 @@
           <button class="btn btn-primary" @click="routerBtn(postObjs)">
             詳細へ
           </button>
+          <div class="drop-shaped"></div>
+          <div class="ripple"></div>
+          <div class="ripple delay1"></div>
+          <div class="ripple delay2"></div>
         </li>
       </ul>
     </div>
@@ -78,6 +82,56 @@ export default {
 </script>
 
 <style scoped>
+.drop-shaped {
+  position: relative;
+  margin: 0 auto;
+  top: -25px;
+  width: 15px;
+  height: 15px;
+  background: #728fe0;
+  border-radius: 0% 100% 50% 50%/ 0% 50% 50% 100%;
+  transform: rotate(45deg) skew(10deg, 10deg);
+  animation: 3s cubic-bezier(0.97, 0.03, 0.86, 0.12) 0s infinite running fall;
+}
+
+@keyframes fall {
+  to {
+    top: 200px;
+  }
+}
+
+.ripple {
+  position: relative;
+  margin: 0 auto;
+  top: 100px;
+  width: 300px;
+  height: 150px;
+  border-radius: 300px / 150px;
+  border: 10px solid #365880;
+  transform: scale(0.01, 0.01);
+  opacity: 0;
+  animation: 3s ease-out 3s infinite running spread;
+}
+
+@keyframes spread {
+  from {
+    opacity: 1;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+.delay1 {
+  top: -70px;
+  animation-delay: 3.3s;
+}
+
+.delay2 {
+  top: -240px;
+  animation-delay: 3.7s;
+}
 .bar {
   width: 100%;
   /* height: 700vw; */
