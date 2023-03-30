@@ -2,6 +2,26 @@
   <!-- リスト入れる -->
   <div class="bar">
     <div class="my-page">
+      <ul class="sakura">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <router-link to="/about" class="MyRouter" data-replace="⬅︎もどる"
         ><span>⬅︎もどる</span></router-link
       >
@@ -90,56 +110,188 @@ export default {
 }
 </script>
 <style scoped>
-.drop-shaped {
-  position: relative;
-  margin: 0 auto;
-  top: -25px;
-  width: 15px;
-  height: 15px;
-  background: #728fe0;
-  border-radius: 0% 100% 50% 50%/ 0% 50% 50% 100%;
-  transform: rotate(45deg) skew(10deg, 10deg);
-  animation: 3s cubic-bezier(0.97, 0.03, 0.86, 0.12) 0s infinite running fall;
+.sakura {
+  position: absolute;
+  padding: 0;
+  /* margin: 0; */
+  margin-top: -500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -4;
+}
+
+.sakura li {
+  width: 50%;
+  height: 50px;
+  position: absolute;
+  list-style: none;
+  top: -50px;
+  background: #ffdbed;
+  border-radius: 0% 70%;
+  animation: fall 4s linear infinite, sway 2s ease-in-out infinite alternate;
 }
 
 @keyframes fall {
   to {
-    top: 200px;
+    top: 120%;
   }
 }
 
-.ripple {
-  position: relative;
-  margin: 0 auto;
-  top: 100px;
-  width: 300px;
-  height: 150px;
-  border-radius: 300px / 150px;
-  border: 10px solid #365880;
-  transform: scale(0.01, 0.01);
-  opacity: 0;
-  animation: 3s ease-out 3s infinite running spread;
-}
-
-@keyframes spread {
+@keyframes sway1 {
   from {
-    opacity: 1;
+    transform: translateX(0px) rotate(0deg);
   }
   to {
-    transform: scale(1, 1);
-    opacity: 0;
+    transform: translateX(200px) rotate(-45deg);
   }
 }
 
-.delay1 {
-  top: -70px;
-  animation-delay: 3.3s;
+@keyframes sway2 {
+  from {
+    transform: translateX(200px) rotate(-45deg);
+  }
+  to {
+    transform: translateX(0px) rotate(0deg);
+  }
 }
 
-.delay2 {
-  top: -240px;
-  animation-delay: 3.7s;
+.sakura li:nth-child(1) {
+  left: 0%;
+  width: 24px;
+  height: 15px;
+  animation: fall 10s linear infinite, sway1 3s ease-in-out infinite alternate;
+  animation-delay: 2s;
 }
+
+.sakura li:nth-child(2) {
+  left: 5%;
+  width: 13px;
+  height: 9px;
+  animation: fall 15s linear infinite, sway1 2s ease-in-out infinite alternate;
+  animation-delay: 8s;
+}
+
+.sakura li:nth-child(3) {
+  left: 15%;
+  width: 16px;
+  height: 10px;
+  animation: fall 9s linear infinite, sway1 3.5s ease-in-out infinite alternate;
+  animation-delay: 13s;
+}
+
+.sakura li:nth-child(4) {
+  left: 30%;
+  width: 16px;
+  height: 10px;
+  animation: fall 8s linear infinite, sway2 4s ease-in-out infinite alternate;
+  animation-delay: 7s;
+}
+.sakura li:nth-child(5) {
+  left: 40%;
+  width: 16px;
+  height: 10px;
+  animation: fall 10s linear infinite, sway1 4s ease-in-out infinite alternate;
+  animation-delay: 0s;
+}
+.sakura li:nth-child(6) {
+  left: 55%;
+  width: 24px;
+  height: 15px;
+  animation: fall 11s linear infinite, sway2 3s ease-in-out infinite alternate;
+  animation-delay: 3s;
+}
+.sakura li:nth-child(7) {
+  left: 65%;
+  width: 16px;
+  height: 10px;
+  animation: fall 7s linear infinite, sway2 3.5s ease-in-out infinite alternate;
+  animation-delay: 7s;
+}
+.sakura li:nth-child(8) {
+  left: 50%;
+  width: 13px;
+  height: 9px;
+  animation: fall 7s linear infinite, sway1 3s ease-in-out infinite alternate;
+  animation-delay: 3s;
+}
+.sakura li:nth-child(9) {
+  left: 80%;
+  width: 16px;
+  height: 10px;
+  animation: fall 10s linear infinite, sway2 4s ease-in-out infinite alternate;
+  animation-delay: 4s;
+}
+
+.sakura li:nth-child(10) {
+  left: 100%;
+  width: 24px;
+  height: 15px;
+  animation: fall 10s linear infinite, sway1 3s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+.sakura li:nth-child(11) {
+  left: 90%;
+  width: 13px;
+  height: 9px;
+  animation: fall 15s linear infinite, sway1 2s ease-in-out infinite alternate;
+  animation-delay: 6s;
+}
+
+.sakura li:nth-child(12) {
+  left: 20%;
+  width: 16px;
+  height: 10px;
+  animation: fall 9s linear infinite, sway1 3.5s ease-in-out infinite alternate;
+  animation-delay: 6s;
+}
+
+.sakura li:nth-child(13) {
+  left: 36%;
+  width: 16px;
+  height: 10px;
+  animation: fall 8s linear infinite, sway2 4s ease-in-out infinite alternate;
+  animation-delay: 3s;
+}
+.sakura li:nth-child(14) {
+  left: 45%;
+  width: 16px;
+  height: 10px;
+  animation: fall 10s linear infinite, sway1 4s ease-in-out infinite alternate;
+  animation-delay: 10s;
+}
+.sakura li:nth-child(15) {
+  left: 60%;
+  width: 24px;
+  height: 15px;
+  animation: fall 11s linear infinite, sway2 3s ease-in-out infinite alternate;
+  animation-delay: 0s;
+}
+.sakura li:nth-child(16) {
+  left: 70%;
+  width: 16px;
+  height: 10px;
+  animation: fall 7s linear infinite, sway2 3.5s ease-in-out infinite alternate;
+  animation-delay: 7s;
+}
+.sakura li:nth-child(17) {
+  left: 55%;
+  width: 13px;
+  height: 9px;
+  animation: fall 7s linear infinite, sway1 3s ease-in-out infinite alternate;
+  animation-delay: 2s;
+}
+.sakura li:nth-child(18) {
+  left: 85%;
+  width: 16px;
+  height: 10px;
+  animation: fall 10s linear infinite, sway2 4s ease-in-out infinite alternate;
+  animation-delay: 8s;
+}
+
 .bar {
   width: 100%;
   /* height: 85vw; */
@@ -252,11 +404,12 @@ body {
   border: #a8d7ba 0.5px solid;
   font-size: 16px;
 }
-li {
+.row li {
   padding: 30px;
   margin: 20px;
   width: 30%;
-  height: 550px;
+  height: 500px;
+  text-align: center;
   list-style: none;
   background-color: #fdfdfd;
   /* background-color: rgb(178, 174, 174); */
